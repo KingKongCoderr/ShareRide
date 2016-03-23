@@ -5,25 +5,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RiderOfferDetailActivity extends AppCompatActivity {
 
     RideCollection rideCollection = new RideCollection();
+    TextView fromAddressET;
+    TextView toAddressET;
+    TextView availabilityET;
+    TextView hrsSpinner;
+    TextView frequencySpinner;
+    TextView offerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_offer_detail);
 
-        TextView fromAddressET = (TextView)findViewById(R.id.fromAddressET);
-        TextView toAddressET = (TextView)findViewById(R.id.toAddressET);
+        fromAddressET = (TextView)findViewById(R.id.fromET);
+        toAddressET = (TextView)findViewById(R.id.ToET);
+        availabilityET = (TextView) findViewById(R.id.offerAvailabilityET);
+        hrsSpinner = (TextView) findViewById(R.id.offertimeSpinner);
+        frequencySpinner = (TextView) findViewById(R.id.offerFrequencySpinner);
+        offerId = (TextView) findViewById(R.id.offerIDTV);
         Bundle bundle = getIntent().getExtras();
-
+        Ride rideObject = rideCollection.getRideObject(Integer.parseInt(bundle.getString("INDEX_LOCATION")));
         //TODO here get the string stored in the string variable and do
-        fromAddressET.setText(rideCollection.items.get(bundle.getInt("INDEX_LOCATION")).getRouteFrom());
-        toAddressET.setText(rideCollection.items.get(bundle.getInt("INDEX_LOCATION")).getRouteTo());
+        if(rideObject !=null) {
+            fromAddressET.setText(rideObject.getRouteFrom());
+            toAddressET.setText(rideObject.getRouteTo());
+            availabilityET.setText(rideObject.getNoOfAvailability());
+            hrsSpinner.setText(rideObject.getTimeOfTravel());
+            frequencySpinner.setText(rideObject.getFrequency());
+            offerId.setText(bundle.getString("INDEX_LOCATION").toString());
+        }
         }
 
         @Override
@@ -47,8 +65,9 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
         else if (id == R.id.Edit_Ride_Offer)
         {
             Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
-           // Intent RideIntent = new Intent(this, MainActivity.class);
-           // startActivity(RideIntent);
+            Intent RideEditIntent = new Intent(this, RideOfferEditActivity.class);
+            RideEditIntent.putExtra("OFFER_ID", offerId.getText());
+            startActivity(RideEditIntent);
             return true;
         }
 

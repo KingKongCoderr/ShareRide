@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.nwmissouri.shareride" >
+    package="edu.nwmissouri.shareride">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -11,12 +11,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".RideActivity"/>
+            android:parentActivityName=".RideActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GooglePlacesActivity"
             android:label="@string/title_activity_google_places"
@@ -28,7 +28,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +38,10 @@
         <activity android:name=".ForgotpassActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".RiderOfferDetailActivity" />
-        <activity android:name=".NewRideOfferActivity"
-         android:parentActivityName=".RideActivity">
-        </activity>
+        <activity
+            android:name=".NewRideOfferActivity"
+            android:parentActivityName=".RideActivity"></activity>
+        <activity android:name=".RideOfferEditActivity"></activity>
     </application>
 
 </manifest>

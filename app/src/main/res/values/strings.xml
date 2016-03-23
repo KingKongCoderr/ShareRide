@@ -50,4 +50,10 @@
         <item>23:00</item>
         <item>24:00</item>
     </string-array>
+
+    <string-array name="frequency_arrays">
+        <item>Daily</item>
+        <item>Select Date</item>
+    </string-array>
+
 </resources>

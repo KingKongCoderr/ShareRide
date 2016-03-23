@@ -1,6 +1,8 @@
 package edu.nwmissouri.shareride;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +31,6 @@ public class FragmentRide extends Fragment {
     ListView rideOfferLV;
     iRideActivity rideActivityInterface;
     Button addRideOffer;
-
 
     public static final String ITEM_POSITION = "position";
 
@@ -130,8 +131,27 @@ public class FragmentRide extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent newRideOfferIntent = new Intent(getActivity(), RiderOfferDetailActivity.class);
-                newRideOfferIntent.putExtra("INDEX_LOCATION", position);
+                String currentOfferId = ((TextView) view.findViewById(R.id.itemId)).getText().toString();
+                String selected = currentOfferId.replace("OfferID: ","");
+                newRideOfferIntent.putExtra("INDEX_LOCATION", selected);
                 startActivity(newRideOfferIntent);
+            }
+        });
+
+        rideOfferLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(getActivity());
+                deleteAlert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        items.remove(position);
+                        RideOfferAdapter.notifyDataSetChanged();
+                    }
+                });
+                deleteAlert.show();
+                return true;
             }
         });
 

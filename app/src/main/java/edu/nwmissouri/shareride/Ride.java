@@ -6,12 +6,46 @@ package edu.nwmissouri.shareride;
 public class Ride {
     private String routeFrom;
     private String routeTo;
-    private int noOfAvailability;
+    private String noOfAvailability;
+    private String timeOfTravel;
+    private String frequency;
+    private int offerID = 0;
 
-    public Ride(String routeFrom, String routeTo, int noOfAvailability) {
+    public Ride(int offerID, String routeFrom, String routeTo, String noOfAvailability, String timeOfTravel,String frequency) {
         this.routeFrom = routeFrom;
         this.routeTo = routeTo;
         this.noOfAvailability = noOfAvailability;
+        this.timeOfTravel = timeOfTravel;
+        this.frequency = frequency;
+        this.offerID = offerID;
+    }
+
+    public int getOfferID() {
+        return offerID;
+    }
+
+    public void setOfferID(int offerID) {
+        this.offerID = offerID;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getNoOfAvailability() {
+        return noOfAvailability;
+    }
+
+    public String getTimeOfTravel() {
+        return timeOfTravel;
+    }
+
+    public void setTimeOfTravel(String timeOfTravel) {
+        this.timeOfTravel = timeOfTravel;
     }
 
     public String getRouteFrom() {
@@ -30,11 +64,7 @@ public class Ride {
         this.routeTo = routeTo;
     }
 
-    public int getNoOfAvailabilityy() {
-        return noOfAvailability;
-    }
-
-    public void setNoOfAvailability(int noOfAvailability) {
+    public void setNoOfAvailability(String noOfAvailability) {
         this.noOfAvailability = noOfAvailability;
     }
 }

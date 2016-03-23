@@ -37,6 +37,7 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
             TextView RouteFrom = (TextView)view.findViewById(R.id.itemName);
             TextView RouteTo = (TextView)view.findViewById(R.id.itemPrice);
             TextView NoOfAvailability = (TextView)view.findViewById(R.id.itemQuantity);
+            TextView offerId = (TextView)view.findViewById(R.id.itemId);
             //holder.txtItemQuantity = (TextView)view.findViewById(R.id.itemQuantity);
 
             //view.setTag(holder);
@@ -54,14 +55,15 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
 
         String[] shortToRoute = getItem(position).getRouteTo().toString().split(",");
         StringBuilder toBuilder = new StringBuilder();
-        String[] shortToStreet =shortFromRoute[(shortToRoute.length)-4].split(" ");
-        toBuilder.append(shortToStreet[shortFromStreet.length-2] + " " + shortToStreet[shortFromStreet.length-1]);
+        String[] shortToStreet =shortToRoute[(shortToRoute.length)-4].split(" ");
+        toBuilder.append(shortToStreet[shortToStreet.length-2] + " " + shortToStreet[shortToStreet.length-1]);
         toBuilder.append(", " + shortToRoute[(shortToRoute.length)-3]);
         toBuilder.append(", " + shortToRoute[(shortToRoute.length)-2]);
 
         RouteFrom.setText("From: " + fromBuilder.toString());
         RouteTo.setText("To: " + toBuilder.toString());
-        NoOfAvailability.setText("Availability: " + String.format("%d",getItem(position).getNoOfAvailabilityy()));
+        NoOfAvailability.setText("Availability: " + getItem(position).getNoOfAvailability().toString());
+        offerId.setText("OfferID: " + String.format("%d", getItem(position).getOfferID()));
         //holder.txtItemQuantity.setText(String.format("%d", rideDetailses[position].getItemQuantity()));
         //text2.setText(String.format("%1$,.2f",getItem(position).getPrice()));
         return view;

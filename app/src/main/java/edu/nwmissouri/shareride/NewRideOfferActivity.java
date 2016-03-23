@@ -1,6 +1,7 @@
 package edu.nwmissouri.shareride;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -18,9 +19,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import android.support.v7.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,13 +44,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import android.view.View.OnClickListener;
 
 import static edu.nwmissouri.shareride.NewRideOfferActivity.autocomplete;
 
-public class NewRideOfferActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
+public class NewRideOfferActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener, OnClickListener  {
 
     private static final String LOG_TAG = " Places Autocomplete";
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
@@ -55,6 +62,9 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
     private static final String API_KEY = "AIzaSyBVGNHxtt0rBeU4jOs427su-0Vc4M06wZs";
     private String fromLatLong = "";
     private String toLatLong = "";
+    private DatePickerDialog selectDatePickerDialog;
+    private SimpleDateFormat dateFormatter;
+    private EditText frequencySpinner;
 
     //Kinvey Details
     public static final String TAG = "ShareRideKinvey";
@@ -88,7 +98,27 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
             }
         });
 
+        final RideCollection rideCollection = new RideCollection();
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
         Button searchBTN = (Button) findViewById(R.id.searchBTN);
+        TextView OfferIdTV = (TextView) findViewById(R.id.offerIDTV);
+        frequencySpinner = (EditText) findViewById(R.id.offerFrequencySpinner);
+        frequencySpinner.setOnClickListener(this);
+
+        Calendar newCalendar = Calendar.getInstance();
+        selectDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                  Calendar newDate = Calendar.getInstance();
+                  newDate.set(year, monthOfYear, dayOfMonth);
+                   frequencySpinner.setText(dateFormatter.format(newDate.getTime()));
+                    }
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+
+        OfferIdTV.setText(String.format("%d", rideCollection.getMaxOfferId() + 1));
 
         fromET.setAdapter(new GooglePlacesAutocompleteAdapter2(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
@@ -102,14 +132,15 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
             public void onClick(View v) {
                 EditText fromET = (EditText) findViewById(R.id.fromET);
                 EditText toET = (EditText) findViewById(R.id.ToET);
+                EditText availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
+                Spinner hrsSpinner = (Spinner) findViewById(R.id.offertimeSpinner);
 
                 String fromStr = fromET.getText().toString();
-//                fromLatLong = getLatLongFromGivenAddress(fromStr);
-//
-//                Toast.makeText(getBaseContext(), fromLatLong.toString(), Toast.LENGTH_SHORT).show();
-//                String[] fromLatLongArrays = fromLatLong.split(",");
-//
                 String toStr = toET.getText().toString();
+                String maxOfferId = String.format("%d",rideCollection.getMaxOfferId() + 1);
+                String noOfPersons = availabilityET.getText().toString();
+                String travelHrs = hrsSpinner.getSelectedItem().toString();
+                String frequencyHrs = frequencySpinner.getText().toString();
 //
 //                toLatLong = getLatLongFromGivenAddress(toStr);
 //                //saveRideInfo(); -- KINVEY
@@ -140,10 +171,10 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 //                    //distanceTV.setText("Distance is: " + resultValue + " miles");
 //
 //                }
-                RideCollection rideCollection = new RideCollection();
-                rideCollection.addRideCollection(fromStr,toStr);
-                rideActivityIntent.putExtra("fromAddress", fromStr);
-                rideActivityIntent.putExtra("toAddress", toStr);
+
+                rideCollection.addRideCollection(Integer.parseInt(maxOfferId),fromStr,toStr,noOfPersons, travelHrs,frequencyHrs);
+//                rideActivityIntent.putExtra("fromAddress", fromStr);
+//                rideActivityIntent.putExtra("toAddress", toStr);
                 startActivity(rideActivityIntent);
             }
         });
@@ -169,6 +200,13 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
             });
         } else {
             Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == frequencySpinner) {
+            selectDatePickerDialog.show();
         }
     }
 
