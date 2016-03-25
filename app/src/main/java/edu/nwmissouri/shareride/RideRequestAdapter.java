@@ -20,12 +20,12 @@ import java.util.Locale;
 /**
  * Created by s525339 on 2/10/2016.
  */
-public class RideOfferAdapter extends ArrayAdapter<Ride> {
+public class RideRequestAdapter extends ArrayAdapter<Ride> {
     Context context;
     int textViewResourceId;
     List<Ride> rideDetailses = null;
 
-    public RideOfferAdapter(Context context, int textViewResourceId, List<Ride> items)
+    public RideRequestAdapter(Context context, int textViewResourceId, List<Ride> items)
     {
         super(context, textViewResourceId, items);
         this.context = context;
@@ -110,7 +110,14 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
             TextView RouteTo = (TextView)view.findViewById(R.id.itemPrice);
             TextView NoOfAvailability = (TextView)view.findViewById(R.id.itemQuantity);
             TextView offerId = (TextView)view.findViewById(R.id.itemId);
+            //holder.txtItemQuantity = (TextView)view.findViewById(R.id.itemQuantity);
 
+            //view.setTag(holder);
+
+//        else
+//        {
+//            holder = (RideDetailsHolder)view.getTag();
+//        }
         String[] shortFromRoute = getItem(position).getRouteFrom().toString().split(",");
         StringBuilder fromBuilder = new StringBuilder();
         String[] shortFromStreet =shortFromRoute[(shortFromRoute.length)-4].split(" ");
@@ -128,7 +135,7 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
         RouteFrom.setText("From: " + fromBuilder.toString());
         RouteTo.setText("To: " + toBuilder.toString());
         NoOfAvailability.setText("Availability: " + getItem(position).getNoOfAvailability().toString());
-        offerId.setText("OfferID: " + String.format("%d", getItem(position).getOfferID()));
+        offerId.setText("RequestID: " + String.format("%d", getItem(position).getOfferID()));
         //holder.txtItemQuantity.setText(String.format("%d", rideDetailses[position].getItemQuantity()));
         //text2.setText(String.format("%1$,.2f",getItem(position).getPrice()));
         return view;

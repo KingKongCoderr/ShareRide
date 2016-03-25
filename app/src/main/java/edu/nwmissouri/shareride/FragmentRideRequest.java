@@ -1,6 +1,8 @@
 package edu.nwmissouri.shareride;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,14 +27,14 @@ public class FragmentRideRequest extends Fragment {
 
     Activity activity; //**
     ArrayList<Ride> updatedItems;
-    ListView rideOfferLV;
+    ListView rideRequestLV;
     iRideRequestActivity rideActivityInterface;
     Button addRideOffer;
     public static final String ITEM_POSITION = "position";
     ArrayList<Ride> items;
-    RideOfferAdapter RideOfferAdapter;
+    RideRequestAdapter rideRequestAdapter;
     Ride[] itemsArray;
-    RideCollection rides = new RideCollection();
+    RideRequestCollection rides = new RideRequestCollection();
     //ResultsListAdapter resultsListAdapter;
 
     public interface iRideRequestActivity
@@ -75,7 +77,7 @@ public class FragmentRideRequest extends Fragment {
         else if (id == R.id.Add_Ride_Request)
         {
             Toast.makeText(getActivity(), "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
-            Intent RideRequestIntent = new Intent(getContext(), MainActivity.class);
+            Intent RideRequestIntent = new Intent(getContext(), NewRideRequestActivity.class);
             startActivity(RideRequestIntent);
             return true;
         }
@@ -104,24 +106,51 @@ public class FragmentRideRequest extends Fragment {
         items = rides.getRideCollection();
         //itemsArray = items.toArray(new Ride[items.size()]);
 
-        RideOfferAdapter =
-                    new RideOfferAdapter(getActivity(), R.layout.list_item, items);
-            rideOfferLV = (ListView) theView.findViewById(R.id.riderOfferLV);
+        rideRequestAdapter = new RideRequestAdapter(getActivity(), R.layout.list_item, items);
+            rideRequestLV = (ListView) theView.findViewById(R.id.riderRequestLV);
 
         TextView noRows = (TextView) theView.findViewById(R.id.emptyriderequest);
 
         if(items != null)
         {
-            rideOfferLV.setAdapter(RideOfferAdapter);
-            noRows.setVisibility(View.INVISIBLE);
-            rideOfferLV.setAdapter(RideOfferAdapter);
+           noRows.setVisibility(View.INVISIBLE);
+           rideRequestLV.setAdapter(rideRequestAdapter);
         }
         else
         {
-            rideOfferLV.setVisibility(View.INVISIBLE);
+            rideRequestLV.setVisibility(View.INVISIBLE);
             noRows.setVisibility(View.VISIBLE);
             noRows.setText("No Ride Requests Found!");
         }
+
+        rideRequestLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent newRideOfferIntent = new Intent(getActivity(), RiderRequestDetailActivity.class);
+                String currentOfferId = ((TextView) view.findViewById(R.id.itemId)).getText().toString();
+                String selected = currentOfferId.replace("RequestID: ","");
+                newRideOfferIntent.putExtra("INDEX_LOCATION", selected);
+                startActivity(newRideOfferIntent);
+            }
+        });
+
+        rideRequestLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(getActivity());
+                deleteAlert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        items.remove(position);
+                        rideRequestAdapter.notifyDataSetChanged();
+                    }
+                });
+                deleteAlert.show();
+                return true;
+            }
+        });
+
 
         return theView;
     }

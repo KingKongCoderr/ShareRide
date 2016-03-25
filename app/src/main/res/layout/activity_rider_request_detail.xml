@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#79f3b4">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "RequestID: "
+        android:id="@+id/offerID"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = ""
+        android:id="@+id/offerIDTV"
+        android:layout_toRightOf="@id/offerID"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "From: "
+        android:id="@+id/offertimeFrom"
+        android:layout_below="@id/offerID"
+        android:layout_marginTop="35dp"/>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:id="@+id/fromET"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="60dp"
+        android:textSize="12dp"
+        android:hint="From Address...">
+        <requestFocus />
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "To: "
+        android:id="@+id/offertimeTo"
+        android:layout_below="@id/offertimeFrom"
+        android:layout_marginTop="55dp"/>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:id="@+id/ToET"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@id/fromET"
+        android:textSize="12dp"
+        android:hint="To Address..."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Time: "
+        android:id="@+id/offertimeTV"
+        android:layout_below="@id/offertimeTo"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/offertimeSpinner"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/ToET"
+        android:layout_marginLeft="70dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Date: "
+        android:id="@+id/offerFrequencyTV"
+        android:layout_below="@id/offertimeTV"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/offerFrequencySpinner"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/offertimeSpinner"
+        android:layout_marginLeft="80dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "No Of Persons: "
+        android:id="@+id/offerAvailabilityTV"
+        android:layout_below="@id/offerFrequencyTV"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text = ""
+        android:id="@+id/offerAvailabilityET"
+        android:layout_below="@id/offerFrequencySpinner"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="100dp"
+        android:layout_alignBaseline="@id/offerAvailabilityTV"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="SEARCH"
+        android:id="@+id/searchBTN"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/offerAvailabilityET"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:onClick="onSearchClick"
+        android:background="#b3FFFFFF"
+        android:textColor="#000000"
+        />
+
+
+</RelativeLayout>

@@ -38,10 +38,14 @@
         <activity android:name=".ForgotpassActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".RiderOfferDetailActivity" />
+        <activity android:name=".RiderRequestDetailActivity" />
         <activity
             android:name=".NewRideOfferActivity"
-            android:parentActivityName=".RideActivity"></activity>
-        <activity android:name=".RideOfferEditActivity"></activity>
+            android:parentActivityName=".RideActivity" />
+        <activity android:name=".RideOfferEditActivity" />
+        <activity android:name=".NewRideRequestActivity" />
+        <activity android:name=".RideRequestEditActivity" />
+        <activity android:name=".RideSearchResults"></activity>
     </application>
 
 </manifest>

@@ -190,7 +190,7 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
                 case 1:
                     return "REQUEST RIDE";
                 case 2:
-                    return "SEARCH RESULTS";
+                    return "RECENT SEARCH";
             }
             return null;
         }
