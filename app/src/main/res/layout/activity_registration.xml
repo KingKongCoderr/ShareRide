@@ -8,57 +8,53 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
+    android:background="@drawable/registration1"
     tools:context="com.s525120.android.shareride.RegistrationActivity">
 
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:textColorHint="#000000"
-        android:background="#33FFFFFF"
+        android:layout_height="60dp"
+android:textSize="25dp"
+        android:background="#ffffff"
         android:inputType="textPersonName"
-        android:textStyle="bold"
+       android:fontFamily="@string/common_google_play_services_install_text_phone"
         android:id="@+id/name_et"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
         android:hint="@string/name_hint"
         android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:textColorHint="#000000"
-        android:background="#33FFFFFF"
+        android:layout_height="60dp"
+        android:background="#ffffff"
+        android:textSize="25dp"
         android:hint="@string/username_hint"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
+        android:layout_marginTop="2dp"
+
         android:id="@+id/newusername_et"
         android:layout_below="@+id/name_et"
         android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:textColorHint="#000000"
-        android:background="#33FFFFFF"
+        android:layout_height="60dp"
+        android:textSize="22dp"
+        android:background="#ffffff"
         android:inputType="textPassword"
         android:hint="@string/password_hint"
         android:textStyle="bold"
         android:id="@+id/password_et"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:layout_below="@+id/newusername_et"
         android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:textColorHint="#000000"
-        android:background="#33FFFFFF"
-        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:textSize="22dp"
+        android:background="#ffffff"
+        android:layout_marginTop="2dp"
         android:textStyle="bold"
         android:inputType="textPassword"
         android:hint="@string/confirm_password"
@@ -69,11 +65,11 @@
 
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColorHint="#000000"
-                android:background="#33FFFFFF"
+                android:textSize="25dp"
+                android:layout_marginTop="1dp"
+                android:background="#ffffff"
                 android:inputType="phone"
                 android:hint="@string/phone_hint"
                 android:ems="10"
@@ -82,13 +78,12 @@
 
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColorHint="#000000"
-                android:background="#33FFFFFF"
+                android:textSize="25dp"
+                android:background="#ffffff"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:ems="10"
                 android:id="@+id/newemail_et"
                 android:hint="@string/email_hint"
@@ -97,42 +92,41 @@
 
 
 
-
+<!--
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColorHint="#000000"
-                android:background="#33FFFFFF"
+
+                android:layout_marginTop="1dp"
+                android:background="#ffffff"
                 android:id="@+id/street_et"
                 android:hint="street address"
                 android:layout_below="@+id/newemail_et"
-                />
+                />-->
 
-            <EditText
+           <!-- <EditText
                 android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColorHint="#000000"
-                android:background="#33FFFFFF"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
+
+                android:background="#ffffff"
+
                 android:hint="City Name"
                 android:id="@+id/city_et"
-                android:layout_below="@+id/street_et"/>
-
+                android:layout_below="@+id/newemail_et"/>-->
+<!--
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:textColorHint="#000000"
-                android:background="#33FFFFFF"
+
+                android:background="#ffffff"
                 android:id="@+id/zip_et"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:hint="Zip Code"
-                android:layout_below="@+id/city_et"/>
+                android:layout_below="@+id/city_et"/>-->
 
 
     <Button
@@ -142,7 +136,7 @@
         android:textColor="#f2000000"
         android:background="#e6ffFFFF"
         android:id="@+id/newsubmit_bt"
-        android:layout_below="@id/zip_et"
+        android:layout_below="@id/newemail_et"
 
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"/>
