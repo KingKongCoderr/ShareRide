@@ -1,5 +1,9 @@
 package edu.nwmissouri.shareride;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RideActivity extends AppCompatActivity implements FragmentRide.iRideActivity,FragmentRideRequest.iRideRequestActivity{
+public class RideActivity extends AppCompatActivity implements FragmentRide.iRideActivity,FragmentRideRequest.iRideRequestActivity,FragmentRideRecent.iRideRequestActivity{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -65,10 +69,17 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
             }
         });
 
+
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
 
-//    @Override
+    }
+
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_ride, menu);
@@ -170,10 +181,10 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
             else if(position == 1) {// Fragment # 1 - This will show image
                 return FragmentRideRequest.newInstance(0);
             }
-            else {// Fragment # 2-9 - Will show list
-                return FragmentRide.newInstance(0);
+            else
+            {
+                return FragmentRideRecent.newInstance(0);
             }
-            //return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override

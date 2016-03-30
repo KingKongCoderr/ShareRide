@@ -34,6 +34,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
         Ride rideObject = rideCollection.getRideObject(Integer.parseInt(bundle.getString("INDEX_LOCATION")));
         //TODO here get the string stored in the string variable and do
         if(rideObject !=null) {
+            offerId.setText(String.format("%d", rideObject.getOfferID()));
             fromAddressET.setText(rideObject.getRouteFrom());
             toAddressET.setText(rideObject.getRouteTo());
             availabilityET.setText(rideObject.getNoOfAvailability());
@@ -76,6 +77,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
     public void onSearchClick(View view)
     {
         Intent searchIntent = new Intent(this,RideSearchResults.class);
+        searchIntent.putExtra("REQUEST_ID",offerId.getText());
         searchIntent.putExtra("FROM_ADDRESS", fromAddressET.getText());
         searchIntent.putExtra("TO_ADDRESS", toAddressET.getText());
         searchIntent.putExtra("AVAILABILITY", availabilityET.getText());

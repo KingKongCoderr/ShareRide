@@ -114,17 +114,12 @@ public class FragmentRide extends Fragment {
         rideOfferLV.setVisibility(View.VISIBLE);
         TextView noRows = (TextView) theView.findViewById(R.id.emptyrideoffer);
 
-        if(items != null) {
+        if(items.size() != 0) {
             rideOfferLV.setVisibility(View.VISIBLE);
-            noRows.setVisibility(View.INVISIBLE);
 
             rideOfferLV.setAdapter(RideOfferAdapter);
         }
-        else{
-            rideOfferLV.setVisibility(View.INVISIBLE);
-            noRows.setVisibility(View.VISIBLE);
-            noRows.setText("No Ride Offers Found!");
-        }
+
 
 
         rideOfferLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -157,5 +152,4 @@ public class FragmentRide extends Fragment {
 
         return theView;
     }
-
 }

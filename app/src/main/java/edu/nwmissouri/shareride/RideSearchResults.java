@@ -16,12 +16,14 @@ public class RideSearchResults extends AppCompatActivity {
     ArrayList<Ride> items;
     RideSearchResultsAdapter rideSearchResultsAdapter;
     RideCollection rides = new RideCollection();
+    RideRequestCollection rideRequest = new RideRequestCollection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_search_results);
         Bundle bundle = getIntent().getExtras();
+        String searchRequestID = bundle.getString("REQUEST_ID");
         String searchFromAddress = bundle.getString("FROM_ADDRESS");
         String searchToAddress = bundle.getString("TO_ADDRESS");
         String searchAvailability = bundle.getString("AVAILABILITY");
@@ -29,22 +31,17 @@ public class RideSearchResults extends AppCompatActivity {
         String searchRideDate = bundle.getString("RIDEDATE");
 
         items = rides.getRideCollection();
+        rideRequest.addRecentRide(new Ride(Integer.parseInt(searchRequestID),searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate));
         rideSearchResultsAdapter =
                 new RideSearchResultsAdapter(this, R.layout.list_item, items,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate);
         rideSearchResultsLV = (ListView) findViewById(R.id.rideSearchResultsLV);
         rideSearchResultsLV.setVisibility(View.VISIBLE);
         TextView noRows = (TextView) findViewById(R.id.emptyrideoffer);
 
-        if(items != null) {
+        if(items.size() != 0) {
             rideSearchResultsLV.setVisibility(View.VISIBLE);
-            noRows.setVisibility(View.INVISIBLE);
 
             rideSearchResultsLV.setAdapter(rideSearchResultsAdapter);
-        }
-        else{
-            rideSearchResultsLV.setVisibility(View.INVISIBLE);
-            noRows.setVisibility(View.VISIBLE);
-            noRows.setText("No Ride Offers Found!");
         }
     }
 

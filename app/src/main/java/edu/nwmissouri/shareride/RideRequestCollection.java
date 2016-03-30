@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class RideRequestCollection {
     public static ArrayList<Ride> items = new ArrayList<Ride>();
+    public static Ride recentRide;
     private RideOfferAdapter mListAdapter;
 
     public RideRequestCollection()
@@ -23,6 +24,16 @@ public class RideRequestCollection {
     {
         items.add(new Ride(OfferId,fromAddress, toAddress, availability, timeOftravel, frequency));
 //        mListAdapter.notifyDataSetChanged();
+    }
+
+    public void addRecentRide(Ride ride)
+    {
+        recentRide = ride;
+    }
+
+    public Ride getRecentRide()
+    {
+        return recentRide;
     }
 
     public int getMaxOfferId()

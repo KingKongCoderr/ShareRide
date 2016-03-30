@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +25,8 @@
         <activity
             android:name=".RideActivity"
             android:label="@string/title_activity_ride"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -34,7 +36,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
         <activity android:name=".ForgotpassActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".RiderOfferDetailActivity" />
@@ -45,7 +47,18 @@
         <activity android:name=".RideOfferEditActivity" />
         <activity android:name=".NewRideRequestActivity" />
         <activity android:name=".RideRequestEditActivity" />
-        <activity android:name=".RideSearchResults"></activity>
+        <activity android:name=".RideSearchResults" />
+
+        <service
+            android:name=".UpdatingService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name=".RideAlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>
