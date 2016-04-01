@@ -219,7 +219,6 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
         //The EventEntity class is defined above
         Log.d("", kinveyClient.user().getUsername());
         RideUser rideUser = new RideUser();
-        rideUser.setUserName("TestUser");
 
         RideInfo rideInfo = new RideInfo();
         String[] fromLat = fromLatLong.split(",");
@@ -250,7 +249,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
             @Override
             public void onSuccess(RideUser r) {
-                Log.d("TAG", "saved data for entity " + String.valueOf(r.getUserName()));
+                Log.d("TAG", "saved data for entity " + String.valueOf(r.getUser().getUsername()));
             }
         });
     }

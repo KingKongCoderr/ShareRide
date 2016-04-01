@@ -28,6 +28,12 @@ public class RideCollection{
 //        mListAdapter.notifyDataSetChanged();
     }
 
+    public void deleteRideCollection(int OfferId,String fromAddress, String toAddress, String availability, String timeOftravel, String frequency)
+    {
+        //items.add(new Ride(OfferId,fromAddress, toAddress, availability, timeOftravel, frequency));
+//        mListAdapter.notifyDataSetChanged();
+    }
+
     public void refreshRecentSearchData()
     {
         Ride tempRide;

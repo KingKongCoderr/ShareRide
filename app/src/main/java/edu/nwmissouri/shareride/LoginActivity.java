@@ -23,48 +23,40 @@ import com.kinvey.java.User;
 import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Callback {
-    private MediaPlayer mp=null;
-    SurfaceView mSurfaceView=null;
-    SurfaceHolder holder=null;
+    private MediaPlayer mp = null;
+    SurfaceView mSurfaceView = null;
+    SurfaceHolder holder = null;
     private Button mLogin_bt;
-    private TextView mForgotPass,mCreateNew;
-    private EditText mUsername_et,mPassword_et;
-    public String mUsername,mPassword;
-    boolean shouldPlay=false;
+    private TextView mForgotPass, mCreateNew;
+    private EditText mUsername_et, mPassword_et;
+    public String mUsername, mPassword;
+    boolean shouldPlay = false;
     AssetFileDescriptor afd;
-    Client client;
+    Client kinveyClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mp=new MediaPlayer();
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
+
+        mp = new MediaPlayer();
         mp.setVolume(0f, 0f);
-        mSurfaceView=(SurfaceView)findViewById(R.id.surface);
+        mSurfaceView = (SurfaceView) findViewById(R.id.surface);
         holder = mSurfaceView.getHolder();
         holder.addCallback(this);
+        afd = getResources().openRawResourceFd(R.raw.video);
+        mLogin_bt = (Button) findViewById(R.id.login_bt);
+        mForgotPass = (TextView) findViewById(R.id.forgotpass_tv);
+        mCreateNew = (TextView) findViewById(R.id.newuser_tv);
+        mUsername_et = (EditText) findViewById(R.id.username_et);
+        mPassword_et = (EditText) findViewById(R.id.password_et);
 
+        try {
+            mUsername = mUsername_et.getText().toString();
+            mPassword = mPassword_et.getText().toString();
 
-
-           afd = getResources().openRawResourceFd(R.raw.video);
-
-
-
-        mLogin_bt=(Button)findViewById(R.id.login_bt);
-        mForgotPass=(TextView)findViewById(R.id.forgotpass_tv);
-        mCreateNew=(TextView)findViewById(R.id.newuser_tv);
-        mUsername_et=(EditText)findViewById(R.id.username_et);
-        mPassword_et=(EditText)findViewById(R.id.password_et);
-
-        client = new Client.Builder("kid_Z10tuBjTCx", "41f0212a449c472fab5e423f7c225f98", this.getApplicationContext()).build();
-        client.user().logout(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
-        pingKinvey();
-
-        try{
-            mUsername=mUsername_et.getText().toString();
-            mPassword=mPassword_et.getText().toString();
-
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -72,7 +64,13 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         mLogin_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                client.user().login(mUsername_et.getText().toString(), mPassword_et.getText().toString(), new KinveyUserCallback() {
+                if(kinveyClient.user().isUserLoggedIn()){
+                    Toast.makeText(getApplicationContext(),"User alreay Logged in",Toast.LENGTH_SHORT);
+                    kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
+                }else{
+                    Toast.makeText(getApplicationContext(),"Login now",Toast.LENGTH_SHORT);
+                }
+                kinveyClient.user().login(mUsername_et.getText().toString(), mPassword_et.getText().toString(), new KinveyUserCallback() {
                     @Override
                     public void onFailure(Throwable t) {
                         CharSequence text = "Wrong username or password";
@@ -112,30 +110,26 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
     public void surfaceCreated(SurfaceHolder holder) {
        /* Uri video = Uri.parse("android.resource://" + getPackageName() + "/"
                 + R.raw.video);*/
-if(!shouldPlay){
-    try {
-        shouldPlay=true;
-        mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
+        if (!shouldPlay) {
+            try {
+                shouldPlay = true;
+                mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
-
-           // mp.setDataSource(String.valueOf(video));
+        // mp.setDataSource(String.valueOf(video));
         try {
             mp.setDisplay(holder);
             mp.setLooping(true);
             mp.prepare();
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (IllegalStateException e1){
+        } catch (IllegalStateException e1) {
             e1.printStackTrace();
         }
-
-
-
 
 
         //Get the dimensions of the video
@@ -144,7 +138,7 @@ if(!shouldPlay){
 
         //Get the width of the screen
         int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
-        int screenHeight=getWindowManager().getDefaultDisplay().getHeight();
+        int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
 
         //Get the SurfaceView layout parameters
         android.view.ViewGroup.LayoutParams lp = mSurfaceView.getLayoutParams();
@@ -157,7 +151,7 @@ if(!shouldPlay){
         //lp.height = (int) (((float)videoHeight / (float)videoWidth) * (float)screenWidth)+200;
         Log.d("height:", "" + (int) (((float) videoHeight / (float) videoWidth) * (float) screenWidth));
 
-        lp.height= screenHeight;
+        lp.height = screenHeight;
         //Commit the layout parameters
         mSurfaceView.setLayoutParams(lp);
 
@@ -169,7 +163,7 @@ if(!shouldPlay){
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-Log.d("changed:","inside changed");
+        Log.d("changed:", "inside changed");
         //mp.start();
 
     }
@@ -183,21 +177,8 @@ Log.d("changed:","inside changed");
         }catch (IllegalStateException e){
             e.printStackTrace();
         }*/
-        Log.d("destroyed:","inside destroyed");
+        Log.d("destroyed:", "inside destroyed");
 
-    }
-    // Tests the kinvey connection
-    public void pingKinvey(){
-
-        client.ping(new KinveyPingCallback() {
-            public void onFailure(Throwable t) {
-                Log.e("TAGGER", "Kinvey Ping Failed", t);
-            }
-
-            public void onSuccess(Boolean b) {
-                Log.d("TAGGER", "Kinvey Ping Success");
-            }
-        });
     }
 }
 

@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         //The EventEntity class is defined above
         Log.d("", kinveyClient.user().getUsername());
         RideUser rideUser = new RideUser();
-        rideUser.setUserName("TestUser");
 
         RideInfo rideInfo = new RideInfo();
         String[] fromLat = fromLatLong.split(",");
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
             @Override
             public void onSuccess(RideUser r){
-                Log.d("TAG", "saved data for entity " + String.valueOf(r.getUserName()));
+                Log.d("TAG", "saved data for entity " + String.valueOf(r.getUser().getUsername()));
             }
         });
     }
