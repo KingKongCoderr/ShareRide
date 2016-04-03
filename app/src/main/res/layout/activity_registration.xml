@@ -29,9 +29,9 @@ android:textSize="25dp"
         android:layout_height="60dp"
         android:background="#ffffff"
         android:textSize="25dp"
+        android:inputType="text"
         android:hint="@string/username_hint"
         android:layout_marginTop="2dp"
-
         android:id="@+id/newusername_et"
         android:layout_below="@+id/name_et"
         android:layout_centerHorizontal="true"/>
