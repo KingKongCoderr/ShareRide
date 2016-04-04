@@ -133,7 +133,6 @@
         android:textColor="#f2000000"
         android:background="#e6ffFFFF"
         android:id="@+id/editnewsubmit_bt"
-        android:layout_below="@id/newemail_et"
 
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"/>
