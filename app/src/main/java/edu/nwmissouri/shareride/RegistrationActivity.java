@@ -67,16 +67,17 @@ public class RegistrationActivity extends AppCompatActivity {
                         rideUser.setEmail(emailET.getText().toString());
                         rideUser.setUser(u);
                         try{
-                            AsyncAppData<RideUser> userInfo = kinveyClient.appData("User Information", RideUser.class);
-                            userInfo.save(rideUser, new KinveyClientCallback<RideUser>() {
+                            kinveyClient.appData("RideUser", RideUser.class).save(rideUser, new KinveyClientCallback<RideUser>() {
                                 @Override
-                                public void onSuccess(RideUser user) {
-                                    Log.d("UserSignUp","Successfully user Created");
+                                public void onSuccess(RideUser result) {
+                                    Toast.makeText(getApplicationContext(),"Entity Saved\nTitle: " + result.getFullname()
+                                            + "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
                                 }
 
                                 @Override
-                                public void onFailure(Throwable e) {
-                                    Log.e("", "failed to save event data", e);
+                                public void onFailure(Throwable error) {
+                                    Log.e("RideUser", "AppData.save Failure", error);
+                                    Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
                         }catch (Exception e){
