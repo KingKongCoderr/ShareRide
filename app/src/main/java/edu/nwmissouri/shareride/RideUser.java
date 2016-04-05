@@ -10,39 +10,22 @@ import com.kinvey.java.model.KinveyMetaData;
  */
 public class RideUser extends GenericJson {
     @Key("_id")
-    private String userId;
-
+    private String rideUserId;
+    @Key
     private String fullname;
-
+    @Key
     private String phone;
-
+    @Key
     private String email;
 
     public RideUser() {
     }
 
-    public RideUser(String userId, String fullname, String phone, String email, User user) {
-        this.userId = userId;
-        this.fullname = fullname;
-        this.phone = phone;
+    public RideUser(String email, String phone, String fullname, String rideUserId) {
         this.email = email;
-        this.user = user;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
+        this.fullname = fullname;
+        this.rideUserId = rideUserId;
     }
 
     public String getEmail() {
@@ -53,15 +36,29 @@ public class RideUser extends GenericJson {
         this.email = email;
     }
 
-    public User getUser() {
-        return user;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    private User user;
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getRideUserId() {
+        return rideUserId;
+    }
+
+    public void setRideUserId(String rideUserId) {
+        this.rideUserId = rideUserId;
+    }
 
     @Key("_kmd")
     private KinveyMetaData meta; // Kinvey metadata, OPTIONAL
@@ -82,13 +79,5 @@ public class RideUser extends GenericJson {
 
     public void setMeta(KinveyMetaData meta) {
         this.meta = meta;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

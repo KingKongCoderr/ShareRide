@@ -231,19 +231,6 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        // rideInfo.put("Description", "This is a description of a dynamically-added Entity property.");
-        AsyncAppData<RideUser> myRideUser = kinveyClient.appData("RideUser", RideUser.class);
-        myRideUser.save(rideUser, new KinveyClientCallback<RideUser>() {
-            @Override
-            public void onFailure(Throwable e) {
-                Log.e(TAG, "failed to save event data", e);
-            }
-
-            @Override
-            public void onSuccess(RideUser r) {
-                Log.d("TAG", "saved data for entity " + String.valueOf(r.getUser().getUsername()));
-            }
-        });
     }
 
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {

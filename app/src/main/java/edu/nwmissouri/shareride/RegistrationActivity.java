@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 
@@ -61,17 +63,33 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onSuccess(User u) {
                         CharSequence text = u.getUsername() + ", your account has been created.";
                         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-                        RideUser rideUser = new RideUser();
+                        final RideUser rideUser = new RideUser();
+                        rideUser.setRideUserId(u.getUsername());
                         rideUser.setFullname(fullNameET.getText().toString());
+//                        rideUser.put("fullName", rideUser.getFullname());
                         rideUser.setPhone(phoneNumberET.getText().toString());
+//                        rideUser.put("phone", rideUser.getPhone());
                         rideUser.setEmail(emailET.getText().toString());
-                        rideUser.setUser(u);
+//                        rideUser.put("email", rideUser.getEmail());
                         try{
                             kinveyClient.appData("RideUser", RideUser.class).save(rideUser, new KinveyClientCallback<RideUser>() {
                                 @Override
                                 public void onSuccess(RideUser result) {
-                                    Toast.makeText(getApplicationContext(),"Entity Saved\nTitle: " + result.getFullname()
-                                            + "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+                                    Log.d("RIDINGUSER", result.getFullname());
+                                    Query myQuery = kinveyClient.query();
+                                    Log.d("RIDERUSERNAME",result.getRideUserId());
+                                    myQuery.equals("username",result.getRideUserId());
+                                    kinveyClient.appData("Users", User.class).get(myQuery, new KinveyListCallback<User>() {
+                                        @Override
+                                        public void onSuccess(User[] result) {
+                                            Log.d("Actual User", String.valueOf(result.length));
+                                        }
+
+                                        @Override
+                                        public void onFailure(Throwable error) {
+
+                                        }
+                                    });
                                 }
 
                                 @Override
