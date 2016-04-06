@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.kinvey.android.Client;
+
 import java.util.ArrayList;
 
 public class RideSearchResults extends AppCompatActivity {
@@ -17,11 +20,13 @@ public class RideSearchResults extends AppCompatActivity {
     RideSearchResultsAdapter rideSearchResultsAdapter;
     RideCollection rides = new RideCollection();
     RideRequestCollection rideRequest = new RideRequestCollection();
+    Client kinveyClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_search_results);
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
         Bundle bundle = getIntent().getExtras();
         String searchRequestID = bundle.getString("REQUEST_ID");
         String searchFromAddress = bundle.getString("FROM_ADDRESS");
@@ -31,7 +36,7 @@ public class RideSearchResults extends AppCompatActivity {
         String searchRideDate = bundle.getString("RIDEDATE");
 
         items = rides.getRideCollection();
-        rideRequest.addRecentRide(new Ride(Integer.parseInt(searchRequestID),searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate));
+        rideRequest.addRecentRide(new Ride(searchRequestID,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate,"request",kinveyClient.user().getUsername()));
         rideSearchResultsAdapter =
                 new RideSearchResultsAdapter(this, R.layout.list_item, items,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate);
         rideSearchResultsLV = (ListView) findViewById(R.id.rideSearchResultsLV);

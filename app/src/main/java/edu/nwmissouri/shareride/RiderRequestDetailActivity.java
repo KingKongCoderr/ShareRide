@@ -31,7 +31,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
         frequencySpinner = (TextView) findViewById(R.id.offerFrequencySpinner);
         offerId = (TextView) findViewById(R.id.offerIDTV);
         Bundle bundle = getIntent().getExtras();
-        Ride rideObject = rideCollection.getRideObject(Integer.parseInt(bundle.getString("INDEX_LOCATION")));
+        Ride rideObject = rideCollection.getRideObject(bundle.getString("INDEX_LOCATION"));
         //TODO here get the string stored in the string variable and do
         if(rideObject !=null) {
             offerId.setText(String.format("%d", rideObject.getOfferID()));

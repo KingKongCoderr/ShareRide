@@ -77,17 +77,40 @@ public class RegistrationActivity extends AppCompatActivity {
                                 public void onSuccess(RideUser result) {
                                     Log.d("RIDINGUSER", result.getFullname());
                                     Query myQuery = kinveyClient.query();
-                                    Log.d("RIDERUSERNAME",result.getRideUserId());
-                                    myQuery.equals("username",result.getRideUserId());
-                                    kinveyClient.appData("Users", User.class).get(myQuery, new KinveyListCallback<User>() {
+                                    Log.d("RIDERUSERNAME", result.getRideUserId());
+                                    myQuery.equals("_id", result.getRideUserId());
+                                    kinveyClient.appData("RideUser", RideUser.class).getEntity(result.getRideUserId().toString(), new KinveyClientCallback<RideUser>() {
                                         @Override
-                                        public void onSuccess(User[] result) {
-                                            Log.d("Actual User", String.valueOf(result.length));
+                                        public void onSuccess(RideUser user) {
+                                            Log.d("Actual User Full Name", String.valueOf(user.getFullname()));
+                                            Log.d("Actual User", String.valueOf(user.getEmail()));
                                         }
 
                                         @Override
                                         public void onFailure(Throwable error) {
 
+                                        }
+                                    });
+                                    kinveyClient.appData("RideUser", RideUser.class).get(new KinveyListCallback<RideUser>() {
+                                        @Override
+                                        public void onSuccess(RideUser[] result) {
+                                            Log.d("Length of the data", String.valueOf(result.length));
+                                        }
+
+                                        @Override
+                                        public void onFailure(Throwable error) {
+                                            Log.e("ALL DATA", "AppData.get all Failure", error);
+                                        }
+                                    });
+                                    kinveyClient.appData("RideUser", RideUser.class).get(myQuery, new KinveyListCallback<RideUser>() {
+                                        @Override
+                                        public void onSuccess(RideUser[] result) {
+                                            Log.d("Length of the data",String.valueOf(result.length));
+                                        }
+
+                                        @Override
+                                        public void onFailure(Throwable error) {
+                                            Log.e("ALL DATA", "AppData.get all Failure", error);
                                         }
                                     });
                                 }

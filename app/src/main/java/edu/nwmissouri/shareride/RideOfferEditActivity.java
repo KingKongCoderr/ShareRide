@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+import com.kinvey.java.core.KinveyClientCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +30,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements View.OnC
     Spinner hrsSpinner;
     EditText frequencySpinner;
     TextView offerId;
+    Client kinveyClient;
     private SimpleDateFormat dateFormatter;
     private DatePickerDialog selectDatePickerDialog;
 
@@ -33,6 +38,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_offer_edit);
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
         fromAddressET = (EditText)findViewById(R.id.fromET);
         toAddressET = (EditText)findViewById(R.id.ToET);
         availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
@@ -43,7 +49,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements View.OnC
 
         Bundle bundle = getIntent().getExtras();
         resultOfferId = bundle.getString("OFFER_ID");
-        Ride rideObject = rideCollection.getRideObject(Integer.parseInt(resultOfferId));
+        Ride rideObject = rideCollection.getRideObject(resultOfferId);
         //TODO here get the string stored in the string variable and do
         if(rideObject !=null) {
             fromAddressET.setText(rideObject.getRouteFrom());
@@ -70,17 +76,28 @@ public class RideOfferEditActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View v)
             {
-                boolean result = rideCollection.setRideObject(resultOfferId, fromAddressET.getText().toString(), toAddressET.getText().toString(), availabilityET.getText().toString(), hrsSpinner.getSelectedItem().toString(), frequencySpinner.getText().toString());
+
+                kinveyClient.appData("RideCollection", Ride.class).getEntity(resultOfferId, new KinveyClientCallback<Ride>() {
+                    @Override
+                    public void onSuccess(Ride ride) {
+                        boolean result = rideCollection.setRideObject(resultOfferId, fromAddressET.getText().toString(), toAddressET.getText().toString(), availabilityET.getText().toString(), hrsSpinner.getSelectedItem().toString(), frequencySpinner.getText().toString());
                         if(result == true)
                         {
-                            Toast.makeText(getBaseContext(),"Ride updated!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Ride updated!", Toast.LENGTH_SHORT).show();
                             Intent rideActivity = new Intent(getBaseContext(),RideActivity.class);
                             startActivity(rideActivity);
                         }
                         else
                         {
-                            Toast.makeText(getBaseContext(),"Ride not updated!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(),"Ride updated in kinvey but not in ride collection!", Toast.LENGTH_SHORT).show();
                         }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                        Toast.makeText(getBaseContext(),"Ride not updated!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

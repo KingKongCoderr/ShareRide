@@ -1,5 +1,9 @@
 package edu.nwmissouri.shareride;
 
+import android.view.View;
+
+import com.kinvey.android.Client;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,13 +26,13 @@ public class RideCollection{
         return items;
     }
 
-    public void addRideCollection(int OfferId,String fromAddress, String toAddress, String availability, String timeOftravel, String frequency)
+    public void addRideCollection(Ride ride)
     {
-        items.add(new Ride(OfferId,fromAddress, toAddress, availability, timeOftravel, frequency));
+        items.add(ride);
 //        mListAdapter.notifyDataSetChanged();
     }
 
-    public void deleteRideCollection(int OfferId,String fromAddress, String toAddress, String availability, String timeOftravel, String frequency)
+    public void deleteRideCollection(String OfferId,String fromAddress, String toAddress, String availability, String timeOftravel, String frequency)
     {
         //items.add(new Ride(OfferId,fromAddress, toAddress, availability, timeOftravel, frequency));
 //        mListAdapter.notifyDataSetChanged();
@@ -43,7 +47,7 @@ public class RideCollection{
 
     public Ride temporaryRide()
     {
-        Ride myRide = new Ride(1, "1351 Hampshire Avenue South, Saint Louis Park, MN, United States","Nicollet mall, Minneapolis, MN, United States","4","3:00","29-03-2016");
+        Ride myRide = new Ride("1", "1351 Hampshire Avenue South, Saint Louis Park, MN, United States","Nicollet mall, Minneapolis, MN, United States","4","3:00","29-03-2016","offer","rider");
         return myRide;
     }
 
@@ -54,16 +58,16 @@ public class RideCollection{
         {
             if(items.get(i) != null)
             {
-                if(items.get(i).getOfferID() > maxId)
+                if(Integer.parseInt(items.get(i).getOfferID()) > maxId)
                 {
-                    maxId = items.get(i).getOfferID();
+                    maxId = Integer.parseInt(items.get(i).getOfferID());
                 }
             }
         }
         return maxId;
     }
 
-    public Ride getRideObject(int OfferId)
+    public Ride getRideObject(String OfferId)
     {
         Ride resultObject = null;
         for(Ride item: items)
@@ -82,7 +86,7 @@ public class RideCollection{
         Ride resultObject = null;
         for(Ride item: items)
         {
-            if(item.getOfferID() == Integer.parseInt(resultOfferId))
+            if(item.getOfferID() == resultOfferId)
             {
                 item.setRouteFrom(fromAddressET);
                 item.setRouteTo(toAddressET);

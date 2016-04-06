@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 String toStr = toET.getText().toString();
 
                 toLatLong = getLatLongFromGivenAddress(toStr);
-                saveRideInfo();
                 Toast.makeText(getBaseContext(), toLatLong.toString(), Toast.LENGTH_SHORT).show();
                 String[] toLatLongArrays = toLatLong.split(",");
 
@@ -170,36 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         }
     }
 
-    /**
-     * This method is used to save ride info to the Kinvey database
-     */
 
-    private void saveRideInfo() {
-
-        //The EventEntity class is defined above
-        Log.d("", kinveyClient.user().getUsername());
-        RideUser rideUser = new RideUser();
-
-        RideInfo rideInfo = new RideInfo();
-        String[] fromLat = fromLatLong.split(",");
-        rideInfo.setOriginLat(Float.parseFloat(fromLat[0]));
-        rideInfo.setOriginLong(Float.parseFloat(fromLat[1]));
-
-        rideInfo.put("Description", "This is a description of a dynamically-added RideInfo property.");
-        AsyncAppData<RideInfo> myRideInfo = kinveyClient.appData("RideInformation", RideInfo.class);
-        myRideInfo.save(rideInfo, new KinveyClientCallback<RideInfo>() {
-            @Override
-            public void onFailure(Throwable e) {
-                Log.e(TAG, "failed to save event data", e);
-            }
-
-            @Override
-            public void onSuccess(RideInfo r) {
-                Log.d("TAG", "saved data for entity " + String.valueOf(r.getOriginLat()));
-            }
-        });
-
-    }
 
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
         String str = (String) adapterView.getItemAtPosition(position);

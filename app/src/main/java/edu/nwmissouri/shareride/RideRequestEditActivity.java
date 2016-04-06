@@ -12,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kinvey.android.Client;
+import com.kinvey.java.core.KinveyClientCallback;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -26,6 +29,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements View.O
     Spinner hrsSpinner;
     EditText frequencySpinner;
     TextView offerId;
+    Client kinveyClient;
     private SimpleDateFormat dateFormatter;
     private DatePickerDialog selectDatePickerDialog;
 
@@ -33,6 +37,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_request_edit);
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
         fromAddressET = (EditText)findViewById(R.id.fromET);
         toAddressET = (EditText)findViewById(R.id.ToET);
         availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
@@ -43,7 +48,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements View.O
 
         Bundle bundle = getIntent().getExtras();
         resultOfferId = bundle.getString("REQUEST_ID");
-        Ride rideObject = rideCollection.getRideObject(Integer.parseInt(resultOfferId));
+        Ride rideObject = rideCollection.getRideObject(resultOfferId);
         //TODO here get the string stored in the string variable and do
         if(rideObject !=null) {
             fromAddressET.setText(rideObject.getRouteFrom());
@@ -70,6 +75,27 @@ public class RideRequestEditActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View v)
             {
+                kinveyClient.appData("RideCollection", Ride.class).getEntity(resultOfferId, new KinveyClientCallback<Ride>() {
+                    @Override
+                    public void onSuccess(Ride ride) {
+                        boolean result = rideCollection.setRideObject(resultOfferId, fromAddressET.getText().toString(), toAddressET.getText().toString(), availabilityET.getText().toString(), hrsSpinner.getSelectedItem().toString(), frequencySpinner.getText().toString());
+                        if(result == true)
+                        {
+                            Toast.makeText(getBaseContext(), "Ride updated!", Toast.LENGTH_SHORT).show();
+                            Intent rideActivity = new Intent(getBaseContext(),RideActivity.class);
+                            startActivity(rideActivity);
+                        }
+                        else
+                        {
+                            Toast.makeText(getBaseContext(),"Ride updated in kinvey but not in ride collection!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                        Toast.makeText(getBaseContext(),"Ride not updated!", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 boolean result = rideCollection.setRideObject(resultOfferId, fromAddressET.getText().toString(), toAddressET.getText().toString(), availabilityET.getText().toString(), hrsSpinner.getSelectedItem().toString(), frequencySpinner.getText().toString());
                 if(result == true)
                 {

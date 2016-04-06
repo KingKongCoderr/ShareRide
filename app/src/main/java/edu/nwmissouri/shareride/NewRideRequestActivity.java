@@ -128,7 +128,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                String maxOfferId = String.format("%d",rideCollection.getMaxOfferId() + 1);
+                String  maxOfferId = String.format("%d",rideCollection.getMaxOfferId() + 1);
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -163,7 +163,20 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 //
 //                }
 
-                rideCollection.addRideCollection(Integer.parseInt(maxOfferId),fromStr,toStr,noOfPersons, travelHrs,frequencyHrs);
+                Ride ride = new Ride(maxOfferId,fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
+                kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
+                    @Override
+                    public void onSuccess(Ride result) {
+                        Toast.makeText(getApplicationContext(), "Ride offer created", Toast.LENGTH_LONG).show();
+                        rideCollection.addRideCollection(result);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                        Log.e(TAG, "AppData.save Failure", error);
+                        Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
 //                rideActivityIntent.putExtra("fromAddress", fromStr);
 //                rideActivityIntent.putExtra("toAddress", toStr);
                 startActivity(rideActivityIntent);
@@ -200,37 +213,6 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         if(view == frequencySpinner) {
             selectDatePickerDialog.show();
         }
-    }
-
-    /**
-     * This method is used to save ride info to the Kinvey database
-     */
-
-    private void saveRideInfo() {
-
-        //The EventEntity class is defined above
-        Log.d("", kinveyClient.user().getUsername());
-        RideUser rideUser = new RideUser();
-
-        RideInfo rideInfo = new RideInfo();
-        String[] fromLat = fromLatLong.split(",");
-        rideInfo.setOriginLat(Float.parseFloat(fromLat[0]));
-        rideInfo.setOriginLong(Float.parseFloat(fromLat[1]));
-
-        rideInfo.put("Description", "This is a description of a dynamically-added RideInfo property.");
-        AsyncAppData<RideInfo> myRideInfo = kinveyClient.appData("RideInformation", RideInfo.class);
-        myRideInfo.save(rideInfo, new KinveyClientCallback<RideInfo>() {
-            @Override
-            public void onFailure(Throwable e) {
-                Log.e(TAG, "failed to save event data", e);
-            }
-
-            @Override
-            public void onSuccess(RideInfo r) {
-                Log.d("TAG", "saved data for entity " + String.valueOf(r.getOriginLat()));
-            }
-        });
-
     }
 
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
