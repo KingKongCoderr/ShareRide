@@ -71,7 +71,8 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ride_request);
-
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , this.getApplicationContext()).build();
         ActionBar actionbar = getSupportActionBar();
 
         // Enable the Up button
@@ -184,9 +185,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        // Kinvey initialization
-        kinveyClient = new Client.Builder(appKey, appSecret
-                , this.getApplicationContext()).build();
+
 
         if (!kinveyClient.user().isUserLoggedIn()) {
             kinveyClient.user().login(new KinveyUserCallback() {
