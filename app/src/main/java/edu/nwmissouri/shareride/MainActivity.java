@@ -44,6 +44,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     {
         double earthRadius = 3958.75; // miles (or 6371.0 kilometers)
         double dLat = Math.toRadians(toLat-fromLat);
-        double dLng = Math.toRadians(toLong-fromLong);
+        double dLng = Math.toRadians(toLong - fromLong);
         double sindLat = Math.sin(dLat / 2);
         double sindLng = Math.sin(dLng / 2);
         double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
@@ -314,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         return super.onOptionsItemSelected(item);
     }
-
 }
 
 class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable

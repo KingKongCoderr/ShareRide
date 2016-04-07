@@ -53,7 +53,6 @@ public class FragmentRide extends Fragment {
 
     public static FragmentRide newInstance(int num) {
         FragmentRide f = new FragmentRide();
-
         // Supply num input as an argument.
         Bundle args = new Bundle();
         args.putInt("from", num);

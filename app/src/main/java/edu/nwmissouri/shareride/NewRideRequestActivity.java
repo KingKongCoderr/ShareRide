@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
@@ -60,6 +61,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
     private DatePickerDialog selectDatePickerDialog;
     private SimpleDateFormat dateFormatter;
     private EditText frequencySpinner;
+    private static int maxOfferId = 0;
 
     //Kinvey Details
     public static final String TAG = "ShareRideKinvey";
@@ -120,6 +122,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         final Intent rideActivityIntent = new Intent(this,RideActivity.class);
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
+            int rideCount;
             @Override
             public void onClick(View v) {
                 EditText fromET = (EditText) findViewById(R.id.fromET);
@@ -129,7 +132,19 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                String  maxOfferId = String.valueOf(rideCollection.getMaxOfferId() + 1);
+                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                    @Override
+                    public void onSuccess(Ride[] result) {
+                        Log.d("Length of the data", String.valueOf(result.length));
+                        Ride.rideCount = result.length;
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                        Log.e("ALL DATA", "AppData.get all Failure", error);
+                    }
+                });
+                Log.d("MAXOFFERID", Ride.rideCount + "");
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -164,13 +179,30 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 //
 //                }
 
-                Ride ride = new Ride(maxOfferId,fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
+                Ride ride = new Ride(String.valueOf(Ride.rideCount),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
                 kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                     @Override
                     public void onSuccess(Ride result) {
-                        Toast.makeText(getApplicationContext(), "Ride offer created", Toast.LENGTH_LONG).show();
-                        Log.d("REQUEST","Sucuess");
-                        rideCollection.addRideCollection(result);
+                        Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
+                        Log.d("REQUEST", "Sucuess");
+                        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                            @Override
+                            public void onSuccess(Ride[] result) {
+                                Log.d("Length of the data", String.valueOf(result.length));
+                                RideRequestCollection.items.clear();
+                                for (Ride ride:result){
+                                    if(ride.getRideType() == "request"){
+                                        RideRequestCollection.items.add(ride);
+                                    }
+                                }
+                                Log.d("REQUEST LIST",RideRequestCollection.items.toString());
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("ALL DATA", "AppData.get all Failure", error);
+                            }
+                        });
                     }
 
                     @Override

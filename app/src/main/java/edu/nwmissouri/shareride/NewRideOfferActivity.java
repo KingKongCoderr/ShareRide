@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
@@ -130,6 +131,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
         final Intent rideActivityIntent = new Intent(this,RideActivity.class);
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
+            int rideCount;
             @Override
             public void onClick(View v) {
                 EditText fromET = (EditText) findViewById(R.id.fromET);
@@ -139,7 +141,19 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                String maxOfferId = String.valueOf(rideCollection.getMaxOfferId() + 1);
+                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                    @Override
+                    public void onSuccess(Ride[] result) {
+                        Log.d("Length of the data", String.valueOf(result.length));
+                        Ride.rideCount = result.length;
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+                        Log.e("ALL DATA", "AppData.get all Failure", error);
+                    }
+                });
+                Log.d("MAXOFFERID", Ride.rideCount + "");
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -174,12 +188,31 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 //
 //                }
 
-                Ride ride = new Ride(maxOfferId,fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"offer",kinveyClient.user().getUsername());
+                Ride ride = new Ride(String.valueOf(Ride.rideCount),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"offer",kinveyClient.user().getUsername());
                 kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                     @Override
                     public void onSuccess(Ride result) {
                         Toast.makeText(getApplicationContext(), "Ride offer created", Toast.LENGTH_LONG).show();
-                        rideCollection.addRideCollection(result);
+                        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                            @Override
+                            public void onSuccess(Ride[] result) {
+                                Log.d("Length of the data", String.valueOf(result.length));
+                                RideCollection.items.clear();
+                                for (Ride ride : result) {
+                                    if(ride.getRideType().equals("offer")){
+                                        //RideCollection.items.add(ride);
+                                        rideCollection.addRideCollection(ride);
+                                    }
+                                }
+
+                                Log.d("OFFER LIST",RideCollection.items.toString());
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("ALL DATA", "AppData.get all Failure", error);
+                            }
+                        });
                     }
 
                     @Override

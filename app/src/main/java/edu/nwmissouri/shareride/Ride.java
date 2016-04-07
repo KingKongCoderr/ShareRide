@@ -25,6 +25,8 @@ public class Ride extends GenericJson {
     @Key
     private String rideUserId;
 
+    public static int rideCount = 0;
+
     @Key("_kmd")
     private KinveyMetaData meta; // Kinvey metadata, OPTIONAL
     @Key("_acl")
