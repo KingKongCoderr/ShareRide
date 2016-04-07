@@ -139,7 +139,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                String maxOfferId = String.format("%d",rideCollection.getMaxOfferId() + 1);
+                String maxOfferId = String.valueOf(rideCollection.getMaxOfferId() + 1);
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();

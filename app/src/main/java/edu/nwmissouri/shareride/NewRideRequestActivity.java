@@ -63,8 +63,8 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 
     //Kinvey Details
     public static final String TAG = "ShareRideKinvey";
-    private String appKey = "kid_Z10tuBjTCx";
-    private String appSecret = "41f0212a449c472fab5e423f7c225f98";
+    private String appKey = "kid_ZJCDL-Jpy-";
+    private String appSecret = "7ba9e5e0015849b790845e669ab87992";
     private Client kinveyClient;
 
     @Override
@@ -128,7 +128,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                String  maxOfferId = String.format("%d",rideCollection.getMaxOfferId() + 1);
+                String  maxOfferId = String.valueOf(rideCollection.getMaxOfferId() + 1);
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -168,6 +168,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                     @Override
                     public void onSuccess(Ride result) {
                         Toast.makeText(getApplicationContext(), "Ride offer created", Toast.LENGTH_LONG).show();
+                        Log.d("REQUEST","Sucuess");
                         rideCollection.addRideCollection(result);
                     }
 

@@ -128,7 +128,7 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
         RouteFrom.setText("From: " + fromBuilder.toString());
         RouteTo.setText("To: " + toBuilder.toString());
         NoOfAvailability.setText("Availability: " + getItem(position).getNoOfAvailability().toString());
-        offerId.setText("OfferID: " + String.format("%d", getItem(position).getOfferID()));
+        offerId.setText("OfferID: " + String.valueOf(getItem(position).getOfferID()));
         //holder.txtItemQuantity.setText(String.format("%d", rideDetailses[position].getItemQuantity()));
         //text2.setText(String.format("%1$,.2f",getItem(position).getPrice()));
         return view;
