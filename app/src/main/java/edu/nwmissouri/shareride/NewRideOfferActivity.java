@@ -128,7 +128,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
         toET.setAdapter(new GooglePlacesAutocompleteAdapter2(this, R.layout.places_result));
         toET.setOnItemClickListener(this);
-        final Intent rideActivityIntent = new Intent(this,RideActivity.class);
+
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
             int rideCount;
@@ -199,13 +199,14 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                                 Log.d("Length of the data", String.valueOf(result.length));
                                 RideCollection.items.clear();
                                 for (Ride ride : result) {
-                                    if(ride.getRideType().equals("offer")){
+                                    if(ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())){
                                         //RideCollection.items.add(ride);
                                         rideCollection.addRideCollection(ride);
                                     }
                                 }
-
                                 Log.d("OFFER LIST",RideCollection.items.toString());
+                                final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
+                                startActivity(rideActivityIntent);
                             }
 
                             @Override
@@ -224,7 +225,6 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
 //                rideActivityIntent.putExtra("fromAddress", fromStr);
 //                rideActivityIntent.putExtra("toAddress", toStr);
-                startActivity(rideActivityIntent);
             }
         });
 
