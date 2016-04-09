@@ -1,7 +1,9 @@
 package edu.nwmissouri.shareride;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 
 import java.util.ArrayList;
 
@@ -35,7 +38,7 @@ public class RideSearchResults extends AppCompatActivity {
         String searchRideTime = bundle.getString("RIDETIME");
         String searchRideDate = bundle.getString("RIDEDATE");
 
-        items = rides.getRideCollection();
+        items = RideCollection.searchItems;
         rideRequest.addRecentRide(new Ride(searchRequestID,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate,"request",kinveyClient.user().getUsername()));
         rideSearchResultsAdapter =
                 new RideSearchResultsAdapter(this, R.layout.list_item, items,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate);

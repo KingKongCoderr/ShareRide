@@ -12,6 +12,7 @@ import java.util.Collection;
  */
 public class RideCollection{
     public static ArrayList<Ride> items = new ArrayList<Ride>();
+    public static ArrayList<Ride> searchItems = new ArrayList<Ride>();
     private RideOfferAdapter mListAdapter;
 
     public RideCollection()

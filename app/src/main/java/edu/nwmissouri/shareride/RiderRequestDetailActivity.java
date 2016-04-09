@@ -3,11 +3,17 @@ package edu.nwmissouri.shareride;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+
+import java.util.ArrayList;
 
 public class RiderRequestDetailActivity extends AppCompatActivity {
 
@@ -18,12 +24,13 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
     TextView hrsSpinner;
     TextView frequencySpinner;
     TextView offerId;
+    Client kinveyClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_request_detail);
-
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
         fromAddressET = (TextView)findViewById(R.id.fromET);
         toAddressET = (TextView)findViewById(R.id.ToET);
         availabilityET = (TextView) findViewById(R.id.offerAvailabilityET);
@@ -82,6 +89,27 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
         searchIntent.putExtra("AVAILABILITY", availabilityET.getText());
         searchIntent.putExtra("RIDETIME", hrsSpinner.getText());
         searchIntent.putExtra("RIDEDATE", frequencySpinner.getText());
+
+        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+            @Override
+            public void onSuccess(Ride[] result) {
+                Log.d("Length of the data", String.valueOf(result.length));
+                RideCollection.searchItems.clear();
+                for (Ride ride : result) {
+                    if (ride.getRideType().equals("offer")) {
+                        if (!ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                            RideCollection.searchItems.add(ride);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error) {
+                Log.e("ALL DATA", "AppData.get all Failure", error);
+            }
+        });
+
         startActivity(searchIntent);
     }
 }
