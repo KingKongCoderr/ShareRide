@@ -183,7 +183,11 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                                         rideCollection.addRideCollection(ride);
                                     }
                                 }
-                                Ride.rideOfferCount = RideCollection.items.size();
+                                if(RideCollection.items.size()>0){
+                                    Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
+                                }else{
+                                    Ride.rideOfferCount = 0;
+                                }
                                 Log.d("OFFER LIST",RideCollection.items.toString());
                                 final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
                                 startActivity(rideActivityIntent);

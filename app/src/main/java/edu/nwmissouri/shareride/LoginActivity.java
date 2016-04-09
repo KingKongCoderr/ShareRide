@@ -96,8 +96,16 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                                         rideRequestCollection.addRideCollection(ride);
                                     }
                                 }
-                                Ride.rideOfferCount = RideCollection.items.size();
-                                Ride.rideRequestCount = RideRequestCollection.items.size();
+                                if(RideCollection.items.size()>0){
+                                    Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
+                                }else{
+                                    Ride.rideOfferCount = 0;
+                                }
+                                if(RideRequestCollection.items.size()>0){
+                                    Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size()-1).getOfferID());
+                                }else{
+                                    Ride.rideRequestCount = 0;
+                                }
                                 Log.d("Ride Count On LOgin",Ride.rideOfferCount +"");
                                 Log.d("OFFER LIST", RideCollection.items.toString());
                                 final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);

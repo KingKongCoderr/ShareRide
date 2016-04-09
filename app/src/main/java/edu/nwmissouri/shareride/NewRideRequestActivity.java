@@ -91,7 +91,6 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        final RideRequestCollection rideCollection = new RideRequestCollection();
         final RideRequestCollection rideRequestCollection = new RideRequestCollection();
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -181,7 +180,11 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                                         rideRequestCollection.addRideCollection(ride);
                                     }
                                 }
-                                Ride.rideRequestCount = RideRequestCollection.items.size();
+                                if(RideRequestCollection.items.size()>0){
+                                    Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size()-1).getOfferID());
+                                }else{
+                                    Ride.rideRequestCount = 0;
+                                }
                                 Log.d("REQUEST LIST",RideRequestCollection.items.toString());
                                 final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
                                 startActivity(rideActivityIntent);

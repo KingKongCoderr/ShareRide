@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.java.core.KinveyClientCallback;
 
 import java.text.SimpleDateFormat;
@@ -76,26 +77,49 @@ public class RideOfferEditActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View v)
             {
+                Ride ride = rideCollection.getRideObject(resultOfferId);
+                ride.setRouteFrom(fromAddressET.getText().toString());
+                ride.setRouteTo(toAddressET.getText().toString());
+                ride.setNoOfAvailability(availabilityET.getText().toString());
+                ride.setTimeOfTravel(hrsSpinner.getSelectedItem().toString());
+                ride.setFrequency(frequencySpinner.getText().toString());
 
-                kinveyClient.appData("RideCollection", Ride.class).getEntity(resultOfferId, new KinveyClientCallback<Ride>() {
+                kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                     @Override
-                    public void onSuccess(Ride ride) {
-                        boolean result = rideCollection.setRideObject(resultOfferId, fromAddressET.getText().toString(), toAddressET.getText().toString(), availabilityET.getText().toString(), hrsSpinner.getSelectedItem().toString(), frequencySpinner.getText().toString());
-                        if(result == true)
-                        {
-                            Toast.makeText(getBaseContext(), "Ride updated!", Toast.LENGTH_SHORT).show();
-                            Intent rideActivity = new Intent(getBaseContext(),RideActivity.class);
-                            startActivity(rideActivity);
-                        }
-                        else
-                        {
-                            Toast.makeText(getBaseContext(),"Ride updated in kinvey but not in ride collection!", Toast.LENGTH_SHORT).show();
-                        }
+                    public void onSuccess(Ride result) {
+                        Toast.makeText(getApplicationContext(), "Ride offer Updated", Toast.LENGTH_LONG).show();
+                        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                            @Override
+                            public void onSuccess(Ride[] result) {
+                                Log.d("Length of the data", String.valueOf(result.length));
+                                RideCollection.items.clear();
+                                for (Ride ride : result) {
+                                    if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                        //RideCollection.items.add(ride);
+                                        rideCollection.addRideCollection(ride);
+                                    }
+                                }
+                                if(RideCollection.items.size()>0){
+                                    Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
+                                }else{
+                                    Ride.rideOfferCount = 0;
+                                }
+                                Log.d("OFFER LIST", RideCollection.items.toString());
+                                final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+                                startActivity(rideActivityIntent);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("ALL DATA", "AppData.get all Failure", error);
+                            }
+                        });
                     }
 
                     @Override
                     public void onFailure(Throwable error) {
-                        Toast.makeText(getBaseContext(),"Ride not updated!", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "AppData.save Failure", error);
+                        Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }

@@ -57,7 +57,7 @@ public class RideRequestCollection {
         Ride resultObject = null;
         for(Ride item: items)
         {
-            if(item.getOfferID() == OfferId)
+            if(item.getOfferID().equals(OfferId))
             {
                 resultObject =  item;
             }

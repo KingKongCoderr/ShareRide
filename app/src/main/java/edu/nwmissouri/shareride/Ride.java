@@ -135,4 +135,17 @@ public class Ride extends GenericJson {
     public void setNoOfAvailability(String noOfAvailability) {
         this.noOfAvailability = noOfAvailability;
     }
+
+    @Override
+    public String toString() {
+        return "Ride{" +
+                "rideID='" + rideID + '\'' +
+                ", noOfAvailability='" + noOfAvailability + '\'' +
+                ", routeFrom='" + routeFrom + '\'' +
+                ", routeTo='" + routeTo + '\'' +
+                ", timeOfTravel='" + timeOfTravel + '\'' +
+                ", frequency='" + frequency + '\'' +
+                ", rideType='" + rideType + '\'' +
+                '}';
+    }
 }

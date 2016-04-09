@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyDeleteCallback;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.model.KinveyDeleteResponse;
 
 import java.util.ArrayList;
 
@@ -36,6 +42,9 @@ public class FragmentRideRequest extends Fragment {
     Ride[] itemsArray;
     RideRequestCollection rides = new RideRequestCollection();
     //ResultsListAdapter resultsListAdapter;
+    Client kinveyClient;
+    private String appKey = "kid_ZJCDL-Jpy-";
+    private String appSecret = "7ba9e5e0015849b790845e669ab87992";
 
     public interface iRideRequestActivity
     {
@@ -105,6 +114,8 @@ public class FragmentRideRequest extends Fragment {
 
         items = rides.getRideCollection();
         //itemsArray = items.toArray(new Ride[items.size()]);
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , getContext()).build();
 
         rideRequestAdapter = new RideRequestAdapter(getActivity(), R.layout.list_item, items);
             rideRequestLV = (ListView) theView.findViewById(R.id.riderRequestLV);
@@ -142,7 +153,52 @@ public class FragmentRideRequest extends Fragment {
                 deleteAlert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        items.remove(position);
+
+                        Log.d("POSITION", String.valueOf(position));
+                        Log.d("WHICH",String.valueOf(which));
+                        Ride ride = RideRequestCollection.items.get(position);
+                        Log.d("RIDEOBJECT",ride.toString());
+                        kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
+                            @Override
+                            public void onSuccess(KinveyDeleteResponse result) {
+                                Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
+                                final RideRequestCollection rideCollection = new RideRequestCollection();
+                                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                                    @Override
+                                    public void onSuccess(Ride[] result) {
+                                        Log.d("Length of the data", String.valueOf(result.length));
+                                        RideRequestCollection.items.clear();
+                                        for (Ride ride : result) {
+                                            if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                                //RideCollection.items.add(ride);
+                                                rideCollection.addRideCollection(ride);
+                                            }
+                                        }
+                                        if(RideRequestCollection.items.size()>0){
+                                            Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size()-1).getOfferID());
+                                        }else{
+                                            Ride.rideRequestCount = 0;
+                                        }
+                                        Log.d("OFFER LIST", RideCollection.items.toString());
+                                        final Intent rideActivityIntent = new Intent(getContext(), RideActivity.class);
+                                        startActivity(rideActivityIntent);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Throwable error) {
+                                        Log.e("ALL DATA", "AppData.get all Failure", error);
+                                    }
+                                });
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("TAG", "AppData.delete Failure", error);
+                                Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                         rideRequestAdapter.notifyDataSetChanged();
                     }
                 });

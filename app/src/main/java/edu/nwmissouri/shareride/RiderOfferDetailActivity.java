@@ -25,8 +25,8 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_offer_detail);
 
-        fromAddressET = (TextView)findViewById(R.id.fromET);
-        toAddressET = (TextView)findViewById(R.id.ToET);
+        fromAddressET = (TextView) findViewById(R.id.fromET);
+        toAddressET = (TextView) findViewById(R.id.ToET);
         availabilityET = (TextView) findViewById(R.id.offerAvailabilityET);
         hrsSpinner = (TextView) findViewById(R.id.offertimeSpinner);
         frequencySpinner = (TextView) findViewById(R.id.offerFrequencySpinner);
@@ -34,7 +34,7 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         Ride rideObject = rideCollection.getRideObject(bundle.getString("INDEX_LOCATION"));
         //TODO here get the string stored in the string variable and do
-        if(rideObject !=null) {
+        if (rideObject != null) {
             fromAddressET.setText(rideObject.getRouteFrom());
             toAddressET.setText(rideObject.getRouteTo());
             availabilityET.setText(rideObject.getNoOfAvailability());
@@ -42,9 +42,9 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
             frequencySpinner.setText(rideObject.getFrequency());
             offerId.setText(bundle.getString("INDEX_LOCATION").toString());
         }
-        }
+    }
 
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_ride_offer_edit, menu);
@@ -61,9 +61,7 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if (id == R.id.Edit_Ride_Offer)
-        {
+        } else if (id == R.id.Edit_Ride_Offer) {
             Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
             Intent RideEditIntent = new Intent(this, RideOfferEditActivity.class);
             RideEditIntent.putExtra("OFFER_ID", offerId.getText());

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyDeleteCallback;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.model.KinveyDeleteResponse;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,10 @@ public class FragmentRide extends Fragment {
     ListView rideOfferLV;
     iRideActivity rideActivityInterface;
     Button addRideOffer;
+
+    Client kinveyClient;
+    private String appKey = "kid_ZJCDL-Jpy-";
+    private String appSecret = "7ba9e5e0015849b790845e669ab87992";
 
     public static final String ITEM_POSITION = "position";
 
@@ -106,7 +116,8 @@ public class FragmentRide extends Fragment {
 
         items = rides.getRideCollection();
         //itemsArray = items.toArray(new Ride[items.size()]);
-
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , getContext()).build();
         RideOfferAdapter =
                     new RideOfferAdapter(getActivity(), R.layout.list_item, items);
         rideOfferLV = (ListView) theView.findViewById(R.id.riderOfferLV);
@@ -128,6 +139,7 @@ public class FragmentRide extends Fragment {
                 String currentOfferId = ((TextView) view.findViewById(R.id.itemId)).getText().toString();
                 String selected = currentOfferId.replace("OfferID: ","");
                 newRideOfferIntent.putExtra("INDEX_LOCATION", selected);
+                Log.d("Selected Offer Id", selected.toString());
                 startActivity(newRideOfferIntent);
             }
         });
@@ -140,7 +152,51 @@ public class FragmentRide extends Fragment {
                 deleteAlert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        items.remove(position);
+                        Log.d("POSITION",String.valueOf(position));
+                        Log.d("WHICH",String.valueOf(which));
+                        Ride ride = RideCollection.items.get(position);
+                        Log.d("RIDEOBJECT",ride.toString());
+                        kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
+                            @Override
+                            public void onSuccess(KinveyDeleteResponse result) {
+                                Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
+                                final RideCollection rideCollection = new RideCollection();
+                                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                                    @Override
+                                    public void onSuccess(Ride[] result) {
+                                        Log.d("Length of the data", String.valueOf(result.length));
+                                        RideCollection.items.clear();
+                                        for (Ride ride : result) {
+                                            if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                                //RideCollection.items.add(ride);
+                                                rideCollection.addRideCollection(ride);
+                                            }
+                                        }
+                                        if(RideCollection.items.size()>0){
+                                            Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
+                                        }else{
+                                            Ride.rideOfferCount = 0;
+                                        }
+                                        Log.d("OFFER LIST", RideCollection.items.toString());
+                                        final Intent rideActivityIntent = new Intent(getContext(), RideActivity.class);
+                                        startActivity(rideActivityIntent);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Throwable error) {
+                                        Log.e("ALL DATA", "AppData.get all Failure", error);
+                                    }
+                                });
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("TAG", "AppData.delete Failure", error);
+                                Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                         RideOfferAdapter.notifyDataSetChanged();
                     }
                 });

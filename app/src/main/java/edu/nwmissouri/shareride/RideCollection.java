@@ -32,7 +32,7 @@ public class RideCollection{
 //        mListAdapter.notifyDataSetChanged();
     }
 
-    public void deleteRideCollection(String OfferId,String fromAddress, String toAddress, String availability, String timeOftravel, String frequency)
+    public void deleteRideCollection()
     {
         //items.add(new Ride(OfferId,fromAddress, toAddress, availability, timeOftravel, frequency));
 //        mListAdapter.notifyDataSetChanged();
@@ -72,7 +72,7 @@ public class RideCollection{
         Ride resultObject = null;
         for(Ride item: items)
         {
-            if(item.getOfferID() == OfferId)
+            if(item.getOfferID().equals(OfferId))
             {
                 resultObject =  item;
             }
