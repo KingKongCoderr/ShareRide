@@ -8,6 +8,8 @@ import com.kinvey.java.model.KinveyMetaData;
  * Created by s525339 on 2/10/2016.
  */
 public class Ride extends GenericJson {
+    @Key("_id")
+    private String rideID;
     @Key
     private String routeFrom;
     @Key
@@ -18,14 +20,23 @@ public class Ride extends GenericJson {
     private String timeOfTravel;
     @Key
     private String frequency;
-    @Key("_id")
+    @Key
     private String offerID;
     @Key
     private String rideType;
     @Key
     private String rideUserId;
 
-    public static int rideCount = 0;
+    public static int rideOfferCount = 0;
+    public static int rideRequestCount = 0;
+
+    public String getRideID() {
+        return rideID;
+    }
+
+    public void setRideID(String rideID) {
+        this.rideID = rideID;
+    }
 
     @Key("_kmd")
     private KinveyMetaData meta; // Kinvey metadata, OPTIONAL

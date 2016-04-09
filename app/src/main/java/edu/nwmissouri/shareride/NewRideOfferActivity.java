@@ -1,18 +1,15 @@
 package edu.nwmissouri.shareride;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,17 +24,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
-import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
-import android.support.v7.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -121,7 +114,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
 
 
-        OfferIdTV.setText(String.format("%d", rideCollection.getMaxOfferId() + 1));
+        OfferIdTV.setText(String.valueOf(Ride.rideOfferCount +1));
 
         fromET.setAdapter(new GooglePlacesAutocompleteAdapter2(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
@@ -131,29 +124,15 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
-            int rideCount;
             @Override
             public void onClick(View v) {
                 EditText fromET = (EditText) findViewById(R.id.fromET);
                 EditText toET = (EditText) findViewById(R.id.ToET);
                 EditText availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
                 Spinner hrsSpinner = (Spinner) findViewById(R.id.offertimeSpinner);
-
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
-                    @Override
-                    public void onSuccess(Ride[] result) {
-                        Log.d("Length of the data", String.valueOf(result.length));
-                        Ride.rideCount = result.length;
-                    }
-
-                    @Override
-                    public void onFailure(Throwable error) {
-                        Log.e("ALL DATA", "AppData.get all Failure", error);
-                    }
-                });
-                Log.d("MAXOFFERID", Ride.rideCount + "");
+                Log.d("MAXOFFERID", Ride.rideOfferCount + "");
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -188,7 +167,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 //
 //                }
 
-                Ride ride = new Ride(String.valueOf(Ride.rideCount),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"offer",kinveyClient.user().getUsername());
+                Ride ride = new Ride(String.valueOf(Ride.rideOfferCount +1),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"offer",kinveyClient.user().getUsername());
                 kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                     @Override
                     public void onSuccess(Ride result) {
@@ -204,6 +183,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                                         rideCollection.addRideCollection(ride);
                                     }
                                 }
+                                Ride.rideOfferCount = RideCollection.items.size();
                                 Log.d("OFFER LIST",RideCollection.items.toString());
                                 final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
                                 startActivity(rideActivityIntent);

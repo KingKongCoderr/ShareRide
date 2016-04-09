@@ -24,7 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
@@ -93,6 +92,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         });
 
         final RideRequestCollection rideCollection = new RideRequestCollection();
+        final RideRequestCollection rideRequestCollection = new RideRequestCollection();
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
         Button searchBTN = (Button) findViewById(R.id.searchBTN);
@@ -112,7 +112,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 
 
 
-        OfferIdTV.setText(String.format("%d", rideCollection.getMaxOfferId() + 1));
+        OfferIdTV.setText(String.valueOf(Ride.rideRequestCount+1));
 
         fromET.setAdapter(new GooglePlacesAutocompleteAdapter3(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
@@ -122,29 +122,15 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         final Intent rideActivityIntent = new Intent(this,RideActivity.class);
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
-            int rideCount;
             @Override
             public void onClick(View v) {
                 EditText fromET = (EditText) findViewById(R.id.fromET);
                 EditText toET = (EditText) findViewById(R.id.ToET);
                 EditText availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
                 Spinner hrsSpinner = (Spinner) findViewById(R.id.offertimeSpinner);
-
                 String fromStr = fromET.getText().toString();
                 String toStr = toET.getText().toString();
-                kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
-                    @Override
-                    public void onSuccess(Ride[] result) {
-                        Log.d("Length of the data", String.valueOf(result.length));
-                        Ride.rideCount = result.length;
-                    }
-
-                    @Override
-                    public void onFailure(Throwable error) {
-                        Log.e("ALL DATA", "AppData.get all Failure", error);
-                    }
-                });
-                Log.d("MAXOFFERID", Ride.rideCount + "");
+                Log.d("MAXOFFERID", Ride.rideOfferCount + "");
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
@@ -179,7 +165,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
 //
 //                }
 
-                Ride ride = new Ride(String.valueOf(Ride.rideCount),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
+                Ride ride = new Ride(String.valueOf(Ride.rideRequestCount+1),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
                 kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                     @Override
                     public void onSuccess(Ride result) {
@@ -191,11 +177,15 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                                 Log.d("Length of the data", String.valueOf(result.length));
                                 RideRequestCollection.items.clear();
                                 for (Ride ride:result){
-                                    if(ride.getRideType() == "request"){
-                                        RideRequestCollection.items.add(ride);
+                                    if(ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())){
+                                        rideRequestCollection.addRideCollection(ride);
                                     }
                                 }
+                                Ride.rideRequestCount = RideRequestCollection.items.size();
                                 Log.d("REQUEST LIST",RideRequestCollection.items.toString());
+                                final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
+                                startActivity(rideActivityIntent);
+
                             }
 
                             @Override
@@ -213,7 +203,6 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                 });
 //                rideActivityIntent.putExtra("fromAddress", fromStr);
 //                rideActivityIntent.putExtra("toAddress", toStr);
-                startActivity(rideActivityIntent);
             }
         });
 

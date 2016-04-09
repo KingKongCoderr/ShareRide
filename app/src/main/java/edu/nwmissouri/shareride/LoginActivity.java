@@ -3,7 +3,6 @@ package edu.nwmissouri.shareride;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
 
@@ -39,7 +38,8 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
-
+        final RideCollection rideCollection = new RideCollection();
+        final RideRequestCollection rideRequestCollection = new RideRequestCollection();
         mp = new MediaPlayer();
         mp.setVolume(0f, 0f);
         mSurfaceView = (SurfaceView) findViewById(R.id.surface);
@@ -82,6 +82,33 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                     public void onSuccess(User u) {
                         CharSequence text = "Welcome back," + u.getUsername() + ".";
                         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                            @Override
+                            public void onSuccess(Ride[] result) {
+                                Log.d("Length of the data", String.valueOf(result.length));
+                                RideCollection.items.clear();
+                                RideRequestCollection.items.clear();
+                                for (Ride ride : result) {
+                                    if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                        //RideCollection.items.add(ride);
+                                        rideCollection.addRideCollection(ride);
+                                    }else if(ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())){
+                                        rideRequestCollection.addRideCollection(ride);
+                                    }
+                                }
+                                Ride.rideOfferCount = RideCollection.items.size();
+                                Ride.rideRequestCount = RideRequestCollection.items.size();
+                                Log.d("Ride Count On LOgin",Ride.rideOfferCount +"");
+                                Log.d("OFFER LIST", RideCollection.items.toString());
+                                final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+                                startActivity(rideActivityIntent);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.e("ALL DATA", "AppData.get all Failure", error);
+                            }
+                        });
                         Intent rideActivity = new Intent(LoginActivity.this, RideActivity.class);
                         startActivity(rideActivity);
                     }
