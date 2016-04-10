@@ -82,17 +82,17 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         AutoCompleteTextView fromET = (AutoCompleteTextView) findViewById(R.id.fromET);
         AutoCompleteTextView toET = (AutoCompleteTextView) findViewById(R.id.ToET);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         final RideRequestCollection rideRequestCollection = new RideRequestCollection();
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
 
         Button searchBTN = (Button) findViewById(R.id.searchBTN);
         TextView OfferIdTV = (TextView) findViewById(R.id.offerIDTV);
@@ -133,82 +133,56 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
-//
-//                toLatLong = getLatLongFromGivenAddress(toStr);
-//                //saveRideInfo(); -- KINVEY
-//                Toast.makeText(getBaseContext(), toLatLong.toString(), Toast.LENGTH_SHORT).show();
-//                String[] toLatLongArrays = toLatLong.split(",");
-//
-//                Double[] fromArray = new Double[fromLatLongArrays.length];
-//                Double[] toArray = new Double[toLatLongArrays.length];
-//
-//                if (fromArray.length != 2 && toArray.length != 2) {
-//                    Toast.makeText(getBaseContext(), "Retry! not a valid input", Toast.LENGTH_SHORT);
-//                } else {
-//
-//                    for (int i = 0; i < fromLatLongArrays.length; i++) {
-//                        fromArray[i] = Double.parseDouble(fromLatLongArrays[i]);
-//                    }
-//
-//                    for (int i = 0; i < fromLatLongArrays.length; i++) {
-//                        toArray[i] = Double.parseDouble(toLatLongArrays[i]);
-//                    }
-//
-//                    float[] dist = new float[1];
-                //double distance = getDistanceinMiles(fromArray[0],fromArray[1],toArray[0],toArray[1]);
-//                    Location.distanceBetween(fromArray[0] / 1e6, fromArray[1] / 1e6, toArray[0] / 1e6, toArray[1] / 1e6, dist);
-//                    String resultValue = String.format("%f", dist[0] * 621.371192f);
-//                    TextView distanceTV = (TextView) findViewById(R.id.distanceTV);
-//
-//                    //distanceTV.setText("Distance is: " + resultValue + " miles");
-//
-//                }
 
-                Ride ride = new Ride(String.valueOf(Ride.rideRequestCount+1),fromStr, toStr, noOfPersons,travelHrs,frequencyHrs,"request",kinveyClient.user().getUsername());
-                kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
-                    @Override
-                    public void onSuccess(Ride result) {
-                        Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
-                        Log.d("REQUEST", "Sucuess");
-                        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
-                            @Override
-                            public void onSuccess(Ride[] result) {
-                                Log.d("Length of the data", String.valueOf(result.length));
-                                RideRequestCollection.items.clear();
-                                for (Ride ride:result){
-                                    if(ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())){
-                                        rideRequestCollection.addRideCollection(ride);
+                if (fromStr.length() == 0 || toStr.length() == 0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0) {
+                    Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_LONG).show();
+                } else {
+
+                    Ride ride = new Ride(String.valueOf(Ride.rideRequestCount + 1), fromStr, toStr, noOfPersons, travelHrs, frequencyHrs, "request", kinveyClient.user().getUsername());
+                    kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
+                        @Override
+                        public void onSuccess(Ride result) {
+                            Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
+                            Log.d("REQUEST", "Sucuess");
+                            kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+                                @Override
+                                public void onSuccess(Ride[] result) {
+                                    Log.d("Length of the data", String.valueOf(result.length));
+                                    RideRequestCollection.items.clear();
+                                    for (Ride ride : result) {
+                                        if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                            rideRequestCollection.addRideCollection(ride);
+                                        }
                                     }
+                                    if (RideRequestCollection.items.size() > 0) {
+                                        Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size() - 1).getOfferID());
+                                    } else {
+                                        Ride.rideRequestCount = 0;
+                                    }
+                                    Log.d("REQUEST LIST", RideRequestCollection.items.toString());
+                                    final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+                                    startActivity(rideActivityIntent);
+
                                 }
-                                if(RideRequestCollection.items.size()>0){
-                                    Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size()-1).getOfferID());
-                                }else{
-                                    Ride.rideRequestCount = 0;
+
+                                @Override
+                                public void onFailure(Throwable error) {
+                                    Log.e("ALL DATA", "AppData.get all Failure", error);
                                 }
-                                Log.d("REQUEST LIST",RideRequestCollection.items.toString());
-                                final Intent rideActivityIntent = new Intent(getBaseContext(),RideActivity.class);
-                                startActivity(rideActivityIntent);
+                            });
+                        }
 
-                            }
-
-                            @Override
-                            public void onFailure(Throwable error) {
-                                Log.e("ALL DATA", "AppData.get all Failure", error);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(Throwable error) {
-                        Log.e(TAG, "AppData.save Failure", error);
-                        Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Throwable error) {
+                            Log.e(TAG, "AppData.save Failure", error);
+                            Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
 //                rideActivityIntent.putExtra("fromAddress", fromStr);
 //                rideActivityIntent.putExtra("toAddress", toStr);
+                }
             }
         });
-
 
 
         if (!kinveyClient.user().isUserLoggedIn()) {

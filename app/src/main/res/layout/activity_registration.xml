@@ -8,8 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/registration1"
-    tools:context="com.s525120.android.shareride.RegistrationActivity">
+    tools:context="com.s525120.android.shareride.RegistrationActivity"
+    android:background="@drawable/tabbackground2">
 
 
     <EditText

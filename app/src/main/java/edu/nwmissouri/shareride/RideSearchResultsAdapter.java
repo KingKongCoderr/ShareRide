@@ -146,14 +146,8 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
     public View getView(int position, View oldView, ViewGroup parent)
     {
         View view = oldView;
-        //RideDetailsHolder holder = null;
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         view = inflater.inflate(textViewResourceId, parent, false);
-        //holder = new RideDetailsHolder();
-        TextView RouteFrom = (TextView)view.findViewById(R.id.itemName);
-        TextView RouteTo = (TextView)view.findViewById(R.id.itemPrice);
-        TextView NoOfAvailability = (TextView)view.findViewById(R.id.itemQuantity);
-        TextView offerId = (TextView)view.findViewById(R.id.itemId);
         String[] shortFromRoute = getItem(position).getRouteFrom().toString().split(",");
         fromAddressLatLong = getLatLongFromGivenAddress(getItem(position).getRouteFrom().toString());
         StringBuilder fromBuilder = new StringBuilder();
@@ -172,10 +166,14 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
 
         String[] shortToRoute = getItem(position).getRouteTo().toString().split(",");
         toAddressLatLong = getLatLongFromGivenAddress(getItem(position).getRouteTo().toString());
-        boolean isRideValid = isResultValid(fromAddressLatLong,toAddressLatLong,getItem(position).getNoOfAvailability().toString(),getItem(position).getTimeOfTravel().toString(),getItem(position).getFrequency().toString());
+        //boolean isRideValid = isResultValid(fromAddressLatLong,toAddressLatLong,getItem(position).getNoOfAvailability().toString(),getItem(position).getTimeOfTravel().toString(),getItem(position).getFrequency().toString());
 
-        if(isRideValid)
-        {
+
+            TextView RouteFrom = (TextView)view.findViewById(R.id.itemName);
+            TextView RouteTo = (TextView)view.findViewById(R.id.itemPrice);
+            TextView NoOfAvailability = (TextView)view.findViewById(R.id.itemQuantity);
+            TextView offerId = (TextView)view.findViewById(R.id.itemId);
+
             String distanceBetween = getDistanceBetween(fromAddressLatLong, toAddressLatLong);
             StringBuilder toBuilder = new StringBuilder();
             String[] shortToStreet= shortToRoute;
@@ -197,9 +195,7 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
             float distanceFloat = Float.parseFloat(distanceBetween);
             distanceBetween = String.format("%.1f", distanceFloat);
             offerId.setText(distanceBetween + " miles");
-        }
-        //holder.txtItemQuantity.setText(String.format("%d", rideDetailses[position].getItemQuantity()));
-        //text2.setText(String.format("%1$,.2f",getItem(position).getPrice()));
+
         return view;
 
     }

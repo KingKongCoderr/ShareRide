@@ -82,7 +82,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
 
     public void onSearchClick(View view)
     {
-        Intent searchIntent = new Intent(this,RideSearchResults.class);
+        final Intent searchIntent = new Intent(this,RideSearchResults.class);
         searchIntent.putExtra("REQUEST_ID",offerId.getText());
         searchIntent.putExtra("FROM_ADDRESS", fromAddressET.getText());
         searchIntent.putExtra("TO_ADDRESS", toAddressET.getText());
@@ -102,15 +102,15 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
                         }
                     }
                 }
+                startActivity(searchIntent);
             }
+
 
             @Override
             public void onFailure(Throwable error) {
                 Log.e("ALL DATA", "AppData.get all Failure", error);
             }
         });
-
-        startActivity(searchIntent);
     }
 }
 

@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.nwmissouri.shareride.RideRequestEditActivity"
-    android:background="#79f3b4">
+    android:background="@drawable/tabbackground2">
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package edu.nwmissouri.shareride;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,12 @@ public class RideAlarmReceiver extends BroadcastReceiver {
         if (action.equals(ACTION_ALARM)) {
             Log.i("Alarm Receiver", "If loop");
             Intent inService = new Intent(context,UpdatingService.class);
-            context.startService(inService);
+            PendingIntent pendingIntent =   PendingIntent.getService(context,0,inService, PendingIntent.FLAG_NO_CREATE);
+
+            if (pendingIntent == null) {
+                Toast.makeText(context, "Scheduler running successfully", Toast.LENGTH_SHORT).show();
+                context.startService(inService);
+            }
         }
         else
         {

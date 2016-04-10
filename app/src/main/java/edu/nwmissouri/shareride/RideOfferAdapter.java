@@ -113,7 +113,7 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
 
         String[] shortFromRoute = getItem(position).getRouteFrom().toString().split(",");
         StringBuilder fromBuilder = new StringBuilder();
-        String[] shortFromStreet= shortFromRoute;
+        String[] shortFromStreet= new String[shortFromRoute.length];
         if(shortFromRoute.length > 3) {
             shortFromStreet = shortFromRoute[(shortFromRoute.length) - 4].split(" ");
 
@@ -122,8 +122,12 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
             fromBuilder.append(", " + shortFromRoute[(shortFromRoute.length) - 2]);
         }else
         {
-            fromBuilder.append(shortFromStreet[0]);
-            fromBuilder.append(shortFromStreet[1]);
+            for(String shortFrom : shortFromStreet)
+            {
+                fromBuilder.append(shortFrom);
+            }
+
+            //fromBuilder.append(shortFromStreet[1]);
         }
 
         String[] shortToRoute = getItem(position).getRouteTo().toString().split(",");

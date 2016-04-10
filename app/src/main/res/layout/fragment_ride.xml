@@ -19,7 +19,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/riderOfferLV"
-                android:background="#79f3b4"/>
+                android:background="@drawable/tabbackground2"
+                android:divider="#000000"
+                android:dividerHeight="2dp"/>
                 <TextView
                     android:id="@+id/emptyrideoffer"
                     android:text="Empty"

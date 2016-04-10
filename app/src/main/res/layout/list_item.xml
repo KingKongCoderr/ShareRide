@@ -3,7 +3,8 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:divider="#1d1b1b"
-    android:dividerPadding="10dp">
+    android:dividerPadding="10dp"
+    android:background="#d3d3d3">
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"

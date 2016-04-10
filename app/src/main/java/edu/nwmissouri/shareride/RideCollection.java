@@ -41,15 +41,9 @@ public class RideCollection{
 
     public void refreshRecentSearchData()
     {
-        Ride tempRide;
-        tempRide = temporaryRide();
-        items.add(tempRide);
-    }
-
-    public Ride temporaryRide()
-    {
-        Ride myRide = new Ride("1", "1351 Hampshire Avenue South, Saint Louis Park, MN, United States","Nicollet mall, Minneapolis, MN, United States","4","3:00","29-03-2016","offer","rider");
-        return myRide;
+//        Ride tempRide;
+//        tempRide = temporaryRide();
+//        items.add(tempRide);
     }
 
     public int getMaxOfferId()

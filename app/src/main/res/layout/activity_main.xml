@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="edu.nwmissouri.shareride.MainActivity"
-
-    android:background="@drawable/background">
+    android:background="@drawable/tabbackground2">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
