@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         mSurfaceView = (SurfaceView) findViewById(R.id.surface);
         holder = mSurfaceView.getHolder();
         holder.addCallback(this);
-        afd = getResources().openRawResourceFd(R.raw.video);
+        afd = getResources().openRawResourceFd(R.raw.background);
         mLogin_bt = (Button) findViewById(R.id.login_bt);
         mForgotPass = (TextView) findViewById(R.id.forgotpass_tv);
         mCreateNew = (TextView) findViewById(R.id.newuser_tv);
