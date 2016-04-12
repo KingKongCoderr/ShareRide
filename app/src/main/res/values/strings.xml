@@ -23,6 +23,7 @@
     <string name="address_tv">ADDRESS</string>
     <string name="newsubmit_et">Submit</string>
     <string name="time_prompt">Select Time...</string>
+    <string name="logout">Logout</string>
 
     <string-array name="time_arrays">
         <item>1:00</item>

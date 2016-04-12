@@ -54,6 +54,8 @@ public class FragmentRideRequest extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , this.getContext()).build();
         setHasOptionsMenu(true);
     }
 
@@ -89,6 +91,11 @@ public class FragmentRideRequest extends Fragment {
             Intent RideRequestIntent = new Intent(getContext(), NewRideRequestActivity.class);
             startActivity(RideRequestIntent);
             return true;
+        }else if(id == R.id.logout){
+            kinveyClient.user().logout().execute();
+            Intent loginActivity = new Intent(getContext(), LoginActivity.class);
+            startActivity(loginActivity);
+
         }
 
         return super.onOptionsItemSelected(item);
