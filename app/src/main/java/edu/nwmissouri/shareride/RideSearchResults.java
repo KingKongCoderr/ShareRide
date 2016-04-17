@@ -1,5 +1,7 @@
 package edu.nwmissouri.shareride;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.core.KinveyClientCallback;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -42,7 +46,7 @@ public class RideSearchResults extends AppCompatActivity {
     String searchAvailability;
     String searchRideTime;
     String searchRideDate;
-    String fromAddressLatLong ="";
+    String fromAddressLatLong = "";
     String toAddressLatLong = "";
 
     @Override
@@ -60,37 +64,81 @@ public class RideSearchResults extends AppCompatActivity {
 
         items = RideCollection.searchItems;
 
-        for(Ride item : items)
-        {
+        for (Ride item : items) {
             String[] shortFromRoute = item.getRouteFrom().toString().split(",");
             fromAddressLatLong = getLatLongFromGivenAddress(item.getRouteFrom().toString());
             String[] shortToRoute = item.getRouteTo().toString().split(",");
             toAddressLatLong = getLatLongFromGivenAddress(item.getRouteTo().toString());
             boolean isRideValid = isResultValid(fromAddressLatLong, toAddressLatLong, item.getNoOfAvailability().toString(), item.getTimeOfTravel().toString(), item.getFrequency().toString());
-            if(isRideValid)
-            {
+            if (isRideValid) {
                 filteredItems.add(item);
             }
         }
 
         rideSearchResultsAdapter =
-                new RideSearchResultsAdapter(this, R.layout.list_item, filteredItems,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate);
+                new RideSearchResultsAdapter(this, R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
         rideSearchResultsLV = (ListView) findViewById(R.id.rideSearchResultsLV);
         rideSearchResultsLV.setVisibility(View.VISIBLE);
         TextView noRows = (TextView) findViewById(R.id.emptyrideoffer);
 
-        if(filteredItems.size() > 0)
-        {
+        if (filteredItems.size() > 0) {
             rideSearchResultsLV.setAdapter(rideSearchResultsAdapter);
         }
-        else
-        {
-            rideRequest.addRecentRide(new Ride(searchRequestID,searchFromAddress,searchToAddress,searchAvailability,searchRideTime,searchRideDate,"request",kinveyClient.user().getUsername()));
-        }
+
+        rideRequest.addRecentRide(new Ride(searchRequestID, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate, "request", kinveyClient.user().getUsername()));
+        rideSearchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("CLICKED", "Yes");
+                Log.d("USERID", filteredItems.get(position).toString());
+                String rideUserid = filteredItems.get(position).getRideUserId();
+                kinveyClient.appData("RideUser", RideUser.class).getEntity(rideUserid, new KinveyClientCallback<RideUser>() {
+                    @Override
+                    public void onSuccess(RideUser result) {
+                        Log.d("EMAIL",result.getEmail());
+                        String title = null;
+                        String email = null;
+                        String phone = null;
+                        String message = null;
+                        if(result.getFullname().isEmpty()){
+                            title = "Unknown User";
+                        }else{
+                            title = result.getFullname();
+                        }
+                        if(result.getEmail().isEmpty()){
+                            email = "No Email";
+                        }else{
+                            email = result.getEmail();
+                        }
+                        if(result.getPhone().isEmpty()){
+                            phone = "No Phone";
+                        }else{
+                            phone = result.getPhone();
+                        }
+                        message = "Email: "+email+" , "+"Phone"+phone;
+                        AlertDialog.Builder userDetails = new AlertDialog.Builder(RideSearchResults.this);
+                        userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).create();
+                        userDetails.show();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+
+                    }
+                });
+
+            }
+        });
     }
 
-    private String getLatLongFromGivenAddress(String address)
-    {
+    private String getLatLongFromGivenAddress(String address) {
         Geocoder coder = new Geocoder(getBaseContext(), Locale.getDefault());
         boolean geoAvailable = coder.isPresent();
         String strLongitude = "";
@@ -101,10 +149,10 @@ public class RideSearchResults extends AppCompatActivity {
             List<Address> list = coder.getFromLocationName(address, 1);
             geoAvailable = coder.isPresent();
             while (count < 10 && list.size() == 0) {
-                list = (ArrayList<Address>) coder.getFromLocationName(address,1);
+                list = (ArrayList<Address>) coder.getFromLocationName(address, 1);
                 count++;
             }
-            if(list.size()>0) {
+            if (list.size() > 0) {
                 double longitude = list.get(0).getLongitude();
                 double latitude = list.get(0).getLatitude();
                 strLongitude = String.format("%f", longitude);
@@ -119,8 +167,7 @@ public class RideSearchResults extends AppCompatActivity {
         return latLongResult.toString();
     }
 
-    private String getDistanceBetween(String fromAddressLatLong, String toAddressLatLong)
-    {
+    private String getDistanceBetween(String fromAddressLatLong, String toAddressLatLong) {
         String resultValue = "";
 
         String[] fromLatLongArrays = fromAddressLatLong.split(",");
@@ -154,8 +201,7 @@ public class RideSearchResults extends AppCompatActivity {
         return resultValue;
     }
 
-    private boolean isResultValid(String fromAddressLatLong, String toAddressLatLong, String RideAvailability, String RideTime, String RideDate)
-    {
+    private boolean isResultValid(String fromAddressLatLong, String toAddressLatLong, String RideAvailability, String RideTime, String RideDate) {
         Date dateRideDate = new Date();
         Date SearchDateRideDate = new Date();
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -173,12 +219,9 @@ public class RideSearchResults extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(distanceFromPlaces <= 1.00 && distanceToPlaces <= 1.00 && floatRideAvailability > 0 && (RideTime.equals(searchRideTime)) && (dateRideDate.equals(SearchDateRideDate)))
-        {
+        if (distanceFromPlaces <= 1.00 && distanceToPlaces <= 1.00 && floatRideAvailability > 0 && (RideTime.equals(searchRideTime)) && (dateRideDate.equals(SearchDateRideDate))) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

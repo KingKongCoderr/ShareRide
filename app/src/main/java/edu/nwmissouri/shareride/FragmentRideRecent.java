@@ -185,34 +185,7 @@ public class FragmentRideRecent extends Fragment {
                 }
             }
 //list on click listener
-//            rideRecentLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Log.d("CLICKED", "Yes");
-//                    Log.d("USERID", filteredItems.get(position).toString());
-//                    String rideUserid = filteredItems.get(position).getRideUserId();
-//                    kinveyClient.appData("RideUser", RideUser.class).getEntity(rideUserid, new KinveyClientCallback<RideUser>() {
-//                        @Override
-//                        public void onSuccess(RideUser result) {
-//                            AlertDialog.Builder userDetails = new AlertDialog.Builder(getActivity());
-//                            userDetails.setMessage("User Details here").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-//                                }
-//                            });
-//                            userDetails.show();
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Throwable error) {
-//
-//                        }
-//                    });
-//                }
-//            });
+
 
 //                if (items.size() != 0) {
 //                    //noRows.setVisibility(View.INVISIBLE);
