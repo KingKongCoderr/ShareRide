@@ -17,15 +17,28 @@ public class RideUser extends GenericJson {
     private String phone;
     @Key
     private String email;
+    @Key
+    private Ride rideRecent;
+
+    public static RideUser currentUser;
 
     public RideUser() {
     }
 
-    public RideUser(String email, String phone, String fullname, String rideUserId) {
+    public RideUser(String email, String phone, String fullname, String rideUserId, Ride rideRecent) {
         this.email = email;
         this.phone = phone;
         this.fullname = fullname;
         this.rideUserId = rideUserId;
+        this.rideRecent = rideRecent;
+    }
+
+    public Ride getRideRecent() {
+        return rideRecent;
+    }
+
+    public void setRideRecent(Ride rideRecent) {
+        this.rideRecent = rideRecent;
     }
 
     public String getEmail() {

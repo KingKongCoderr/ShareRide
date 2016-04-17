@@ -18,6 +18,7 @@ import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
 
 import java.io.IOException;
 
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                     Log.d("Length of the data", String.valueOf(result.length));
                     RideCollection.items.clear();
                     RideRequestCollection.items.clear();
+
                     for (Ride ride : result) {
                         if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
                             //RideCollection.items.add(ride);
@@ -85,7 +87,29 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                     } else {
                         Ride.rideRequestCount = 0;
                     }
-                    Log.d("Ride Count On LOgin", Ride.rideOfferCount + "");
+
+                    if ( null != RideRequestCollection.recentRide ){
+                        Log.d("RECENT RIDE", RideRequestCollection.recentRide.toString());
+                    }else{
+                        kinveyClient.appData("RideUser", RideUser.class).getEntity(kinveyClient.user().getUsername(), new KinveyClientCallback<RideUser>() {
+                            @Override
+                            public void onSuccess(RideUser result) {
+                                RideUser.currentUser = result;
+                                RideRequestCollection.recentRide = result.getRideRecent();
+                                if ( null != RideRequestCollection.recentRide ){
+                                    Log.d("RECENT RIDE AUTO LOGIN", result.getRideRecent().toString());
+                                }else{
+                                    Log.d("RECENT RIDE AUTO LOGIN","Recent ride is still empty");
+                                }
+                            }
+                            @Override
+                            public void onFailure(Throwable error) {
+                                Log.d("KINVEY_ERROR","Rideuser retrival failure");
+                            }
+                        });
+                        Log.d("RECENT RIDE","null in recent Ride");
+                    }
+                    Log.d("Ride Count On Login", Ride.rideOfferCount + "");
                     Log.d("OFFER LIST", RideCollection.items.toString());
                     final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
                     startActivity(rideActivityIntent);
@@ -121,6 +145,27 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                     public void onSuccess(User u) {
                         CharSequence text = "Welcome back," + u.getUsername() + ".";
                         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+
+                        kinveyClient.appData("RideUser", RideUser.class).getEntity(kinveyClient.user().getUsername(), new KinveyClientCallback<RideUser>() {
+                            @Override
+                            public void onSuccess(RideUser result) {
+                                RideUser.currentUser = result;
+                                RideRequestCollection.recentRide = result.getRideRecent();
+                            }
+
+                            @Override
+                            public void onFailure(Throwable error) {
+
+                            }
+                        });
+
+                        if(null != RideRequestCollection.recentRide ) {
+                            Log.d("RECENT RIDE LOGIN CLICK",RideRequestCollection.recentRide.toString());
+                        }else{
+                            Log.d("RECENT RIDE LOGIN CLICK","Nothing in recent ride");
+                        }
+
+
                         kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                             @Override
                             public void onSuccess(Ride[] result) {

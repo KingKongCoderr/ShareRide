@@ -147,6 +147,11 @@ public class FragmentRideRecent extends Fragment {
         /* BackEnd Service code */
 
         recentRide = rideRequest.getRecentRide();
+        if(null != recentRide ) {
+            Log.d("RECENT RIDE FRAGMENT",recentRide.toString());
+        }else{
+            Log.d("RECENT RIDE FRAGMENT","Nothing in recent ride");
+        }
         if (recentRide != null) {
             items = RideCollection.searchItems;
 
