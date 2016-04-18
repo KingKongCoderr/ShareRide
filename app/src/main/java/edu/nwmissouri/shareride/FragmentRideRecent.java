@@ -147,12 +147,14 @@ public class FragmentRideRecent extends Fragment {
         /* BackEnd Service code */
 
         recentRide = rideRequest.getRecentRide();
+        rideRecentLV = (ListView) theView.findViewById(R.id.riderecentlv);
         if(null != recentRide ) {
             Log.d("RECENT RIDE FRAGMENT",recentRide.toString());
         }else{
             Log.d("RECENT RIDE FRAGMENT","Nothing in recent ride");
         }
         if (recentRide != null) {
+
             items = RideCollection.searchItems;
 
             AlarmManager alarms = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
@@ -168,7 +170,9 @@ public class FragmentRideRecent extends Fragment {
             searchRideTime = recentRide.getTimeOfTravel();
             searchRideDate = recentRide.getFrequency();
 
+            //items.clear();
             items = RideCollection.searchItems;
+            filteredItems.clear();
 
             for (Ride item : items) {
                 String[] shortFromRoute = item.getRouteFrom().toString().split(",");
@@ -176,18 +180,19 @@ public class FragmentRideRecent extends Fragment {
                 String[] shortToRoute = item.getRouteTo().toString().split(",");
                 toAddressLatLong = getLatLongFromGivenAddress(item.getRouteTo().toString());
                 boolean isRideValid = isResultValid(fromAddressLatLong, toAddressLatLong, item.getNoOfAvailability().toString(), item.getTimeOfTravel().toString(), item.getFrequency().toString());
+
+
                 if (isRideValid) {
                     filteredItems.add(item);
-                    rideSearchResultsAdapter =
-                            new RideSearchResultsAdapter(getContext(), R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
-                    rideRecentLV = (ListView) theView.findViewById(R.id.rideSearchResultsLV);
-                    rideRecentLV.setVisibility(View.VISIBLE);
-
-                    if (filteredItems.size() > 0) {
-                        rideRecentLV.setAdapter(rideSearchResultsAdapter);
-
-                    }
                 }
+
+            }
+
+            rideSearchResultsAdapter =
+                    new RideSearchResultsAdapter(getContext(), R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
+
+            if (filteredItems.size() > 0) {
+                rideRecentLV.setAdapter(rideSearchResultsAdapter);
             }
 //list on click listener
 

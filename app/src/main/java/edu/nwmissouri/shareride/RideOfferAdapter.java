@@ -113,8 +113,8 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
 
         String[] shortFromRoute = getItem(position).getRouteFrom().toString().split(",");
         StringBuilder fromBuilder = new StringBuilder();
-        String[] shortFromStreet= new String[shortFromRoute.length];
-        if(shortFromRoute.length > 3) {
+        String[] shortFromStreet= shortFromRoute;
+        if(shortFromStreet.length > 3) {
             shortFromStreet = shortFromRoute[(shortFromRoute.length) - 4].split(" ");
 
             fromBuilder.append(shortFromStreet[shortFromStreet.length - 2] + " " + shortFromStreet[shortFromStreet.length - 1]);
@@ -122,10 +122,13 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
             fromBuilder.append(", " + shortFromRoute[(shortFromRoute.length) - 2]);
         }else
         {
-            for(String shortFrom : shortFromStreet)
-            {
-                fromBuilder.append(shortFrom);
-            }
+//            for(String shortFrom : shortFromStreet)
+//            {
+//                fromBuilder.append(shortFrom);
+//            }
+
+            fromBuilder.append(shortFromStreet[0]);
+            fromBuilder.append(", " + shortFromStreet[1]);
 
             //fromBuilder.append(shortFromStreet[1]);
         }
@@ -141,7 +144,7 @@ public class RideOfferAdapter extends ArrayAdapter<Ride> {
         }else
         {
             toBuilder.append(shortToStreet[0]);
-            toBuilder.append(shortToStreet[1]);
+            toBuilder.append(", " + shortToStreet[1]);
         }
 
         RouteFrom.setText("From: " + fromBuilder.toString());

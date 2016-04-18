@@ -165,7 +165,6 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                             Log.d("RECENT RIDE LOGIN CLICK","Nothing in recent ride");
                         }
 
-
                         kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                             @Override
                             public void onSuccess(Ride[] result) {
@@ -192,6 +191,26 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                                 }
                                 Log.d("Ride Count On LOgin",Ride.rideOfferCount +"");
                                 Log.d("OFFER LIST", RideCollection.items.toString());
+
+                                //Search Items
+                                Log.d("Length of the data", String.valueOf(result.length));
+                                RideCollection.searchItems.clear();
+                                for (Ride ride : result) {
+                                    Log.d("SEARCH BEFORE",ride.toString());
+                                    Log.d("SEARCH TYPE",ride.getRideType());
+                                    if (ride.getRideType().equals("offer")) {
+                                        Log.d("SEARCH AFTER",ride.toString());
+                                        if (!ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                            Log.d("SEARCH RIDE",ride.toString());
+                                            RideCollection.searchItems.add(ride);
+                                        }
+                                    }
+                                }
+                                Log.d("SEARCH ITEMS",RideCollection.searchItems.toString());
+
+                                // End of Search Items
+
+
                                 final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
                                 startActivity(rideActivityIntent);
                             }

@@ -104,7 +104,8 @@
         android:id="@+id/offerAvailabilityET"
         android:layout_marginLeft="100dp"
         android:layout_alignBaseline="@id/offerAvailabilityTV"
-        android:background="@android:drawable/editbox_background_normal"/>
+        android:background="@android:drawable/editbox_background_normal"
+        android:inputType="number"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -40,9 +40,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,6 +69,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
     private String appKey = "kid_ZJCDL-Jpy-";
     private String appSecret = "7ba9e5e0015849b790845e669ab87992";
     private Client kinveyClient;
+    private Date date = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,8 +136,15 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
+                try
+                {
+                    date = dateFormatter.parse(frequencyHrs);
+                }
+                catch (ParseException e) {
 
-                if (fromStr.length() == 0 || toStr.length() == 0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0) {
+                }
+
+                if (fromStr.length() == 0 || toStr.length() == 0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0 || date == null) {
                     Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_LONG).show();
                 } else {
 
@@ -152,6 +162,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                                     for (Ride ride : result) {
                                         if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
                                             rideRequestCollection.addRideCollection(ride);
+
                                         }
                                     }
                                     if (RideRequestCollection.items.size() > 0) {

@@ -38,9 +38,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import android.view.View.OnClickListener;
@@ -65,6 +67,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
     private String appKey = "kid_ZJCDL-Jpy-";
     private String appSecret = "7ba9e5e0015849b790845e669ab87992";
     private Client kinveyClient;
+    private Date date = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
         final RideCollection rideCollection = new RideCollection();
         dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+        dateFormatter.setLenient(false);
 
         Button searchBTN = (Button) findViewById(R.id.searchBTN);
         TextView OfferIdTV = (TextView) findViewById(R.id.offerIDTV);
@@ -126,8 +130,16 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                 String noOfPersons = availabilityET.getText().toString();
                 String travelHrs = hrsSpinner.getSelectedItem().toString();
                 String frequencyHrs = frequencySpinner.getText().toString();
+                try
+                {
+                    date = dateFormatter.parse(frequencyHrs);
+                }
+                catch (ParseException e) {
 
-                if (fromStr.length() == 0 || toStr.length()==0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0)
+                }
+
+
+                if (fromStr.length() == 0 || toStr.length()==0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0 || date == null)
                 {
                     Toast.makeText(getBaseContext(),"Invalid Inputs",Toast.LENGTH_LONG).show();
                 }
@@ -138,7 +150,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                     kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                         @Override
                         public void onSuccess(Ride result) {
-                            Toast.makeText(getApplicationContext(), "Ride offer created", Toast.LENGTH_LONG).show();
+
                             kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                 @Override
                                 public void onSuccess(Ride[] result) {
@@ -148,6 +160,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                                         if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
                                             //RideCollection.items.add(ride);
                                             rideCollection.addRideCollection(ride);
+                                            Toast.makeText(getApplicationContext(), "Your Ride offer will now be visible for other requests", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                     if (RideCollection.items.size() > 0) {

@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:text = "RequestID: "
         android:id="@+id/offerID"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +26,8 @@
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:textSize="15dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_alignBaseline="@id/offerID"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +35,9 @@
         android:text = "From: "
         android:id="@+id/offertimeFrom"
         android:layout_below="@id/offerID"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="250dp"
@@ -40,8 +45,9 @@
         android:id="@+id/fromET"
         android:layout_marginTop="55dp"
         android:layout_marginLeft="60dp"
-        android:textSize="12dp"
-        android:hint="From Address...">
+        android:hint="From Address..."
+        android:layout_alignBaseline="@id/offertimeFrom"
+        android:textSize="15dp">
         <requestFocus />
     </TextView>
 
@@ -51,7 +57,9 @@
         android:text = "To: "
         android:id="@+id/offertimeTo"
         android:layout_below="@id/offertimeFrom"
-        android:layout_marginTop="55dp"/>
+        android:layout_marginTop="55dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="250dp"
@@ -60,8 +68,9 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="35dp"
         android:layout_below="@id/fromET"
-        android:textSize="12dp"
-        android:hint="To Address..."/>
+        android:textSize="15dp"
+        android:hint="To Address..."
+        android:layout_alignBaseline="@id/offertimeTo"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +78,9 @@
         android:text = "Time: "
         android:id="@+id/offertimeTV"
         android:layout_below="@id/offertimeTo"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/offertimeSpinner"
@@ -77,7 +88,9 @@
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
         android:layout_below="@id/ToET"
-        android:layout_marginLeft="70dp"/>
+        android:layout_marginLeft="70dp"
+        android:layout_alignBaseline="@id/offertimeTV"
+        android:textSize="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +98,9 @@
         android:text = "Date: "
         android:id="@+id/offerFrequencyTV"
         android:layout_below="@id/offertimeTV"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/offerFrequencySpinner"
@@ -93,7 +108,9 @@
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:layout_below="@id/offertimeSpinner"
-        android:layout_marginLeft="80dp"/>
+        android:layout_alignBaseline="@id/offerFrequencyTV"
+        android:layout_marginLeft="80dp"
+        android:textSize="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,7 +118,9 @@
         android:text = "No Of Persons: "
         android:id="@+id/offerAvailabilityTV"
         android:layout_below="@id/offerFrequencyTV"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="100dp"
@@ -110,8 +129,9 @@
         android:id="@+id/offerAvailabilityET"
         android:layout_below="@id/offerFrequencySpinner"
         android:layout_marginTop="75dp"
-        android:layout_marginLeft="100dp"
-        android:layout_alignBaseline="@id/offerAvailabilityTV"/>
+        android:layout_marginLeft="125dp"
+        android:layout_alignBaseline="@id/offerAvailabilityTV"
+        android:textSize="15dp"/>
 
     <Button
         android:layout_width="250dp"

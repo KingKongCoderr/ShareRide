@@ -31,18 +31,18 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email_et"
-        android:hint="@string/email_hint"
+        android:hint="Please! send an email to 'shareride.support@gmail.com' by mentioning your User ID. Our support team will contact you to address this issue."
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/newsubmit_et"
-        android:textColor="#f2000000"
-        android:background="#e6ffFFFF"
-        android:id="@+id/newsubmit_bt"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/email_et"
-        />
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/newsubmit_et"-->
+        <!--android:textColor="#f2000000"-->
+        <!--android:background="#e6ffFFFF"-->
+        <!--android:id="@+id/newsubmit_bt"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_below="@+id/email_et"-->
+        <!--/>-->
 </RelativeLayout>

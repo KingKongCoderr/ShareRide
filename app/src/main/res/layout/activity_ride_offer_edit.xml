@@ -133,6 +133,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginLeft="100dp"
             android:layout_alignBaseline="@id/offerAvailabilityTV"
+            android:inputType="number"
             android:background="@android:drawable/editbox_background_normal"/>
 
         <Button

@@ -130,7 +130,7 @@ public class RideRequestAdapter extends ArrayAdapter<Ride> {
         else
         {
             fromBuilder.append(shortFromStreet[0]);
-            fromBuilder.append(shortFromStreet[1]);
+            fromBuilder.append(", " + shortFromStreet[1]);
         }
 
         String[] shortToRoute = getItem(position).getRouteTo().toString().split(",");
@@ -144,7 +144,7 @@ public class RideRequestAdapter extends ArrayAdapter<Ride> {
         }else
         {
             toBuilder.append(shortToStreet[0]);
-            toBuilder.append(shortToStreet[1]);
+            toBuilder.append(", " + shortToStreet[1]);
         }
 
         RouteFrom.setText("From: " + fromBuilder.toString());

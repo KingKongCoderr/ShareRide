@@ -101,6 +101,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
             public void onSuccess(RideUser rideUser) {
                 RideUser.currentUser = rideUser;
                 RideRequestCollection.recentRide = rideUser.getRideRecent();
+                Log.d("SEARCH CLICK", " User SUCSESS");
             }
 
             @Override
@@ -117,12 +118,17 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
                             Log.d("Length of the data", String.valueOf(result.length));
                             RideCollection.searchItems.clear();
                             for (Ride ride : result) {
+                                Log.d("SEARCH BEFORE",ride.toString());
+                                Log.d("SEARCH TYPE",ride.getRideType());
                                 if (ride.getRideType().equals("offer")) {
+                                    Log.d("SEARCH AFTER",ride.toString());
                                     if (!ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+                                        Log.d("SEARCH RIDE",ride.toString());
                                         RideCollection.searchItems.add(ride);
                                     }
                                 }
                             }
+                            Log.d("SEARCH ITEMS",RideCollection.searchItems.toString());
                             startActivity(searchIntent);
                         }
 
