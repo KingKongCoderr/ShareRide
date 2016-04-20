@@ -310,6 +310,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent profile_intent=new Intent(getApplicationContext(),Profile_settings.class);
+            startActivity(profile_intent);
             return true;
         }else if (id == R.id.logout) {
             kinveyClient.user().logout().execute();

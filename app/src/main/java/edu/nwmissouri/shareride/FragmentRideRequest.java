@@ -83,6 +83,8 @@ public class FragmentRideRequest extends Fragment {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent profile_intent=new Intent(getContext(),Profile_settings.class);
+            startActivity(profile_intent);
             return true;
         }
         else if (id == R.id.Add_Ride_Request)

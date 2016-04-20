@@ -67,6 +67,8 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent profile_intent=new Intent(getApplicationContext(),Profile_settings.class);
+            startActivity(profile_intent);
             return true;
         } else if (id == R.id.Edit_Ride_Offer) {
             //Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
