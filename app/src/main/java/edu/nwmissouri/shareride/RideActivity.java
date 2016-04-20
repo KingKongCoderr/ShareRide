@@ -55,7 +55,7 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.sharerride_logo);
+        getSupportActionBar().setIcon(R.mipmap.ic_shareride_logo);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
