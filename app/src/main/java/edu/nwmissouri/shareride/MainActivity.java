@@ -156,18 +156,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 @Override
                 public void onSuccess(User result) {
                     Log.i(TAG, "Logged in to Kinvey successfully!" + result.getId());
-                    Toast.makeText(MainActivity.this, "Logged in to Kinvey successfully as " + result.getId(),
-                            Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this, "Logged in to Kinvey successfully as " + result.getId(),Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Throwable error) {
                     Log.e(TAG, "Login Failure", error);
-                    Toast.makeText(MainActivity.this, "Login error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this, "Login error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }   else {
-            Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
         }
     }
 

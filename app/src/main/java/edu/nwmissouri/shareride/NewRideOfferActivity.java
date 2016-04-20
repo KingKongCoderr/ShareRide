@@ -173,7 +173,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                                         if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
                                             //RideCollection.items.add(ride);
                                             rideCollection.addRideCollection(ride);
-                                            Toast.makeText(getApplicationContext(), "Your Ride offer will now be visible for other requests", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Your Ride offer will now be visible for other requests", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     if (RideCollection.items.size() > 0) {
@@ -196,7 +196,7 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
                         @Override
                         public void onFailure(Throwable error) {
                             Log.e(TAG, "AppData.save Failure", error);
-                            Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 

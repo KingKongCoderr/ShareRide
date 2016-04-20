@@ -87,7 +87,7 @@ public class FragmentRideRequest extends Fragment {
         }
         else if (id == R.id.Add_Ride_Request)
         {
-            Toast.makeText(getActivity(), "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
             Intent RideRequestIntent = new Intent(getContext(), NewRideRequestActivity.class);
             startActivity(RideRequestIntent);
             return true;
@@ -171,7 +171,7 @@ public class FragmentRideRequest extends Fragment {
                         kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
                             @Override
                             public void onSuccess(KinveyDeleteResponse result) {
-                                Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
                                 final RideRequestCollection rideCollection = new RideRequestCollection();
                                 kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                     @Override
@@ -206,7 +206,7 @@ public class FragmentRideRequest extends Fragment {
                             @Override
                             public void onFailure(Throwable error) {
                                 Log.e("TAG", "AppData.delete Failure", error);
-                                Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
                         rideRequestAdapter.notifyDataSetChanged();

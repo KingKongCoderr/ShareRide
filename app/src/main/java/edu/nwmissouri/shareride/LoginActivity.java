@@ -136,10 +136,10 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
             @Override
             public void onClick(View v) {
                 if(kinveyClient.user().isUserLoggedIn()){
-                    Toast.makeText(getApplicationContext(),"User alreay Logged in",Toast.LENGTH_SHORT);
+                    //Toast.makeText(getApplicationContext(),"User alreay Logged in",Toast.LENGTH_SHORT);
                     kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
                 }else{
-                    Toast.makeText(getApplicationContext(),"Login now",Toast.LENGTH_SHORT);
+                    //Toast.makeText(getApplicationContext(),"Login now",Toast.LENGTH_SHORT);
                 }
                 kinveyClient.user().login(mUsername_et.getText().toString(), mPassword_et.getText().toString(), new KinveyUserCallback() {
                     @Override

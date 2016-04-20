@@ -35,7 +35,7 @@ public class RideAlarmReceiver extends BroadcastReceiver {
         else
         {
             Log.i("Alarm Receiver", "Else loop");
-            Toast.makeText(context, "Else loop", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Else loop", Toast.LENGTH_SHORT).show();
         }
     }
 }

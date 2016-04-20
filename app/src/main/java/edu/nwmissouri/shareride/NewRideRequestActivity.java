@@ -158,14 +158,14 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                 }
 
                 if (fromStr.length() == 0 || toStr.length() == 0 || noOfPersons.length() == 0 || travelHrs.length() == 0 || frequencyHrs.length() == 0 || date == null) {
-                    Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_SHORT).show();
                 } else {
 
                     Ride ride = new Ride(String.valueOf(Ride.rideRequestCount + 1), fromStr, toStr, noOfPersons, travelHrs, frequencyHrs, "request", kinveyClient.user().getUsername());
                     kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                         @Override
                         public void onSuccess(Ride result) {
-                            Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
                             Log.d("REQUEST", "Sucuess");
                             kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                 @Override
@@ -199,7 +199,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                         @Override
                         public void onFailure(Throwable error) {
                             Log.e(TAG, "AppData.save Failure", error);
-                            Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 //                rideActivityIntent.putExtra("fromAddress", fromStr);
@@ -214,18 +214,17 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                 @Override
                 public void onSuccess(User result) {
                     Log.i(TAG, "Logged in to Kinvey successfully!" + result.getId());
-                    Toast.makeText(NewRideRequestActivity.this, "Logged in to Kinvey successfully as " + result.getId(),
-                            Toast.LENGTH_LONG).show();
+                    //Toast.makeText(NewRideRequestActivity.this, "Logged in to Kinvey successfully as " + result.getId(),Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Throwable error) {
                     Log.e(TAG, "Login Failure", error);
-                    Toast.makeText(NewRideRequestActivity.this, "Login error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(NewRideRequestActivity.this, "Login error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         } else {
-            Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -240,7 +239,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
         String str = (String) adapterView.getItemAtPosition(position);
         String distance = getLatLongFromGivenAddress(str);
-        Toast.makeText(this, distance.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, distance.toString(), Toast.LENGTH_LONG).show();
     }
 
     /**

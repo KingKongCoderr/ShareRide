@@ -110,7 +110,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
             @Override
             public void onClick(View v) {
                 if (fromAddressET.getText().toString().length() == 0 || toAddressET.getText().toString().length() == 0 || availabilityET.getText().toString().length() == 0 || hrsSpinner.getSelectedItem().toString().length() == 0 || frequencySpinner.getText().toString().length() == 0) {
-                    Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_SHORT).show();
                 } else {
                     Ride ride = rideCollection.getRideObject(resultOfferId);
                     ride.setRouteFrom(fromAddressET.getText().toString());
@@ -122,7 +122,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
                     kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                         @Override
                         public void onSuccess(Ride result) {
-                            Toast.makeText(getApplicationContext(), "Ride offer Updated", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Ride offer Updated", Toast.LENGTH_LONG).show();
                             kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                 @Override
                                 public void onSuccess(Ride[] result) {
@@ -154,7 +154,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
                         @Override
                         public void onFailure(Throwable error) {
                             Log.e("TAG", "AppData.save Failure", error);
-                            Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }

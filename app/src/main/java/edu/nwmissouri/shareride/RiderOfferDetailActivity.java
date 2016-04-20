@@ -69,7 +69,7 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.Edit_Ride_Offer) {
-            Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
             Intent RideEditIntent = new Intent(this, RideOfferEditActivity.class);
             RideEditIntent.putExtra("OFFER_ID", offerId.getText());
             startActivity(RideEditIntent);

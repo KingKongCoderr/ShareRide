@@ -46,7 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
-                Toast.makeText(getApplicationContext(), "Creating user...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Creating user...", Toast.LENGTH_SHORT).show();
                 if(confirmPasswordET.getText().toString().equals(passwordET.getText().toString())){
                     Toast.makeText(getApplicationContext(),"password matched",Toast.LENGTH_SHORT).show();
                 }
@@ -54,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Throwable t) {
                         CharSequence text = "Could not sign up -> " + t.getMessage();
-                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
                         Log.e("Kinvey Sign Up", "Sign-up error", t);
 
                     }
@@ -118,7 +118,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(Throwable error) {
                                     Log.e("RideUser", "AppData.save Failure", error);
-                                    Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
                         }catch (Exception e){

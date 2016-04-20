@@ -118,7 +118,7 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
 
     @Override
     public void onSelectingNewRide() {
-        Toast.makeText(this, "Navigating to Ride Screen!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Navigating to Ride Screen!", Toast.LENGTH_SHORT).show();
         Intent RideIntent = new Intent(this, NewRideOfferActivity.class);
         startActivity(RideIntent);
 
@@ -127,7 +127,7 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
     @Override
     public void onSelectingNewRideRequest()
     {
-        Toast.makeText(this, "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
         Intent RideIntent = new Intent(this, MainActivity.class);
         startActivity(RideIntent);
 

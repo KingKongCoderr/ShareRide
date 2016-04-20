@@ -91,7 +91,7 @@ public class FragmentRide extends Fragment {
         }
         else if (id == R.id.Add_Ride_Offer)
         {
-            Toast.makeText(getActivity(), "Navigating to Ride Offer Screen!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Navigating to Ride Offer Screen!", Toast.LENGTH_SHORT).show();
             Intent RideIntent = new Intent(getContext(), NewRideOfferActivity.class);
             startActivity(RideIntent);
             return true;
@@ -169,7 +169,7 @@ public class FragmentRide extends Fragment {
                         kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
                             @Override
                             public void onSuccess(KinveyDeleteResponse result) {
-                                Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
                                 final RideCollection rideCollection = new RideCollection();
                                 kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                     @Override
@@ -204,7 +204,7 @@ public class FragmentRide extends Fragment {
                             @Override
                             public void onFailure(Throwable error) {
                                 Log.e("TAG", "AppData.delete Failure", error);
-                                Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
                         RideOfferAdapter.notifyDataSetChanged();

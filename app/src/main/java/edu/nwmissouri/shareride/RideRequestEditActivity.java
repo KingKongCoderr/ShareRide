@@ -119,7 +119,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
                     kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                         @Override
                         public void onSuccess(Ride result) {
-                            Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Ride request created", Toast.LENGTH_LONG).show();
                             Log.d("REQUEST", "Sucuess");
                             kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                 @Override
@@ -152,7 +152,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
                         @Override
                         public void onFailure(Throwable error) {
                             Log.e("TAG", "AppData.save Failure", error);
-                            Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
