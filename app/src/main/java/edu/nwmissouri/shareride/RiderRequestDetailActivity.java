@@ -78,6 +78,14 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
             RideEditIntent.putExtra("REQUEST_ID", offerId.getText());
             startActivity(RideEditIntent);
             return true;
+        }else if (id == R.id.logout) {
+            kinveyClient.user().logout().execute();
+            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginActivity);
+
+        } else if(id == R.id.stats){
+            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+            startActivity(stats_intent);
         }
 
         return super.onOptionsItemSelected(item);

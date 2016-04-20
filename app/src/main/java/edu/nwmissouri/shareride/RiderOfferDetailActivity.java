@@ -10,6 +10,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kinvey.android.Client;
+
 public class RiderOfferDetailActivity extends AppCompatActivity {
 
     RideCollection rideCollection = new RideCollection();
@@ -20,11 +22,16 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
     TextView frequencySpinner;
     TextView offerId;
 
+    Client kinveyClient;
+    private String appKey = "kid_ZJCDL-Jpy-";
+    private String appSecret = "7ba9e5e0015849b790845e669ab87992";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_offer_detail);
-
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , getApplicationContext()).build();
         fromAddressET = (TextView) findViewById(R.id.fromET);
         toAddressET = (TextView) findViewById(R.id.ToET);
         availabilityET = (TextView) findViewById(R.id.offerAvailabilityET);
@@ -67,6 +74,14 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
             RideEditIntent.putExtra("OFFER_ID", offerId.getText());
             startActivity(RideEditIntent);
             return true;
+        }else if (id == R.id.logout) {
+            kinveyClient.user().logout().execute();
+            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginActivity);
+
+        } else if(id == R.id.stats){
+            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+            startActivity(stats_intent);
         }
 
         return super.onOptionsItemSelected(item);

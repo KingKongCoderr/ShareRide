@@ -99,7 +99,9 @@ public class FragmentRide extends Fragment {
             kinveyClient.user().logout().execute();
             Intent loginActivity = new Intent(getContext(), LoginActivity.class);
             startActivity(loginActivity);
-
+        } else if(id == R.id.stats){
+            Intent stats_intent=new Intent(getContext(),Statistics.class);
+            startActivity(stats_intent);
         }
 
         return super.onOptionsItemSelected(item);

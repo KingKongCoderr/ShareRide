@@ -112,6 +112,9 @@ public class FragmentRideRecent extends Fragment {
             Intent loginActivity = new Intent(getContext(), LoginActivity.class);
             startActivity(loginActivity);
 
+        } else if(id == R.id.stats){
+            Intent stats_intent=new Intent(getContext(),Statistics.class);
+            startActivity(stats_intent);
         }
 //        else if (id == R.id.Add_Ride_Request)
 //        {

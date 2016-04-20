@@ -2,6 +2,7 @@ package edu.nwmissouri.shareride;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -311,6 +312,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.logout) {
+            kinveyClient.user().logout().execute();
+            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginActivity);
+
+        } else if(id == R.id.stats){
+            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+            startActivity(stats_intent);
         }
 
         return super.onOptionsItemSelected(item);
