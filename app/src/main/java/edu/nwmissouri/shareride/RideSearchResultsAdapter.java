@@ -84,10 +84,10 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
 
         String[] fromLatLongArrays = fromAddressLatLong.split(",");
 
-        Toast.makeText(getContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         String[] toLatLongArrays = toAddressLatLong.split(",");
 
-        Toast.makeText(getContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         Double[] fromArray = new Double[fromLatLongArrays.length];
         Double[] toArray = new Double[toLatLongArrays.length];
 

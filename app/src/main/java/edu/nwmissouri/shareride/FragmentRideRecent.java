@@ -163,9 +163,9 @@ public class FragmentRideRecent extends Fragment {
             AlarmManager alarms = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
             Intent myIntent = new Intent(getContext(), RideAlarmReceiver.class);
             myIntent.putExtra(RideAlarmReceiver.ACTION_ALARM, RideAlarmReceiver.ACTION_ALARM);
-            Toast.makeText(getContext(), "Scheduler called successfully", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Scheduler called successfully", Toast.LENGTH_SHORT).show();
             final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), 1234567, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarms.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 100000, pIntent);
+            alarms.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000000, pIntent);
 
             searchFromAddress = recentRide.getRouteFrom();
             searchToAddress = recentRide.getRouteTo();
@@ -261,10 +261,10 @@ public class FragmentRideRecent extends Fragment {
 
         String[] fromLatLongArrays = fromAddressLatLong.split(",");
 
-        Toast.makeText(getContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+
         String[] toLatLongArrays = toAddressLatLong.split(",");
 
-        Toast.makeText(getContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+
         Double[] fromArray = new Double[fromLatLongArrays.length];
         Double[] toArray = new Double[toLatLongArrays.length];
 

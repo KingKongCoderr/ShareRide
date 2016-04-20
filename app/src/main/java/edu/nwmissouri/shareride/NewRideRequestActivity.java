@@ -101,6 +101,19 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         TextView OfferIdTV = (TextView) findViewById(R.id.offerIDTV);
         frequencySpinner = (EditText) findViewById(R.id.offerFrequencySpinner);
         frequencySpinner.setOnClickListener(this);
+        frequencySpinner.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    selectDatePickerDialog.show();
+                    frequencySpinner.setInputType(0);
+                } else {
+                    selectDatePickerDialog.hide();
+                    frequencySpinner.setInputType(0);
+                }
+            }
+        });
 
         Calendar newCalendar = Calendar.getInstance();
         selectDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {

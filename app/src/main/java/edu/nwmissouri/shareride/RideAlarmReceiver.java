@@ -18,7 +18,7 @@ public class RideAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("Alarm Receiver", "Entered");
-        Toast.makeText(context, "Entered", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Entered", Toast.LENGTH_SHORT).show();
 
         Bundle bundle = intent.getExtras();
         String action = bundle.getString(ACTION_ALARM);
@@ -28,7 +28,7 @@ public class RideAlarmReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent =   PendingIntent.getService(context,0,inService, PendingIntent.FLAG_NO_CREATE);
 
             if (pendingIntent == null) {
-                Toast.makeText(context, "Scheduler running successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Scheduler running successfully", Toast.LENGTH_SHORT).show();
                 context.startService(inService);
             }
         }

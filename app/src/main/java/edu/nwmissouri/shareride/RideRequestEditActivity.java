@@ -82,6 +82,19 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
 
         Button btnSubmit = (Button) findViewById(R.id.searchBTN);
         frequencySpinner.setOnClickListener(this);
+        frequencySpinner.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    selectDatePickerDialog.show();
+                    frequencySpinner.setInputType(0);
+                } else {
+                    selectDatePickerDialog.hide();
+                    frequencySpinner.setInputType(0);
+                }
+            }
+        });
         Calendar newCalendar = Calendar.getInstance();
         selectDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -170,7 +183,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
         String str = (String) adapterView.getItemAtPosition(position);
         String distance = getLatLongFromGivenAddress(str);
-        Toast.makeText(this, distance.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, distance.toString(), Toast.LENGTH_LONG).show();
     }
 
     public String getLatLongFromGivenAddress(String address) {

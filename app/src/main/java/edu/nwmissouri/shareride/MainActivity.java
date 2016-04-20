@@ -110,13 +110,13 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 String fromStr = fromET.getText().toString();
                 fromLatLong = getLatLongFromGivenAddress(fromStr);
 
-                Toast.makeText(getBaseContext(), fromLatLong.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), fromLatLong.toString(), Toast.LENGTH_SHORT).show();
                 String[] fromLatLongArrays = fromLatLong.split(",");
 
                 String toStr = toET.getText().toString();
 
                 toLatLong = getLatLongFromGivenAddress(toStr);
-                Toast.makeText(getBaseContext(), toLatLong.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), toLatLong.toString(), Toast.LENGTH_SHORT).show();
                 String[] toLatLongArrays = toLatLong.split(",");
 
                 Double[] fromArray = new Double[fromLatLongArrays.length];

@@ -172,10 +172,10 @@ public class RideSearchResults extends AppCompatActivity {
 
         String[] fromLatLongArrays = fromAddressLatLong.split(",");
 
-        Toast.makeText(getBaseContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         String[] toLatLongArrays = toAddressLatLong.split(",");
 
-        Toast.makeText(getBaseContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         Double[] fromArray = new Double[fromLatLongArrays.length];
         Double[] toArray = new Double[toLatLongArrays.length];
 
@@ -219,7 +219,7 @@ public class RideSearchResults extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (distanceFromPlaces <= 1.00 && distanceToPlaces <= 1.00 && floatRideAvailability > 0 && (RideTime.equals(searchRideTime)) && (dateRideDate.equals(SearchDateRideDate))) {
+        if (distanceFromPlaces <= 1.00 && distanceToPlaces <= 1.00 && floatRideAvailability > 0 && (RideTime.equals(searchRideTime)) && ((dateRideDate.toString().substring(0,10)).equals(SearchDateRideDate.toString().substring(0,10)))) {
             return true;
         } else {
             return false;
