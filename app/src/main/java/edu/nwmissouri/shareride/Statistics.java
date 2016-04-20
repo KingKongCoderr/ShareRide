@@ -11,14 +11,23 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Statistics extends AppCompatActivity {
 private RelativeLayout mstatisticslayout;
     private PieChart mChart;
     private int[] ride_offers={5,10,20,35,40};
     private String[] cities={"maryville","st.joseph","jefferson city","st.louis","Kansas city"};
+
+    Client kinveyClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +36,8 @@ private RelativeLayout mstatisticslayout;
         mChart=new PieChart(this);
         mstatisticslayout.addView(mChart);
         mstatisticslayout.setBackgroundColor(Color.LTGRAY);
+
+        kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
 
         mChart.setMinimumHeight(1300);
         mChart.setMinimumWidth(950);
@@ -48,41 +59,80 @@ private RelativeLayout mstatisticslayout;
 
     private void addpieData() {
 
-        ArrayList<Entry> offervals=new ArrayList<Entry>();
+        kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
 
-        for(int i=0;i<ride_offers.length;i++){
-            offervals.add(new Entry(ride_offers[i],i));
-        }
+            @Override
+            public void onSuccess(Ride[] rides) {
+                ArrayList<String> states = new ArrayList<String>();
+                String[] cities;
+                int[] stateCount;
+                Map<String ,Integer> citiRides = new HashMap<String, Integer>();
+                for(Ride ride:rides){
+                    String[] bit = ride.getRouteFrom().split(",");
+                    String state = bit[bit.length-2];
+                    if(!states.contains(state)){
+                        states.add(state);
+                        citiRides.put(state,1);
+                    }else{
+                        citiRides.put(state, citiRides.get(state)+1);
+                    }
+                }
 
-        ArrayList<String> citievals=new ArrayList<String>();
-        for(int j=0;j<cities.length;j++){
-            citievals.add(cities[j]);
-        }
-        PieDataSet dataSet = new PieDataSet(offervals,"ride offers");
-        dataSet.setHighlightEnabled(true);
-        dataSet.setSliceSpace(3);
-        dataSet.setSelectionShift(5);
+                cities = new String[citiRides.size()];
+                stateCount = new int[citiRides.size()];
+                Iterator it = citiRides.entrySet().iterator();
+                int count= 0;
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    cities[count] = (String) pair.getKey();
+                    stateCount[count++] = (int) pair.getValue();
+                    it.remove(); // avoids a ConcurrentModificationException
+                }
 
 
-        ArrayList<Integer> colors=new ArrayList<Integer>();
-        for(int c: ColorTemplate.JOYFUL_COLORS)
-           colors.add(c);
-        for(int c: ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-        for(int c: ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
+                ArrayList<Entry> offervals=new ArrayList<Entry>();
 
-        dataSet.setColors(colors);
-        dataSet.setValueTextColor(Color.BLACK);
+                for(int i=0;i<stateCount.length;i++){
+                    offervals.add(new Entry(stateCount[i],i));
+                }
 
-        PieData data=new PieData(citievals,dataSet);
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLACK);
+                ArrayList<String> citievals=new ArrayList<String>();
+                for(int j=0;j<cities.length;j++){
+                    citievals.add(cities[j]);
+                }
+                PieDataSet dataSet = new PieDataSet(offervals,"ride offers");
+                dataSet.setHighlightEnabled(true);
+                dataSet.setSliceSpace(3);
+                dataSet.setSelectionShift(5);
 
-        mChart.setData(data);
+                ArrayList<Integer> colors=new ArrayList<Integer>();
+                for(int c: ColorTemplate.JOYFUL_COLORS)
+                    colors.add(c);
+                for(int c: ColorTemplate.VORDIPLOM_COLORS)
+                    colors.add(c);
+                for(int c: ColorTemplate.COLORFUL_COLORS)
+                    colors.add(c);
 
-        mChart.highlightValues(null);
+                dataSet.setColors(colors);
+                dataSet.setValueTextColor(Color.BLACK);
 
-        mChart.invalidate();
+                PieData data=new PieData(citievals,dataSet);
+                data.setValueTextSize(11f);
+                data.setValueTextColor(Color.BLACK);
+
+                mChart.setData(data);
+
+                mChart.highlightValues(null);
+
+                mChart.invalidate();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+        });
+
+
     }
 }

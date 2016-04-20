@@ -68,69 +68,70 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         } catch (Exception e) {
 
         }
-        if(kinveyClient.user().isUserLoggedIn()){
-            Log.d("ALREADYLOGGIN","User already Logged in");
-            kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
-                @Override
-                public void onSuccess(Ride[] result) {
-                    Log.d("Length of the data", String.valueOf(result.length));
-                    RideCollection.items.clear();
-                    RideRequestCollection.items.clear();
 
-                    for (Ride ride : result) {
-                        if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                            //RideCollection.items.add(ride);
-                            rideCollection.addRideCollection(ride);
-                        } else if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                            rideRequestCollection.addRideCollection(ride);
-                        }
-                    }
-                    if (RideCollection.items.size() > 0) {
-                        Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size() - 1).getOfferID());
-                    } else {
-                        Ride.rideOfferCount = 0;
-                    }
-                    if (RideRequestCollection.items.size() > 0) {
-                        Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size() - 1).getOfferID());
-                    } else {
-                        Ride.rideRequestCount = 0;
-                    }
-
-                    if ( null != RideRequestCollection.recentRide ){
-                        Log.d("RECENT RIDE", RideRequestCollection.recentRide.toString());
-                    }else{
-                        kinveyClient.appData("RideUser", RideUser.class).getEntity(kinveyClient.user().getUsername(), new KinveyClientCallback<RideUser>() {
-                            @Override
-                            public void onSuccess(RideUser result) {
-                                RideUser.currentUser = result;
-                                RideRequestCollection.recentRide = result.getRideRecent();
-                                if ( null != RideRequestCollection.recentRide ){
-                                    Log.d("RECENT RIDE AUTO LOGIN", result.getRideRecent().toString());
-                                }else{
-                                    Log.d("RECENT RIDE AUTO LOGIN","Recent ride is still empty");
-                                }
-                            }
-                            @Override
-                            public void onFailure(Throwable error) {
-                                Log.d("KINVEY_ERROR","Rideuser retrival failure");
-                            }
-                        });
-                        Log.d("RECENT RIDE","null in recent Ride");
-                    }
-                    Log.d("Ride Count On Login", Ride.rideOfferCount + "");
-                    Log.d("OFFER LIST", RideCollection.items.toString());
-                    final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
-                    startActivity(rideActivityIntent);
-                }
-
-                @Override
-                public void onFailure(Throwable error) {
-                    Log.e("ALL DATA", "AppData.get all Failure", error);
-                }
-            });
-        }else{
-
-        }
+//        if(kinveyClient.user().isUserLoggedIn()){
+//            Log.d("ALREADYLOGGIN","User already Logged in");
+//            kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
+//                @Override
+//                public void onSuccess(Ride[] result) {
+//                    Log.d("Length of the data", String.valueOf(result.length));
+//                    RideCollection.items.clear();
+//                    RideRequestCollection.items.clear();
+//
+//                    for (Ride ride : result) {
+//                        if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+//                            //RideCollection.items.add(ride);
+//                            rideCollection.addRideCollection(ride);
+//                        } else if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
+//                            rideRequestCollection.addRideCollection(ride);
+//                        }
+//                    }
+//                    if (RideCollection.items.size() > 0) {
+//                        Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size() - 1).getOfferID());
+//                    } else {
+//                        Ride.rideOfferCount = 0;
+//                    }
+//                    if (RideRequestCollection.items.size() > 0) {
+//                        Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size() - 1).getOfferID());
+//                    } else {
+//                        Ride.rideRequestCount = 0;
+//                    }
+//
+//                    if ( null != RideRequestCollection.recentRide ){
+//                        Log.d("RECENT RIDE", RideRequestCollection.recentRide.toString());
+//                    }else{
+//                        kinveyClient.appData("RideUser", RideUser.class).getEntity(kinveyClient.user().getUsername(), new KinveyClientCallback<RideUser>() {
+//                            @Override
+//                            public void onSuccess(RideUser result) {
+//                                RideUser.currentUser = result;
+//                                RideRequestCollection.recentRide = result.getRideRecent();
+//                                if ( null != RideRequestCollection.recentRide ){
+//                                    Log.d("RECENT RIDE AUTO LOGIN", result.getRideRecent().toString());
+//                                }else{
+//                                    Log.d("RECENT RIDE AUTO LOGIN","Recent ride is still empty");
+//                                }
+//                            }
+//                            @Override
+//                            public void onFailure(Throwable error) {
+//                                Log.d("KINVEY_ERROR","Rideuser retrival failure");
+//                            }
+//                        });
+//                        Log.d("RECENT RIDE","null in recent Ride");
+//                    }
+//                    Log.d("Ride Count On Login", Ride.rideOfferCount + "");
+//                    Log.d("OFFER LIST", RideCollection.items.toString());
+//                    final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+//                    startActivity(rideActivityIntent);
+//                }
+//
+//                @Override
+//                public void onFailure(Throwable error) {
+//                    Log.e("ALL DATA", "AppData.get all Failure", error);
+//                }
+//            });
+//        }else{
+//
+//        }
 
         mLogin_bt.setOnClickListener(new View.OnClickListener() {
             @Override
