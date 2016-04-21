@@ -56,7 +56,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String OUT_JSON = "/json";
-    private static final String API_KEY = "AIzaSyBVGNHxtt0rBeU4jOs427su-0Vc4M06wZs";
+    private static final String API_KEY = "AIzaSyA36XH-x4gJIQvAc7p7LHN55xm_oDVEkhw";
     private String fromLatLong = "";
     private String toLatLong = "";
     private DatePickerDialog selectDatePickerDialog;
