@@ -233,7 +233,7 @@ public class FragmentRideRecent extends Fragment {
                             }else{
                                 phone = result.getPhone();
                             }
-                            message = "Email: "+email+" , "+"Phone"+phone;
+                            message = "Email: "+email+" , "+"Phone: "+phone;
                             AlertDialog.Builder userDetails = new AlertDialog.Builder(getContext());
                             userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 

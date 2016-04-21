@@ -115,7 +115,7 @@ public class RideSearchResults extends AppCompatActivity {
                         }else{
                             phone = result.getPhone();
                         }
-                        message = "Email: "+email+" , "+"Phone"+phone;
+                        message = "Email: "+email+" , "+"Phone: "+phone;
                         AlertDialog.Builder userDetails = new AlertDialog.Builder(RideSearchResults.this);
                         userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
