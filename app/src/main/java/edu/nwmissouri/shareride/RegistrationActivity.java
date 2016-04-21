@@ -45,10 +45,12 @@ public class RegistrationActivity extends AppCompatActivity {
         mRegistration_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String message = "";
+                boolean errorFlag = false;
                 kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
                 //Toast.makeText(getApplicationContext(), "Creating user...", Toast.LENGTH_SHORT).show();
                 if(confirmPasswordET.getText().toString().equals(passwordET.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"password matched",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "password matched", Toast.LENGTH_SHORT).show();
                 }
                 kinveyClient.user().create(userNameET.getText().toString(), passwordET.getText().toString(), new KinveyUserCallback() {
                     @Override

@@ -24,15 +24,16 @@
         android:textStyle="bold"
         android:textSize="15dp"/>-->
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:background="#ffffff"
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:minLines="2"
         android:inputType="textEmailAddress"
         android:ems="10"
+        android:singleLine="false"
         android:id="@+id/email_et"
-        android:hint="Please! send an email to 'shareride.support@gmail.com' by mentioning your User ID. Our support team will contact you to address this issue."
-        android:layout_centerHorizontal="true"/>
+        android:text=""
+        android:textAlignment="inherit" />
 
     <!--<Button-->
         <!--android:layout_width="match_parent"-->
