@@ -147,6 +147,8 @@ public class FragmentRideRecent extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View theView = inflater.inflate(R.layout.fragment_recentride, container, false);
         TextView noRows = (TextView) theView.findViewById(R.id.emptyriderequest);
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , this.getContext()).build();
         //itemsArray = items.toArray(new Ride[items.size()]);
 
         /* BackEnd Service code */
@@ -200,6 +202,60 @@ public class FragmentRideRecent extends Fragment {
                 rideRecentLV.setAdapter(rideSearchResultsAdapter);
             }
 //list on click listener
+
+            rideRecentLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.d("CLICKED", "Yes");
+//                    Log.d("USERID", filteredItems.get(position).toString());
+                    String rideUserid = filteredItems.get(position).getRideUserId();
+                    System.setProperty("http.keepAlive", "false");
+                    kinveyClient.appData("RideUser", RideUser.class).getEntity(rideUserid, new KinveyClientCallback<RideUser>() {
+                        @Override
+                        public void onSuccess(RideUser result) {
+                            Log.d("EMAIL",result.getEmail());
+                            String title = null;
+                            String email = null;
+                            String phone = null;
+                            String message = null;
+                            if(result.getFullname().isEmpty()){
+                                title = "Unknown User";
+                            }else{
+                                title = result.getFullname();
+                            }
+                            if(result.getEmail().isEmpty()){
+                                email = "No Email";
+                            }else{
+                                email = result.getEmail();
+                            }
+                            if(result.getPhone().isEmpty()){
+                                phone = "No Phone";
+                            }else{
+                                phone = result.getPhone();
+                            }
+                            message = "Email: "+email+" , "+"Phone"+phone;
+                            AlertDialog.Builder userDetails = new AlertDialog.Builder(getContext());
+                            userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).create();
+                            userDetails.show();
+                        }
+
+                        @Override
+                        public void onFailure(Throwable error) {
+
+                        }
+                    });
+
+                }
+            });
+
+
+
 
 
 //                if (items.size() != 0) {

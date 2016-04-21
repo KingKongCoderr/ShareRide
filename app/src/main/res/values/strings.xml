@@ -22,6 +22,7 @@
     <string name="contactinfo_tv">Contact Details</string>
     <string name="address_tv">ADDRESS</string>
     <string name="newsubmit_et">Submit</string>
+    <string name="newupdate_et">Update</string>
     <string name="time_prompt">Select Time...</string>
     <string name="logout">Logout</string>
 

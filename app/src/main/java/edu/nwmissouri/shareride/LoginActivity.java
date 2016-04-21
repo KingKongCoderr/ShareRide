@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
     private MediaPlayer mp = null;
     SurfaceView mSurfaceView = null;
     SurfaceHolder holder = null;
-    private Button mLogin_bt,mstats_bt;
+    private Button mLogin_bt;
     private TextView mForgotPass, mCreateNew;
     private EditText mUsername_et, mPassword_et;
     public String mUsername, mPassword;
@@ -52,14 +52,6 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         mCreateNew = (TextView) findViewById(R.id.newuser_tv);
         mUsername_et = (EditText) findViewById(R.id.username_et);
         mPassword_et = (EditText) findViewById(R.id.password_et);
-        mstats_bt=(Button)findViewById(R.id.stats_bt);
-        mstats_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent stats_intent=new Intent(LoginActivity.this,Statistics.class);
-                startActivity(stats_intent);
-            }
-        });
 
         try {
             mUsername = mUsername_et.getText().toString();

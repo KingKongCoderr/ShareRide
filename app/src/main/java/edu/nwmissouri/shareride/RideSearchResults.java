@@ -87,7 +87,6 @@ public class RideSearchResults extends AppCompatActivity {
 
         rideRequest.addRecentRide(new Ride(searchRequestID, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate, "request", kinveyClient.user().getUsername()));
         rideSearchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("CLICKED", "Yes");
