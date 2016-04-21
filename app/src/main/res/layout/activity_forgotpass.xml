@@ -11,39 +11,18 @@
     tools:context="com.s525120.android.shareride.ForgotpassActivity"
     android:background="@drawable/tabbackground2">
 
-  <!--  <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/email_tv"
-        android:textColor="#f8f805"
-        android:background="@color/visible"
-        android:id="@+id/email_tv"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textSize="15dp"/>-->
+
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="500dp"
         android:minLines="2"
-        android:inputType="textEmailAddress"
         android:ems="10"
         android:singleLine="false"
-        android:id="@+id/email_et"
+        android:id="@+id/email_tv"
         android:text=""
         android:textAlignment="inherit" />
 
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/newsubmit_et"-->
-        <!--android:textColor="#f2000000"-->
-        <!--android:background="#e6ffFFFF"-->
-        <!--android:id="@+id/newsubmit_bt"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@+id/email_et"-->
-        <!--/>-->
+
+
 </RelativeLayout>

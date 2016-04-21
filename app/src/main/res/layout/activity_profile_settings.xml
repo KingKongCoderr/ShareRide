@@ -23,31 +23,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2dp" />
 
-    <!--<EditText-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:background="#ffffff"-->
-        <!--android:textSize="25dp"-->
-        <!--android:inputType="text"-->
-        <!--android:hint="Edit Username"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:id="@+id/editnewusername_et"-->
-        <!--android:layout_below="@+id/editname_et"-->
-        <!--android:layout_centerHorizontal="true"/>-->
-
-    <!--<EditText-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:textSize="22dp"-->
-        <!--android:background="#ffffff"-->
-        <!--android:inputType="textPassword"-->
-        <!--android:hint="Edit password"-->
-        <!--android:textStyle="bold"-->
-        <!--android:id="@+id/editpassword_et"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:layout_below="@+id/editnewusername_et"-->
-        <!--android:layout_centerHorizontal="true"/>-->
-
     <EditText
         android:layout_width="300dp"
         android:layout_height="60dp"

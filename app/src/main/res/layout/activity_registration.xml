@@ -92,43 +92,6 @@ android:textSize="25dp"
 
 
 
-<!--
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
-
-                android:layout_marginTop="1dp"
-                android:background="#ffffff"
-                android:id="@+id/street_et"
-                android:hint="street address"
-                android:layout_below="@+id/newemail_et"
-                />-->
-
-           <!-- <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="1dp"
-
-                android:background="#ffffff"
-
-                android:hint="City Name"
-                android:id="@+id/city_et"
-                android:layout_below="@+id/newemail_et"/>-->
-<!--
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-
-                android:background="#ffffff"
-                android:id="@+id/zip_et"
-                android:layout_marginTop="2dp"
-                android:hint="Zip Code"
-                android:layout_below="@+id/city_et"/>-->
-
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

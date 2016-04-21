@@ -137,15 +137,6 @@
         android:background="#0c9ef3"
         android:textColor="#000000"/>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:src="@android:drawable/ic_dialog_email"-->
-        <!--android:layout_marginLeft="@dimen/fab_margin"-->
-        <!--android:layout_marginRight="@dimen/fab_margin"-->
-        <!--android:layout_alignBottom="@+id/distanceTV"-->
-        <!--android:layout_toEndOf="@+id/fromET" />-->
+
 
 </RelativeLayout>

@@ -3,7 +3,9 @@ package edu.nwmissouri.shareride;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -38,9 +40,13 @@ private RelativeLayout mstatisticslayout;
         mstatisticslayout.setBackgroundColor(Color.LTGRAY);
 
         kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
-
-        mChart.setMinimumHeight(750);
-        mChart.setMinimumWidth(750);
+        Display screenDisplay = getWindowManager().getDefaultDisplay();
+        int width=screenDisplay.getWidth(),height=screenDisplay.getHeight();
+        LayoutParams layoutParams=new LayoutParams( width, height);
+        //layoutParams.setMargins(int left, int top, int right, int bottom);
+        mChart.setLayoutParams(layoutParams);
+       // mChart.setMinimumHeight();
+     //   mChart.setMinimumWidth(750);
         mChart.setDescription("Ride offers from cities");
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleRadius(7);
