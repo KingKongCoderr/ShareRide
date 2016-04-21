@@ -69,6 +69,7 @@
             android:parentActivityName=".RideActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Statistics"
+            android:parentActivityName=".RideActivity"
                   android:screenOrientation="portrait"/>
 
         <service

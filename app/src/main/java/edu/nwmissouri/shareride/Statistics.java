@@ -39,8 +39,8 @@ private RelativeLayout mstatisticslayout;
 
         kinveyClient = new Client.Builder("kid_ZJCDL-Jpy-", "7ba9e5e0015849b790845e669ab87992", this.getApplicationContext()).build();
 
-        mChart.setMinimumHeight(1300);
-        mChart.setMinimumWidth(950);
+        mChart.setMinimumHeight(750);
+        mChart.setMinimumWidth(750);
         mChart.setDescription("Ride offers from cities");
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleRadius(7);
