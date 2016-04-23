@@ -15,7 +15,6 @@ public class GooglePlacesActivity extends AppCompatActivity {
         setContentView(R.layout.google_places_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

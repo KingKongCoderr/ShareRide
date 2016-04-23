@@ -25,14 +25,6 @@ public class RideUser extends GenericJson {
     public RideUser() {
     }
 
-    public RideUser(String email, String phone, String fullname, String rideUserId, Ride rideRecent) {
-        this.email = email;
-        this.phone = phone;
-        this.fullname = fullname;
-        this.rideUserId = rideUserId;
-        this.rideRecent = rideRecent;
-    }
-
     public Ride getRideRecent() {
         return rideRecent;
     }

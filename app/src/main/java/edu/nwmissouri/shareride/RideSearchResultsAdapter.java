@@ -51,14 +51,12 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
     private String getLatLongFromGivenAddress(String address)
     {
         Geocoder coder = new Geocoder(getContext(), Locale.getDefault());
-        boolean geoAvailable = coder.isPresent();
         String strLongitude = "";
         String strLatitude = "";
         StringBuilder latLongResult = new StringBuilder();
         int count = 0;
         try {
             List<Address> list = coder.getFromLocationName(address, 1);
-            geoAvailable = coder.isPresent();
             while (count < 10 && list.size() == 0) {
                 list = (ArrayList<Address>) coder.getFromLocationName(address,1);
                 count++;
@@ -83,18 +81,13 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
         String resultValue = "";
 
         String[] fromLatLongArrays = fromAddressLatLong.split(",");
-
-        //Toast.makeText(getContext(), fromAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         String[] toLatLongArrays = toAddressLatLong.split(",");
-
-        //Toast.makeText(getContext(), toAddressLatLong.toString(), Toast.LENGTH_SHORT).show();
         Double[] fromArray = new Double[fromLatLongArrays.length];
         Double[] toArray = new Double[toLatLongArrays.length];
 
         if (fromLatLongArrays.length <= 1 || toLatLongArrays.length <= 1) {
             Toast.makeText(getContext(), "Retry! not a valid input", Toast.LENGTH_SHORT).show();
         } else {
-
             for (int i = 0; i < fromLatLongArrays.length; i++) {
                 fromArray[i] = Double.parseDouble(fromLatLongArrays[i]);
             }
@@ -104,42 +97,11 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
             }
 
             float[] dist = new float[1];
-            //double distance = getDistanceinMiles(fromArray[0],fromArray[1],toArray[0],toArray[1]);
             Location.distanceBetween(fromArray[0] / 1e6, fromArray[1] / 1e6, toArray[0] / 1e6, toArray[1] / 1e6, dist);
             resultValue = String.format("%f", dist[0] * 621.371192f);
-
         }
 
         return resultValue;
-    }
-
-    private boolean isResultValid(String fromAddressLatLong, String toAddressLatLong, String RideAvailability, String RideTime, String RideDate)
-    {
-        Date dateRideDate = new Date();
-        Date SearchDateRideDate = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-
-        String searchFromLatLong = getLatLongFromGivenAddress(searchFromAddress);
-        String searchToLatLong = getLatLongFromGivenAddress(searchToAddress);
-
-        float distanceFromPlaces = Float.parseFloat(getDistanceBetween(searchFromLatLong, fromAddressLatLong));
-        float distanceToPlaces = Float.parseFloat(getDistanceBetween(searchToLatLong, toAddressLatLong));
-        float floatRideAvailability = Float.parseFloat(RideAvailability);
-        try {
-            dateRideDate = formatter.parse(RideDate);
-            SearchDateRideDate = formatter.parse(searchRideDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        if(distanceFromPlaces <= 1.00 && distanceToPlaces <= 1.00 && floatRideAvailability > 0 && (RideTime.equals(searchRideTime)) && (formatter.format(dateRideDate).equals(formatter.format(SearchDateRideDate))))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     @Override
@@ -166,9 +128,6 @@ public class RideSearchResultsAdapter extends ArrayAdapter<Ride> {
 
         String[] shortToRoute = getItem(position).getRouteTo().toString().split(",");
         toAddressLatLong = getLatLongFromGivenAddress(getItem(position).getRouteTo().toString());
-        //boolean isRideValid = isResultValid(fromAddressLatLong,toAddressLatLong,getItem(position).getNoOfAvailability().toString(),getItem(position).getTimeOfTravel().toString(),getItem(position).getFrequency().toString());
-
-
             TextView RouteFrom = (TextView)view.findViewById(R.id.itemName);
             TextView RouteTo = (TextView)view.findViewById(R.id.itemPrice);
             TextView NoOfAvailability = (TextView)view.findViewById(R.id.itemQuantity);

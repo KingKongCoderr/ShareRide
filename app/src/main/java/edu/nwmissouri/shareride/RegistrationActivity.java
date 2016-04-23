@@ -45,10 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mRegistration_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "";
-                boolean errorFlag = false;
                 kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
-                //Toast.makeText(getApplicationContext(), "Creating user...", Toast.LENGTH_SHORT).show();
                 if(confirmPasswordET.getText().toString().equals(passwordET.getText().toString())){
                     Toast.makeText(getApplicationContext(), "password matched", Toast.LENGTH_SHORT).show();
                 }
@@ -56,9 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Throwable t) {
                         CharSequence text = "Could not sign up -> " + t.getMessage();
-                        //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
                         Log.e("Kinvey Sign Up", "Sign-up error", t);
-
                     }
 
                     @Override
@@ -68,11 +63,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         final RideUser rideUser = new RideUser();
                         rideUser.setRideUserId(u.getUsername());
                         rideUser.setFullname(fullNameET.getText().toString());
-//                        rideUser.put("fullName", rideUser.getFullname());
                         rideUser.setPhone(phoneNumberET.getText().toString());
-//                        rideUser.put("phone", rideUser.getPhone());
                         rideUser.setEmail(emailET.getText().toString());
-//                        rideUser.put("email", rideUser.getEmail());
                         try{
                             kinveyClient.appData("RideUser", RideUser.class).save(rideUser, new KinveyClientCallback<RideUser>() {
                                 @Override
@@ -120,7 +112,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(Throwable error) {
                                     Log.e("RideUser", "AppData.save Failure", error);
-                                    //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
                         }catch (Exception e){

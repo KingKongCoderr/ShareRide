@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Statistics extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity {
     private RelativeLayout mstatisticslayout;
     private PieChart mChart;
     private int[] ride_offers = {5, 10, 20, 35, 40};
@@ -45,7 +45,7 @@ public class Statistics extends AppCompatActivity {
         int width = screenDisplay.getWidth() - 100, height = screenDisplay.getHeight() - 100;
         LayoutParams layoutParams = new LayoutParams(width, height);
         mChart.setLayoutParams(layoutParams);
-        mChart.setDescription("Ride offers from cities");
+        mChart.setDescription("Ride offers from States");
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleRadius(7);
         mChart.setTransparentCircleRadius(10);
@@ -74,8 +74,8 @@ public class Statistics extends AppCompatActivity {
                 for (Ride ride : rides) {
                     String[] bit = ride.getRouteFrom().split("[, ]+");
 
-                    Log.d("route",""+bit[bit.length-3]);
-                    String state = bit[bit.length - 3].substring(0,2);
+                    Log.d("route", "" + bit[bit.length - 3]);
+                    String state = bit[bit.length - 3].substring(0, 2);
                     if (!states.contains(state)) {
                         states.add(state);
                         citiRides.put(state, 1);

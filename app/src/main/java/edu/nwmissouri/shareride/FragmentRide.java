@@ -28,7 +28,7 @@ import com.kinvey.java.model.KinveyDeleteResponse;
 import java.util.ArrayList;
 
 /**
- * Created by S525339 on 3/2/2016.
+ * This activity is used when forgot password button is clicked from login activity
  */
 public class FragmentRide extends Fragment {
 
@@ -41,14 +41,9 @@ public class FragmentRide extends Fragment {
     Client kinveyClient;
     private String appKey = "kid_ZJCDL-Jpy-";
     private String appSecret = "7ba9e5e0015849b790845e669ab87992";
-
-    public static final String ITEM_POSITION = "position";
-
     ArrayList<Ride> items;
     RideOfferAdapter RideOfferAdapter;
-    Ride[] itemsArray;
     RideCollection rides = new RideCollection();
-    //ResultsListAdapter resultsListAdapter;
 
     public interface iRideActivity
     {
@@ -85,24 +80,20 @@ public class FragmentRide extends Fragment {
 
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent profile_intent=new Intent(getContext(),Profile_settings.class);
+            Intent profile_intent = new Intent(getContext(), Profile_settings.class);
             startActivity(profile_intent);
             return true;
-        }
-        else if (id == R.id.Add_Ride_Offer)
-        {
-            //Toast.makeText(getActivity(), "Navigating to Ride Offer Screen!", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.Add_Ride_Offer) {
             Intent RideIntent = new Intent(getContext(), NewRideOfferActivity.class);
             startActivity(RideIntent);
             return true;
-        } else if(id == R.id.logout){
+        } else if (id == R.id.logout) {
             kinveyClient.user().logout().execute();
             Intent loginActivity = new Intent(getContext(), LoginActivity.class);
             startActivity(loginActivity);
-        } else if(id == R.id.stats){
-            Intent stats_intent=new Intent(getContext(),Statistics.class);
+        } else if (id == R.id.stats) {
+            Intent stats_intent = new Intent(getContext(), StatisticsActivity.class);
             startActivity(stats_intent);
         }
 
@@ -127,29 +118,26 @@ public class FragmentRide extends Fragment {
         View theView = inflater.inflate(R.layout.fragment_ride, container, false);
 
         items = rides.getRideCollection();
-        //itemsArray = items.toArray(new Ride[items.size()]);
         kinveyClient = new Client.Builder(appKey, appSecret
                 , getContext()).build();
         RideOfferAdapter =
-                    new RideOfferAdapter(getActivity(), R.layout.list_item, items);
+                new RideOfferAdapter(getActivity(), R.layout.list_item, items);
         rideOfferLV = (ListView) theView.findViewById(R.id.riderOfferLV);
         rideOfferLV.setVisibility(View.VISIBLE);
         TextView noRows = (TextView) theView.findViewById(R.id.emptyrideoffer);
 
-        if(items.size() != 0) {
+        if (items.size() != 0) {
             rideOfferLV.setVisibility(View.VISIBLE);
 
             rideOfferLV.setAdapter(RideOfferAdapter);
         }
-
-
 
         rideOfferLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent newRideOfferIntent = new Intent(getActivity(), RiderOfferDetailActivity.class);
                 String currentOfferId = ((TextView) view.findViewById(R.id.itemId)).getText().toString();
-                String selected = currentOfferId.replace("OfferID: ","");
+                String selected = currentOfferId.replace("OfferID: ", "");
                 newRideOfferIntent.putExtra("INDEX_LOCATION", selected);
                 Log.d("Selected Offer Id", selected.toString());
                 startActivity(newRideOfferIntent);
@@ -159,15 +147,14 @@ public class FragmentRide extends Fragment {
         rideOfferLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-
                 AlertDialog.Builder deleteAlert = new AlertDialog.Builder(getActivity());
                 deleteAlert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("POSITION",String.valueOf(position));
-                        Log.d("WHICH",String.valueOf(which));
+                        Log.d("POSITION", String.valueOf(position));
+                        Log.d("WHICH", String.valueOf(which));
                         Ride ride = RideCollection.items.get(position);
-                        Log.d("RIDEOBJECT",ride.toString());
+                        Log.d("RIDEOBJECT", ride.toString());
                         kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
                             @Override
                             public void onSuccess(KinveyDeleteResponse result) {
@@ -180,13 +167,12 @@ public class FragmentRide extends Fragment {
                                         RideCollection.items.clear();
                                         for (Ride ride : result) {
                                             if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                                                //RideCollection.items.add(ride);
                                                 rideCollection.addRideCollection(ride);
                                             }
                                         }
-                                        if(RideCollection.items.size()>0){
-                                            Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
-                                        }else{
+                                        if (RideCollection.items.size() > 0) {
+                                            Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size() - 1).getOfferID());
+                                        } else {
                                             Ride.rideOfferCount = 0;
                                         }
                                         Log.d("OFFER LIST", RideCollection.items.toString());
@@ -206,7 +192,6 @@ public class FragmentRide extends Fragment {
                             @Override
                             public void onFailure(Throwable error) {
                                 Log.e("TAG", "AppData.delete Failure", error);
-                                //Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
                         RideOfferAdapter.notifyDataSetChanged();

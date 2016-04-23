@@ -1,6 +1,5 @@
 package edu.nwmissouri.shareride;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +42,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
     AutoCompleteTextView toAddressET;
     EditText availabilityET;
     Spinner hrsSpinner;
-    EditText frequencySpinner;
+    EditText frequencySpinnerET;
     TextView offerId;
     Client kinveyClient;
     private SimpleDateFormat dateFormatter;
@@ -58,7 +57,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
         toAddressET = (AutoCompleteTextView)findViewById(R.id.ToET);
         availabilityET = (EditText) findViewById(R.id.offerAvailabilityET);
         hrsSpinner = (Spinner) findViewById(R.id.offertimeSpinner);
-        frequencySpinner = (EditText) findViewById(R.id.offerFrequencySpinner);
+        frequencySpinnerET = (EditText) findViewById(R.id.offerFrequencySpinner);
         offerId = (TextView) findViewById(R.id.offerIDTV);
         dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
 
@@ -71,7 +70,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
             toAddressET.setText(rideObject.getRouteTo());
             availabilityET.setText(rideObject.getNoOfAvailability());
             hrsSpinner.setSelection(getIndex(hrsSpinner, rideObject.getTimeOfTravel().toString()));
-            frequencySpinner.setText(rideObject.getFrequency().toString());
+            frequencySpinnerET.setText(rideObject.getFrequency().toString());
             offerId.setText(resultOfferId);
         }
 
@@ -82,17 +81,17 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
         toAddressET.setOnItemClickListener(this);
 
         Button btnSubmit = (Button) findViewById(R.id.searchBTN);
-        frequencySpinner.setOnClickListener(this);
-        frequencySpinner.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        frequencySpinnerET.setOnClickListener(this);
+        frequencySpinnerET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     selectDatePickerDialog.show();
-                    frequencySpinner.setInputType(0);
+                    frequencySpinnerET.setInputType(0);
                 } else {
                     selectDatePickerDialog.hide();
-                    frequencySpinner.setInputType(0);
+                    frequencySpinnerET.setInputType(0);
                 }
             }
         });
@@ -102,14 +101,18 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                frequencySpinner.setText(dateFormatter.format(newDate.getTime()));
+                frequencySpinnerET.setText(dateFormatter.format(newDate.getTime()));
             }
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
         btnSubmit.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                if (fromAddressET.getText().toString().length() == 0 || toAddressET.getText().toString().length() == 0 || availabilityET.getText().toString().length() == 0 || hrsSpinner.getSelectedItem().toString().length() == 0 || frequencySpinner.getText().toString().length() == 0) {
+                String fromLatLong = getLatLongFromGivenAddress(fromAddressET.getText().toString());
+                String toLatLong = getLatLongFromGivenAddress(toAddressET.getText().toString());
+
+                if (fromAddressET.getText().toString().length() == 0 || toAddressET.getText().toString().length() == 0 || availabilityET.getText().toString().length() == 0 || hrsSpinner.getSelectedItem().toString().length() == 0 || frequencySpinnerET.getText().toString().length() == 0 || fromLatLong.indexOf("Invalid") != -1 || toLatLong.indexOf("Invalid") != -1) {
                     Toast.makeText(getBaseContext(), "Invalid Inputs", Toast.LENGTH_SHORT).show();
                 } else {
                     Ride ride = rideCollection.getRideObject(resultOfferId);
@@ -117,12 +120,11 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
                     ride.setRouteTo(toAddressET.getText().toString());
                     ride.setNoOfAvailability(availabilityET.getText().toString());
                     ride.setTimeOfTravel(hrsSpinner.getSelectedItem().toString());
-                    ride.setFrequency(frequencySpinner.getText().toString());
+                    ride.setFrequency(frequencySpinnerET.getText().toString());
 
                     kinveyClient.appData("RideCollection", Ride.class).save(ride, new KinveyClientCallback<Ride>() {
                         @Override
                         public void onSuccess(Ride result) {
-                            //Toast.makeText(getApplicationContext(), "Ride offer Updated", Toast.LENGTH_LONG).show();
                             kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                 @Override
                                 public void onSuccess(Ride[] result) {
@@ -130,7 +132,6 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
                                     RideCollection.items.clear();
                                     for (Ride ride : result) {
                                         if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                                            //RideCollection.items.add(ride);
                                             rideCollection.addRideCollection(ride);
                                         }
                                     }
@@ -154,7 +155,6 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
                         @Override
                         public void onFailure(Throwable error) {
                             Log.e("TAG", "AppData.save Failure", error);
-                            //Toast.makeText(getApplicationContext(), "Save error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -164,7 +164,7 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onClick(View view) {
-        if(view == frequencySpinner) {
+        if(view == frequencySpinnerET) {
             selectDatePickerDialog.show();
         }
     }
@@ -186,19 +186,16 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
         String str = (String) adapterView.getItemAtPosition(position);
         String distance = getLatLongFromGivenAddress(str);
-        Toast.makeText(this, distance.toString(), Toast.LENGTH_LONG).show();
     }
 
     public String getLatLongFromGivenAddress(String address) {
         Geocoder coder = new Geocoder(getBaseContext(), Locale.getDefault());
-        boolean geoAvailable = coder.isPresent();
         String strLongitude = "";
         String strLatitude = "";
         StringBuilder latLongResult = new StringBuilder();
         int count = 0;
         try {
             List<Address> list = coder.getFromLocationName(address, 1);
-            geoAvailable = coder.isPresent();
             while (count < 10 && list.size() == 0) {
                 list = (ArrayList<Address>) coder.getFromLocationName(address, 1);
                 count++;
@@ -212,8 +209,14 @@ public class RideOfferEditActivity extends AppCompatActivity implements AdapterV
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String result = strLongitude + "," + strLatitude;
-        latLongResult.append(result);
+        if(strLongitude != "" || strLatitude != "") {
+            String result = strLongitude + "," + strLatitude;
+            latLongResult.append(result);
+        }
+        else
+        {
+            latLongResult.append("Invalid");
+        }
 
         return latLongResult.toString();
     }
@@ -249,10 +252,8 @@ class GooglePlacesAutocompleteOfferAdapter extends ArrayAdapter implements Filte
                 FilterResults filterResults = new FilterResults();
 
                 if (constraint != null) {
-                    // Retrieve the autocomplete results.
 
                     resultList = autocomplete(constraint.toString());
-                    // Assign the data to the FilterResults
                     filterResults.values = resultList;
                     filterResults.count = resultList.size();
                 }

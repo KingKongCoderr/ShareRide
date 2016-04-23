@@ -12,7 +12,6 @@ public class RideRequestCollection {
 
     public RideRequestCollection()
     {
-        //items.add(new Ride(1, "1351, Hampshire avenue south,St. Louis Park, MN,US, 55426","Nicollet mall, MN,US, 55426","4","3:00","Daily"));
     }
 
     public ArrayList<Ride> getRideCollection()
@@ -23,7 +22,6 @@ public class RideRequestCollection {
     public void addRideCollection(Ride ride)
     {
         items.add(ride);
-//        mListAdapter.notifyDataSetChanged();
     }
 
     public void addRecentRide(Ride ride)
@@ -34,22 +32,6 @@ public class RideRequestCollection {
     public Ride getRecentRide()
     {
         return recentRide;
-    }
-
-    public int getMaxOfferId()
-    {
-        int maxId = 0;
-        for(int i =0; i<items.size();i++)
-        {
-            if(items.get(i) != null)
-            {
-                if(Integer.parseInt(items.get(i).getOfferID()) > maxId)
-                {
-                    maxId = Integer.parseInt(items.get(i).getOfferID());
-                }
-            }
-        }
-        return maxId;
     }
 
     public Ride getRideObject(String OfferId)
@@ -65,26 +47,5 @@ public class RideRequestCollection {
 
         return resultObject;
     }
-
-    public boolean setRideObject(String resultOfferId, String fromAddressET,String toAddressET, String availabilityET, String hrsSpinner,String frequencySpinner)
-    {
-        Ride resultObject = null;
-        for(Ride item: items)
-        {
-            if(item.getOfferID() == resultOfferId)
-            {
-                item.setRouteFrom(fromAddressET);
-                item.setRouteTo(toAddressET);
-                item.setNoOfAvailability(availabilityET);
-                item.setTimeOfTravel(hrsSpinner);
-                item.setFrequency(frequencySpinner);
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 
 }

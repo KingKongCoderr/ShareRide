@@ -44,7 +44,6 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         rideObject = rideCollection.getRideObject(bundle.getString("INDEX_LOCATION"));
         Log.d("SEARCH ITEM", String.valueOf(rideCollection.getRideObject(bundle.getString("INDEX_LOCATION").toString())));
-        //TODO here get the string stored in the string variable and do
         if (rideObject != null) {
             fromAddressET.setText(rideObject.getRouteFrom());
             toAddressET.setText(rideObject.getRouteTo());
@@ -57,36 +56,29 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_ride_request_edit, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent profile_intent=new Intent(getApplicationContext(),Profile_settings.class);
+            Intent profile_intent = new Intent(getApplicationContext(), Profile_settings.class);
             startActivity(profile_intent);
             return true;
         } else if (id == R.id.Edit_Ride_Request) {
-            //Toast.makeText(this, "Navigating to Edit Ride Request Screen!", Toast.LENGTH_SHORT).show();
             Intent RideEditIntent = new Intent(this, RideRequestEditActivity.class);
             RideEditIntent.putExtra("REQUEST_ID", offerId.getText());
             startActivity(RideEditIntent);
             return true;
-        }else if (id == R.id.logout) {
+        } else if (id == R.id.logout) {
             kinveyClient.user().logout().execute();
             Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(loginActivity);
-
-        } else if(id == R.id.stats){
-            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+        } else if (id == R.id.stats) {
+            Intent stats_intent = new Intent(getApplicationContext(), StatisticsActivity.class);
             startActivity(stats_intent);
         }
 
@@ -101,9 +93,6 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
         searchIntent.putExtra("AVAILABILITY", availabilityET.getText());
         searchIntent.putExtra("RIDETIME", hrsSpinner.getText());
         searchIntent.putExtra("RIDEDATE", frequencySpinner.getText());
-
-        // rideRecent
-
         RideRequestCollection.recentRide = rideObject;
         RideUser.currentUser.setRideRecent(rideObject);
         kinveyClient.appData("RideUser", RideUser.class).save(RideUser.currentUser, new KinveyClientCallback<RideUser>() {
@@ -128,20 +117,19 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
                             Log.d("Length of the data", String.valueOf(result.length));
                             RideCollection.searchItems.clear();
                             for (Ride ride : result) {
-                                Log.d("SEARCH BEFORE",ride.toString());
-                                Log.d("SEARCH TYPE",ride.getRideType());
+                                Log.d("SEARCH BEFORE", ride.toString());
+                                Log.d("SEARCH TYPE", ride.getRideType());
                                 if (ride.getRideType().equals("offer")) {
-                                    Log.d("SEARCH AFTER",ride.toString());
+                                    Log.d("SEARCH AFTER", ride.toString());
                                     if (!ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                                        Log.d("SEARCH RIDE",ride.toString());
+                                        Log.d("SEARCH RIDE", ride.toString());
                                         RideCollection.searchItems.add(ride);
                                     }
                                 }
                             }
-                            Log.d("SEARCH ITEMS",RideCollection.searchItems.toString());
+                            Log.d("SEARCH ITEMS", RideCollection.searchItems.toString());
                             startActivity(searchIntent);
                         }
-
 
                         @Override
                         public void onFailure(Throwable error) {

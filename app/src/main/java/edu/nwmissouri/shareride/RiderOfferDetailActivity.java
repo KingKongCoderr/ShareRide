@@ -53,25 +53,19 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_ride_offer_edit, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent profile_intent=new Intent(getApplicationContext(),Profile_settings.class);
             startActivity(profile_intent);
             return true;
         } else if (id == R.id.Edit_Ride_Offer) {
-            //Toast.makeText(this, "Navigating to Edit Ride Offer Screen!", Toast.LENGTH_SHORT).show();
             Intent RideEditIntent = new Intent(this, RideOfferEditActivity.class);
             RideEditIntent.putExtra("OFFER_ID", offerId.getText());
             startActivity(RideEditIntent);
@@ -80,9 +74,8 @@ public class RiderOfferDetailActivity extends AppCompatActivity {
             kinveyClient.user().logout().execute();
             Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(loginActivity);
-
         } else if(id == R.id.stats){
-            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+            Intent stats_intent=new Intent(getApplicationContext(),StatisticsActivity.class);
             startActivity(stats_intent);
         }
 

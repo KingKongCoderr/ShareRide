@@ -57,27 +57,12 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_shareride_logo);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
     }
 
     @Override
@@ -87,38 +72,8 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
 
     }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_ride, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        else if (id == R.id.Add_Ride_Offer)
-//        {
-//            Toast.makeText(this, "Navigating to Ride Screen!", Toast.LENGTH_SHORT).show();
-//            Intent RideIntent = new Intent(this, MainActivity.class);
-//            startActivity(RideIntent);
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public void onSelectingNewRide() {
-        //Toast.makeText(this, "Navigating to Ride Screen!", Toast.LENGTH_SHORT).show();
         Intent RideIntent = new Intent(this, NewRideOfferActivity.class);
         startActivity(RideIntent);
 
@@ -127,7 +82,6 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
     @Override
     public void onSelectingNewRideRequest()
     {
-        //Toast.makeText(this, "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
         Intent RideIntent = new Intent(this, MainActivity.class);
         startActivity(RideIntent);
 
@@ -162,8 +116,6 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_ride, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -180,8 +132,6 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 0 ) {
 
                 return FragmentRide.newInstance(0);

@@ -5,7 +5,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ForgotpassActivity extends AppCompatActivity {
-TextView message_tv;
+
+    /**
+     * This activity is used when forgot password button is clicked from login activity
+     */
+
+    TextView message_tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

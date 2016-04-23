@@ -54,8 +54,6 @@ import static edu.nwmissouri.shareride.MainActivity.autocomplete;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
-    // Key -  AIzaSyBVGNHxtt0rBeU4jOs427su-0Vc4M06wZs
-
     private static final String LOG_TAG = " Places Autocomplete";
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
@@ -109,16 +107,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
                 String fromStr = fromET.getText().toString();
                 fromLatLong = getLatLongFromGivenAddress(fromStr);
-
-                //Toast.makeText(getBaseContext(), fromLatLong.toString(), Toast.LENGTH_SHORT).show();
                 String[] fromLatLongArrays = fromLatLong.split(",");
-
                 String toStr = toET.getText().toString();
-
                 toLatLong = getLatLongFromGivenAddress(toStr);
-                //Toast.makeText(getBaseContext(), toLatLong.toString(), Toast.LENGTH_SHORT).show();
                 String[] toLatLongArrays = toLatLong.split(",");
-
                 Double[] fromArray = new Double[fromLatLongArrays.length];
                 Double[] toArray = new Double[toLatLongArrays.length];
 
@@ -137,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     }
 
                     float [] dist = new float[1];
-                 //double distance = getDistanceinMiles(fromArray[0],fromArray[1],toArray[0],toArray[1]);
                     Location.distanceBetween(fromArray[0]/1e6,fromArray[1]/1e6,toArray[0]/1e6,toArray[1]/1e6,dist);
                     String resultValue = String.format("%f", dist[0]*621.371192f);
                     TextView distanceTV = (TextView) findViewById(R.id.distanceTV);
@@ -147,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             }
         });
 
-        // Kinvey initialization
         kinveyClient = new Client.Builder(appKey, appSecret
                 , this.getApplicationContext()).build();
 
@@ -156,20 +146,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 @Override
                 public void onSuccess(User result) {
                     Log.i(TAG, "Logged in to Kinvey successfully!" + result.getId());
-                    //Toast.makeText(MainActivity.this, "Logged in to Kinvey successfully as " + result.getId(),Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Throwable error) {
                     Log.e(TAG, "Login Failure", error);
-                    //Toast.makeText(MainActivity.this, "Login error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-        }   else {
-            //Toast.makeText(this, "Using cached implicit user " + kinveyClient.user().getId(), Toast.LENGTH_LONG).show();
         }
     }
-
 
 
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
@@ -187,14 +172,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public String getLatLongFromGivenAddress(String address)
     {
         Geocoder coder = new Geocoder(getBaseContext(),Locale.getDefault());
-        boolean geoAvailable = coder.isPresent();
         String strLongitude = "";
         String strLatitude = "";
         StringBuilder latLongResult = new StringBuilder();
         int count = 0;
         try {
             List<Address> list = coder.getFromLocationName(address, 1);
-            geoAvailable = coder.isPresent();
             while (count < 10 && list.size() == 0) {
                 list = (ArrayList<Address>) coder.getFromLocationName(address,1);
                 count++;
@@ -212,21 +195,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         latLongResult.append(result);
 
         return latLongResult.toString();
-    }
-
-
-    private double getDistanceinMiles(double fromLat,double fromLong, double toLat, double toLong)
-    {
-        double earthRadius = 3958.75; // miles (or 6371.0 kilometers)
-        double dLat = Math.toRadians(toLat-fromLat);
-        double dLng = Math.toRadians(toLong - fromLong);
-        double sindLat = Math.sin(dLat / 2);
-        double sindLng = Math.sin(dLng / 2);
-        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
-                * Math.cos(Math.toRadians(toLat)) * Math.cos(Math.toRadians(fromLat));
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double dist = earthRadius * c;
-        return dist;
     }
 
     /**
@@ -283,7 +251,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 System.out.println(predsJsonArray.getJSONObject(i).getString("description"));
                 System.out.println("============================================================");
                 resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
-
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Cannot process JSON results", e);
@@ -296,19 +263,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent profile_intent=new Intent(getApplicationContext(),Profile_settings.class);
             startActivity(profile_intent);
@@ -319,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             startActivity(loginActivity);
 
         } else if(id == R.id.stats){
-            Intent stats_intent=new Intent(getApplicationContext(),Statistics.class);
+            Intent stats_intent=new Intent(getApplicationContext(),StatisticsActivity.class);
             startActivity(stats_intent);
         }
 

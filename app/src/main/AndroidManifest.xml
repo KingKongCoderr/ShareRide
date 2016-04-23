@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:logo="@mipmap/shareride_launcher">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -43,8 +44,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ForgotpassActivity"
+            android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".RegistrationActivity"
+            android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".RiderOfferDetailActivity"
                   android:parentActivityName=".RideActivity"
@@ -63,12 +66,12 @@
             android:parentActivityName=".RideActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".RideRequestEditActivity"
-            android:parentActivityName=".RideActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
         <activity android:name=".RideSearchResults"
             android:parentActivityName=".RideActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Statistics"
+        <activity android:name=".StatisticsActivity"
             android:parentActivityName=".RideActivity"
                   android:screenOrientation="portrait"/>
 

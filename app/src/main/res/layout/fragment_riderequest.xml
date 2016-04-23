@@ -20,7 +20,9 @@
             android:id="@+id/riderRequestLV"
             android:background="@drawable/tabbackground2"
             android:divider="#000000"
-            android:dividerHeight="2dp"/>
+            android:dividerHeight="2dp"
+            android:layout_weight="1"
+            android:layout_gravity="start"/>
 
         <TextView
             android:id="@+id/emptyriderequest"

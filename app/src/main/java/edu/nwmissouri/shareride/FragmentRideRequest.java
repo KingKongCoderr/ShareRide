@@ -32,16 +32,11 @@ import java.util.ArrayList;
 public class FragmentRideRequest extends Fragment {
 
     Activity activity; //**
-    ArrayList<Ride> updatedItems;
     ListView rideRequestLV;
     iRideRequestActivity rideActivityInterface;
-    Button addRideOffer;
-    public static final String ITEM_POSITION = "position";
     ArrayList<Ride> items;
     RideRequestAdapter rideRequestAdapter;
-    Ride[] itemsArray;
     RideRequestCollection rides = new RideRequestCollection();
-    //ResultsListAdapter resultsListAdapter;
     Client kinveyClient;
     private String appKey = "kid_ZJCDL-Jpy-";
     private String appSecret = "7ba9e5e0015849b790845e669ab87992";
@@ -61,12 +56,9 @@ public class FragmentRideRequest extends Fragment {
 
     public static FragmentRideRequest newInstance(int num) {
         FragmentRideRequest f = new FragmentRideRequest();
-
-        // Supply num input as an argument.
         Bundle args = new Bundle();
         args.putInt("from", num);
         f.setArguments(args);
-
         return f;
     }
 
@@ -81,7 +73,6 @@ public class FragmentRideRequest extends Fragment {
 
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent profile_intent=new Intent(getContext(),Profile_settings.class);
             startActivity(profile_intent);
@@ -89,7 +80,6 @@ public class FragmentRideRequest extends Fragment {
         }
         else if (id == R.id.Add_Ride_Request)
         {
-            //Toast.makeText(getActivity(), "Navigating to Ride Request Screen!", Toast.LENGTH_SHORT).show();
             Intent RideRequestIntent = new Intent(getContext(), NewRideRequestActivity.class);
             startActivity(RideRequestIntent);
             return true;
@@ -99,7 +89,7 @@ public class FragmentRideRequest extends Fragment {
             startActivity(loginActivity);
 
         } else if(id == R.id.stats){
-            Intent stats_intent=new Intent(getContext(),Statistics.class);
+            Intent stats_intent=new Intent(getContext(),StatisticsActivity.class);
             startActivity(stats_intent);
         }
 
@@ -125,25 +115,24 @@ public class FragmentRideRequest extends Fragment {
         View theView = inflater.inflate(R.layout.fragment_riderequest, container, false);
 
         items = rides.getRideCollection();
-        //itemsArray = items.toArray(new Ride[items.size()]);
         kinveyClient = new Client.Builder(appKey, appSecret
                 , getContext()).build();
 
         rideRequestAdapter = new RideRequestAdapter(getActivity(), R.layout.list_item, items);
             rideRequestLV = (ListView) theView.findViewById(R.id.riderRequestLV);
 
-        TextView noRows = (TextView) theView.findViewById(R.id.emptyriderequest);
+        TextView noRowsTV = (TextView) theView.findViewById(R.id.emptyriderequest);
 
         if(items != null)
         {
-           noRows.setVisibility(View.INVISIBLE);
+           noRowsTV.setVisibility(View.INVISIBLE);
            rideRequestLV.setAdapter(rideRequestAdapter);
         }
         else
         {
             rideRequestLV.setVisibility(View.INVISIBLE);
-            noRows.setVisibility(View.VISIBLE);
-            noRows.setText("No Ride Requests Found!");
+            noRowsTV.setVisibility(View.VISIBLE);
+            noRowsTV.setText("No Ride Requests Found!");
         }
 
         rideRequestLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,7 +162,6 @@ public class FragmentRideRequest extends Fragment {
                         kinveyClient.appData("RideCollection", Ride.class).delete(ride.getRideID(), new KinveyDeleteCallback() {
                             @Override
                             public void onSuccess(KinveyDeleteResponse result) {
-                                //Toast.makeText(getContext(), "Number of Entities Deleted: " + result.getCount(), Toast.LENGTH_LONG).show();
                                 final RideRequestCollection rideCollection = new RideRequestCollection();
                                 kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
                                     @Override
@@ -182,7 +170,6 @@ public class FragmentRideRequest extends Fragment {
                                         RideRequestCollection.items.clear();
                                         for (Ride ride : result) {
                                             if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                                                //RideCollection.items.add(ride);
                                                 rideCollection.addRideCollection(ride);
                                             }
                                         }
@@ -191,7 +178,6 @@ public class FragmentRideRequest extends Fragment {
                                         }else{
                                             Ride.rideRequestCount = 0;
                                         }
-                                        Log.d("OFFER LIST", RideCollection.items.toString());
                                         final Intent rideActivityIntent = new Intent(getContext(), RideActivity.class);
                                         startActivity(rideActivityIntent);
                                     }
@@ -201,14 +187,11 @@ public class FragmentRideRequest extends Fragment {
                                         Log.e("ALL DATA", "AppData.get all Failure", error);
                                     }
                                 });
-
-
                             }
 
                             @Override
                             public void onFailure(Throwable error) {
                                 Log.e("TAG", "AppData.delete Failure", error);
-                                //Toast.makeText(getContext(), "Delete error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
                         rideRequestAdapter.notifyDataSetChanged();
@@ -218,7 +201,6 @@ public class FragmentRideRequest extends Fragment {
                 return true;
             }
         });
-
 
         return theView;
     }
