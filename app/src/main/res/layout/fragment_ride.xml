@@ -9,12 +9,16 @@
 
         <ListView
             android:id="@+id/riderOfferLV"
+            android:layout_gravity="start"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
             android:background="@drawable/tabbackground2"
             android:divider="#000000"
-            android:dividerHeight="2dp" />
+            android:nestedScrollingEnabled="true"
+            android:smoothScrollbar="true"
+            android:dividerHeight="2dp"
+            />
+
     </LinearLayout>
 
 

@@ -8,6 +8,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true"
+        android:smoothScrollbar="true"
         android:id="@+id/rideSearchResultsLV"/>
     <TextView
         android:id="@+id/emptyrideoffer"

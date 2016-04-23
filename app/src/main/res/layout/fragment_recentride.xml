@@ -20,6 +20,8 @@
                 android:id="@+id/riderecentlv"
                 android:background="@drawable/tabbackground2"
                 android:divider="#000000"
+                android:nestedScrollingEnabled="true"
+                android:smoothScrollbar="true"
                 android:dividerHeight="2dp"
                 android:layout_weight="1"/>
             </RelativeLayout>
