@@ -121,7 +121,8 @@ public class FragmentRideRecent extends LazyFragment {
                 }
 
             }
-
+            getView().findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            getView().findViewById(R.id.riderecentlv).setVisibility(View.VISIBLE);
             rideSearchResultsAdapter =
                     new RideSearchResultsAdapter(getContext(), R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
 
