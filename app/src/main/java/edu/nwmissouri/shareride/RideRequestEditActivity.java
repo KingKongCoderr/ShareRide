@@ -141,6 +141,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
                                     }
                                     Log.d("REQUEST LIST", RideRequestCollection.items.toString());
                                     final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+                                    RideRequestCollection.tabPosition = 1;
                                     startActivity(rideActivityIntent);
 
                                 }

@@ -60,6 +60,11 @@ public class RideActivity extends AppCompatActivity implements FragmentRide.iRid
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        if(RideRequestCollection.tabPosition == 1)
+        {
+            mViewPager.setCurrentItem(1);
+            RideRequestCollection.tabPosition = 0;
+        }
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

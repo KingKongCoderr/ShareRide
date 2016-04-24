@@ -179,6 +179,7 @@ public class FragmentRideRequest extends Fragment {
                                             Ride.rideRequestCount = 0;
                                         }
                                         final Intent rideActivityIntent = new Intent(getContext(), RideActivity.class);
+                                        RideRequestCollection.tabPosition = 1;
                                         startActivity(rideActivityIntent);
                                     }
 

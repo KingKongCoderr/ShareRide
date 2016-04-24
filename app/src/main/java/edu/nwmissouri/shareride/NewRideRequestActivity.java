@@ -159,6 +159,7 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
                                         Ride.rideRequestCount = 0;
                                     }
                                     final Intent rideActivityIntent = new Intent(getBaseContext(), RideActivity.class);
+                                    RideRequestCollection.tabPosition = 1;
                                     startActivity(rideActivityIntent);
                                 }
 

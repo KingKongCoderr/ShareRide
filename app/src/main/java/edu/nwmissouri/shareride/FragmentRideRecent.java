@@ -42,7 +42,7 @@ import java.util.Locale;
 /**
  * Created by S525339 on 3/2/2016.
  */
-public class FragmentRideRecent extends Fragment {
+public class FragmentRideRecent extends LazyFragment {
 
     Activity activity; //**
     ArrayList<Ride> filteredItems = new ArrayList<>();
@@ -82,8 +82,53 @@ public class FragmentRideRecent extends Fragment {
         Bundle args = new Bundle();
         args.putInt("from", num);
         f.setArguments(args);
-
         return f;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+
+        kinveyClient = new Client.Builder(appKey, appSecret
+                , this.getContext()).build();
+        recentRide = rideRequest.getRecentRide();
+        rideRecentLV = (ListView) getView().findViewById(R.id.riderecentlv);
+        if (recentRide != null) {
+
+            items = RideCollection.searchItems;
+            searchFromAddress = recentRide.getRouteFrom();
+            searchToAddress = recentRide.getRouteTo();
+            searchAvailability = recentRide.getNoOfAvailability();
+            searchRideTime = recentRide.getTimeOfTravel();
+            searchRideDate = recentRide.getFrequency();
+            items = RideCollection.searchItems;
+            filteredItems.clear();
+
+            for (Ride item : items) {
+                String[] shortFromRoute = item.getRouteFrom().toString().split(",");
+                fromAddressLatLong = getLatLongFromGivenAddress(item.getRouteFrom().toString());
+                String[] shortToRoute = item.getRouteTo().toString().split(",");
+                toAddressLatLong = getLatLongFromGivenAddress(item.getRouteTo().toString());
+                boolean isRideValid = isResultValid(fromAddressLatLong, toAddressLatLong, item.getNoOfAvailability().toString(), item.getTimeOfTravel().toString(), item.getFrequency().toString());
+
+                if (isRideValid) {
+                    filteredItems.add(item);
+                }
+
+            }
+
+            rideSearchResultsAdapter =
+                    new RideSearchResultsAdapter(getContext(), R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
+
+            if (filteredItems.size() > 0) {
+                rideRecentLV.setAdapter(rideSearchResultsAdapter);
+            }
+        }
     }
 
     @Override
@@ -135,34 +180,28 @@ public class FragmentRideRecent extends Fragment {
         rideRecentLV = (ListView) theView.findViewById(R.id.riderecentlv);
         if (recentRide != null) {
 
-            items = RideCollection.searchItems;
+           // items = RideCollection.searchItems;
 
-            AlarmManager alarms = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            Intent myIntent = new Intent(getContext(), RideAlarmReceiver.class);
-            myIntent.putExtra(RideAlarmReceiver.ACTION_ALARM, RideAlarmReceiver.ACTION_ALARM);
-            final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), 1234567, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarms.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000000, pIntent);
+//            searchFromAddress = recentRide.getRouteFrom();
+//            searchToAddress = recentRide.getRouteTo();
+//            searchAvailability = recentRide.getNoOfAvailability();
+//            searchRideTime = recentRide.getTimeOfTravel();
+//            searchRideDate = recentRide.getFrequency();
+//            items = RideCollection.searchItems;
+//            filteredItems.clear();
 
-            searchFromAddress = recentRide.getRouteFrom();
-            searchToAddress = recentRide.getRouteTo();
-            searchAvailability = recentRide.getNoOfAvailability();
-            searchRideTime = recentRide.getTimeOfTravel();
-            searchRideDate = recentRide.getFrequency();
-            items = RideCollection.searchItems;
-            filteredItems.clear();
-
-            for (Ride item : items) {
-                String[] shortFromRoute = item.getRouteFrom().toString().split(",");
-                fromAddressLatLong = getLatLongFromGivenAddress(item.getRouteFrom().toString());
-                String[] shortToRoute = item.getRouteTo().toString().split(",");
-                toAddressLatLong = getLatLongFromGivenAddress(item.getRouteTo().toString());
-                boolean isRideValid = isResultValid(fromAddressLatLong, toAddressLatLong, item.getNoOfAvailability().toString(), item.getTimeOfTravel().toString(), item.getFrequency().toString());
-
-                if (isRideValid) {
-                    filteredItems.add(item);
-                }
-
-            }
+//            for (Ride item : items) {
+//                String[] shortFromRoute = item.getRouteFrom().toString().split(",");
+//                fromAddressLatLong = getLatLongFromGivenAddress(item.getRouteFrom().toString());
+//                String[] shortToRoute = item.getRouteTo().toString().split(",");
+//                toAddressLatLong = getLatLongFromGivenAddress(item.getRouteTo().toString());
+//                boolean isRideValid = isResultValid(fromAddressLatLong, toAddressLatLong, item.getNoOfAvailability().toString(), item.getTimeOfTravel().toString(), item.getFrequency().toString());
+//
+//                if (isRideValid) {
+//                    filteredItems.add(item);
+//                }
+//
+//            }
 
             rideSearchResultsAdapter =
                     new RideSearchResultsAdapter(getContext(), R.layout.list_item, filteredItems, searchFromAddress, searchToAddress, searchAvailability, searchRideTime, searchRideDate);
@@ -170,56 +209,57 @@ public class FragmentRideRecent extends Fragment {
             if (filteredItems.size() > 0) {
                 rideRecentLV.setAdapter(rideSearchResultsAdapter);
             }
-
-            rideRecentLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("CLICKED", "Yes");
-                    String rideUserid = filteredItems.get(position).getRideUserId();
-                    System.setProperty("http.keepAlive", "false");
-                    kinveyClient.appData("RideUser", RideUser.class).getEntity(rideUserid, new KinveyClientCallback<RideUser>() {
-                        @Override
-                        public void onSuccess(RideUser result) {
-                            String title = null;
-                            String email = null;
-                            String phone = null;
-                            String message = null;
-                            if(result.getFullname().isEmpty()){
-                                title = "Unknown User";
-                            }else{
-                                title = result.getFullname();
-                            }
-                            if(result.getEmail().isEmpty()){
-                                email = "No Email";
-                            }else{
-                                email = result.getEmail();
-                            }
-                            if(result.getPhone().isEmpty()){
-                                phone = "No Phone";
-                            }else{
-                                phone = result.getPhone();
-                            }
-                            message = "Email: "+email+" , "+"Phone: "+phone;
-                            AlertDialog.Builder userDetails = new AlertDialog.Builder(getContext());
-                            userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).create();
-                            userDetails.show();
-                        }
-
-                        @Override
-                        public void onFailure(Throwable error) {
-
-                        }
-                    });
-
-                }
-            });
         }
+
+        rideRecentLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("CLICKED", "Yes");
+                String rideUserid = filteredItems.get(position).getRideUserId();
+                System.setProperty("http.keepAlive", "false");
+                kinveyClient.appData("RideUser", RideUser.class).getEntity(rideUserid, new KinveyClientCallback<RideUser>() {
+                    @Override
+                    public void onSuccess(RideUser result) {
+                        String title = null;
+                        String email = null;
+                        String phone = null;
+                        String message = null;
+                        if(result.getFullname().isEmpty()){
+                            title = "Unknown User";
+                        }else{
+                            title = result.getFullname();
+                        }
+                        if(result.getEmail().isEmpty()){
+                            email = "No Email";
+                        }else{
+                            email = result.getEmail();
+                        }
+                        if(result.getPhone().isEmpty()){
+                            phone = "No Phone";
+                        }else{
+                            phone = result.getPhone();
+                        }
+                        message = "Email: "+email+" , "+"Phone: "+phone;
+                        AlertDialog.Builder userDetails = new AlertDialog.Builder(getContext());
+                        userDetails.setTitle(title).setMessage(message).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).create();
+                        userDetails.show();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable error) {
+
+                    }
+                });
+
+            }
+        });
+
 
         return theView;
     }

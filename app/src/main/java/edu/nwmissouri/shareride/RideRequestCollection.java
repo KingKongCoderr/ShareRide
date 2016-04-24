@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class RideRequestCollection {
     public static ArrayList<Ride> items = new ArrayList<Ride>();
     public static Ride recentRide;
-    public static int tabPosition;
+    public static int tabPosition=0;
     private RideOfferAdapter mListAdapter;
 
 
