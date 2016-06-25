@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private static final String API_KEY = "AIzaSyA36XH-x4gJIQvAc7p7LHN55xm_oDVEkhw";
     private String fromLatLong = "";
     private String toLatLong = "";
+	private int notrequired = 0;
 
     //Kinvey Details
     public static final String TAG = "ShareRideKinvey";
