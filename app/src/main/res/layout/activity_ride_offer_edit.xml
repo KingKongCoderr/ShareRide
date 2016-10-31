@@ -54,7 +54,9 @@
             android:layout_marginLeft="60dp"
             android:background="@android:drawable/editbox_background_normal"
             android:textSize="12dp"
-            android:hint="From Address...">
+            android:hint="From Address..."
+            android:imeOptions="actionDone"
+            android:singleLine="true">
             <requestFocus />
         </AutoCompleteTextView>
 
@@ -75,7 +77,10 @@
             android:background="@android:drawable/editbox_background_normal"
             android:layout_below="@id/fromET"
             android:textSize="12dp"
-            android:hint="To Address..."/>
+            android:hint="To Address..."
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,7 +119,9 @@
             android:layout_marginTop="25dp"
             android:layout_below="@id/offertimeSpinner"
             android:layout_marginLeft="60dp"
-            android:background="@android:drawable/editbox_background_normal"/>
+            android:background="@android:drawable/editbox_background_normal"
+            android:imeOptions="actionDone"
+            android:singleLine="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +141,10 @@
             android:layout_marginLeft="100dp"
             android:layout_alignBaseline="@id/offerAvailabilityTV"
             android:inputType="number"
-            android:background="@android:drawable/editbox_background_normal"/>
+            android:background="@android:drawable/editbox_background_normal"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            />
 
         <Button
             android:layout_width="250dp"

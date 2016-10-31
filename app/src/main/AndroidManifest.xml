@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.nwmissouri.shareride" >
+    package="edu.nwmissouri.shareride">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -11,69 +11,89 @@
         android:allowBackup="true"
         android:icon="@mipmap/shareride_launcher"
         android:label="@string/app_name"
+        android:logo="@mipmap/shareride_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:logo="@mipmap/shareride_launcher">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:parentActivityName=".RideActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".GooglePlacesActivity"
             android:label="@string/title_activity_google_places"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RideActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:showAsAction="ifRoom">
-        </activity>
+            android:showAsAction="ifRoom"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotpassActivity"
+        <activity
+            android:name=".ForgotpassActivity"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RegistrationActivity"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RiderOfferDetailActivity"
-                  android:parentActivityName=".RideActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".RiderRequestDetailActivity"
-                  android:parentActivityName=".RideActivity"
-                  android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RiderOfferDetailActivity"
+            android:parentActivityName=".RideActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RiderRequestDetailActivity"
+            android:parentActivityName=".RideActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".NewRideOfferActivity"
             android:parentActivityName=".RideActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RideOfferEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RideOfferEditActivity"
             android:parentActivityName=".RideActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".NewRideRequestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".NewRideRequestActivity"
             android:parentActivityName=".RideActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RideRequestEditActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RideSearchResults"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RideRequestEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RideSearchResults"
             android:parentActivityName=".RideActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".StatisticsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".StatisticsActivity"
             android:parentActivityName=".RideActivity"
-                  android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name=".UpdatingService"
@@ -85,10 +105,11 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Profile_settings"
+        <activity
+            android:name=".Profile_settings"
             android:parentActivityName=".RideActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

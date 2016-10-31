@@ -101,6 +101,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
                 RideUser.currentUser = rideUser;
                 RideRequestCollection.recentRide = rideUser.getRideRecent();
                 Log.d("SEARCH CLICK", " User SUCSESS");
+                startActivity(searchIntent);
             }
 
             @Override
@@ -108,7 +109,7 @@ public class RiderRequestDetailActivity extends AppCompatActivity {
 
             }
         });
-
+        startActivity(searchIntent);
         kinveyClient.appData("RideCollection", Ride.class).
 
                 get(new KinveyListCallback<Ride>() {

@@ -13,7 +13,11 @@ public abstract class LazyFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+<<<<<<< HEAD
         if(getUserVisibleHint()&&!loaded) {
+=======
+        if(getUserVisibleHint()) {
+>>>>>>> d52e45c3e5920137fe65d039e1357ddaa965f69d
             loaded = true;
             isVisible = true;
             onVisible();
