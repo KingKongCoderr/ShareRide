@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     //Kinvey Details
     public static final String TAG = "ShareRideKinvey";
-    private String appKey="kid_Z10tuBjTCx";
-    private String appSecret="41f0212a449c472fab5e423f7c225f98";
+    private String appKey="kid_ZJCDL-Jpy";
+    private String appSecret="7ba9e5e0015849b790845e669ab87992";
     private Client kinveyClient;
 
     @Override

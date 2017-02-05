@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\gson-2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2e66da15851f9f5b5079228f856c2f090ba98c38">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\gson-2.1_1d7652cb81026ec82e7889136b31f099278974af\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\google-http-client-android-1.19.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e3f11020c2c812112803d252d1392872d3f619c8">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\google-http-client-android-1.19.0_eff1f56c32bf1ac30aa16ac12e4a3510620effd5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e6e2251f3d3abf4eecd6bf6919d41fc7af497852">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-games-9.4.0_0876983bea1eb5a8836385cc5e06b52ae78eb2bb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="dd51b31890731591729f046d7a09c4fe4e483ed1">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-plus-9.4.0_211ddf3ccb6c90b2e0d26e3cb6c805cce5fb4225\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.0_5951f5596f053e6ed3ff52d2b60d7abf9d645c86\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.4.0_ca69ff5a00139cda446e38853a8efc96bd75e13e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_f7421ff95ead7b1b102bbd4383835f1cc24c0c50\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tagmanager\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e5e8e535d15834e824817bdf5370556f62b4b2a5">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tagmanager-9.4.0_13110a53624ef725762474c6fef87553cc876bd6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.4.0_b00d185131d3ebbb894597305678a36f7343ae8a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.0_7ab3ac8831e587b28d59d816e600a1b09b9d8fa7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5e04c0b3683ca45b343284d93e5594b5f9044551">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-identity-9.4.0_e4c470eaf555aca33b49c3725c96bea80370dc8e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="4b630471536351be7c3c3100735c75b7ad2cbd84">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-9.4.0_d6059f3ca6991e72dda427c2b1c850a43386274e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fe4bb9cae05be523b929f8c2215bced8c15cd1ae">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_9a99ea839b6d457cc1c04aa0cd7e465b8a03431f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-storage\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="98e97da89d4df8e2f6eba63498d3d46a587372f2">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-storage-9.4.0_8094aee6353e2e53f4b253c26fe0f6dd986a429f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_ea3d6798f7fe7b542b358329870db7a5958e8f00\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="736d8893fb702f128a153c9d87c9c29724d37872">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appinvite-9.4.0_a4f9cc3a90f4814f347acd83f26017b164a0e3da\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="34762013d39dbe6c656050589c44e8b61b9a2c5d">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-common-9.4.0_514688c5373be4b7d96cb6727152803855546226\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-iid\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="59a16a4a42d25b2c243dd1e8aea87d06895b4a06">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-iid-9.4.0_7f7202e0796481de7cd37431bd676f2b97393947\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\google-http-client-1.19.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="cdca49ad0977c040f603478aa2e16b2775c8fec6">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\google-http-client-1.19.0_ba9f8e9327fd35ecd39bb713765f8b774f610cba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\google-http-client-jackson2-1.19.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="81dbf9795d387d5e80e55346582d5f2fb81a42eb">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\google-http-client-jackson2-1.19.0_c2470b8cecb91992c5b50591c55a351b8e839ffa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tagmanager-api\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7ea53c4458b80e8ea71f7fd6831fa184c501377b">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tagmanager-api-9.4.0_7a891c5085815ce80210d1375d5648b82c468679\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\design\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.0_52ae842c51c0f4370aec4041d7584a4247f61cd3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.4.0_1f6c90cfe7d595f19d8867082e783520fa5070e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads-lite\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="147edbec6bcea71fd675ecc63cae3319637ec2b4">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-lite-9.4.0_12a64f8c563b022ebf46528dd51b953c5493b0ba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-clearcut\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="dd763e0269f2854f5828ae62dd968b80bff6a0db">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-clearcut-9.4.0_b61b14afd03796acef299cdc9734f1e874096cf7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_0ad112e2860eeaba2df0a890fb5b4b231046dec2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast-framework\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="03829a2618892d438a1f59c6286699ca1f476e93">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-cast-framework-9.4.0_dc89cbb10b153c1bacf9b1cb06e5f194b5259e3f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\android-lib-2.10.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="9dfd85a7a33d1854ce25a122092add06c49cb620">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-lib-2.10.5_ef408ee48451636854dd85e81f2f7cbaca49b587\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.0_9e73eecea1297b372594187ce4357c5795549231\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-storage-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c8f5d56f8f8a287c95e02c542baade138a378048">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-storage-common-9.4.0_d0431f4dd61f6366ca4ec4c96ec2a310407062cc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.0_8d31720ebb640e85de66dab2e19e2e142b7d48b8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="670df81539ab71918d49b186598b7eff08ef6563">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-vision-9.4.0_defad60aca6ffdc7b32f12335f820515d3a8c790\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7bc6ea2bcfd6de4b7085e0f3a01616c5c8e0e2ad">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-safetynet-9.4.0_53140f581d50ca75e238344132f392b2f7634eef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a440fb3fec30ff925e9f601cc458fb6671834cb2">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-9.4.0_76b034aabc02f4f482193cd7e64feaaccd209471\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-base-9.4.0_e1997de1bd5abb2fa14361f4f78fc95b926706ed\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics-impl\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0ad33eb600f3d80bdff5ce355c90d5533ade652a">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-analytics-impl-9.4.0_9a52239a78d381e79a695eb41bd764bad0714795\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.0_1858b82721f4420d36977dae12efc7d012f457e6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth-module\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6bc41d9d6fd12d2ef23c785a259011001f4a1a5b">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-module-9.4.0_e911760f28fa3d22baebf75490197fc9888e7dc8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d49118ba67a101c4895f0581f17142cba85b330b">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-panorama-9.4.0_17229637a6a20ea0fd96f83ff07daeb91a4b2eaf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.0_14345819e127ef9933b2053b3ca887ebeb1f52b4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\jackson-core-2.1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\jackson-core-2.1.3_1ae01fbc0945337c3e4ef4e2039b3fcc6a74a019\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gass\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gass-9.4.0_b6c3ed714c202bf0864a7092c907facf1c510d2c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="4348dd26d83b56c2058b768222c3271bce911724">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-9.4.0_7a7d0fb12cb45353500d9e44b13a286ace70c3e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-multidex-1.0.1_3d6826eb455ef58415d0185fc622ad49f7e86aec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database-connection\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0e4d53465cc141bec58f18a894e4c4e80633fa32">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-connection-9.4.0_4ee2e3c02aa9b0777ca61b3b0dda4f1cb3d6252f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0b060160e7daee343f5315b3da91b0ff2d7eed89">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-location-9.4.0_89ea10ba398cd74872308a238eaadaaeff2c9fcb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="954697ee6ea7bdd596babf4f70e8b7a17ca7649e">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wallet-9.4.0_9b0900544e890a6642ec1e954e4f8aca8be43e95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.0_b61ac9860a0d9fe8c6585419f9de71a74ee1520c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\nande\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v2.2.4\7abd1ecef320da6a7679b137083151401fe8bf43\MPAndroidChart-v2.2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7abd1ecef320da6a7679b137083151401fe8bf43">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\MPAndroidChart-v2.2.4_e8db66deef5bb73590ddee477eac3371306026a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8ce5e7a4a146dddd1d9e66b09c714a6c149916d8">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-drive-9.4.0_d6a315026f6c6ad33eb69c8dc08362b96144e955\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b1acf13f1b7d8232af78a30833f9a966d1394c84">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-wearable-9.4.0_3497c85fdfdb5424d91af5242f586331174d8de8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-messaging\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="4b6d9b70f93bbeb872d0948bc064ae3f3f2bcbac">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-messaging-9.4.0_baef2db13fc8d2d20abcdf622a64a0aaeb41dc23\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-places\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e35002351f2d415093a9b564652d4b56be6a0593">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-places-9.4.0_a87a1773fd62a7935e5dad72a793ad26ece7a6ae\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-mediarouter-v7-23.0.0_be720844dcdd3f7901b30fc4571c8a54f8de1b98\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c10df7344e31161852c20bb8143fc37319aa10ec">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-9.4.0_2ddefc80232ec3a6b2763d54012cb573818067ca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ba47b210d36301e237ccfea860eaada04590f12a">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-analytics-9.4.0_803dfa8fdfa26c76d55828e64ab321e990309d58\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.4.0_db2ed981fbe212f04dd9072d40ea9965d0c4b10b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.0_1578790813583cae26eff2726a0b767751a39680\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="84bf369090a8f7e293817efbd6ccf31ada1be32b">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-9.4.0_1900fb6f85b113e3bc35bf3e320758346bcc123e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="43ebde6226c644692683d2fb92de65042f9aa56d">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_41a2a9c3b0a79a379668e9beada9ca5b5a840298\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3b7173b3df4c7029699919414400041f64519e34">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-9.4.0_355cfac048447f98e18b6f944d0c95b8e1aaf307\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-config\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="dab6944860c986980dcc6002a5ca2f127b587317">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-config-9.4.0_0d4d8b08e9d17f485e813ae84580a76098df5055\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_392bed0749a47dcee81c59548635ea11d675b3c9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-crash\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b9d48baf96c7e187991a9befa833bebd181960a9">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-crash-9.4.0_a4a7ea550f9faca20dff4f41ce53400587c427c4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\libs\internal_impl-23.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="03d38bb042efe3e5ce27ba66b729a9523c36d8fe">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.0_9e9c1ce86e3e59f57df8246547bb1a80d49c105a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-ads-9.4.0_807be1cdc84839e1f748dbf050819ba91ef3297c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_2132188e80da22a2114b765cdda7aab033c67e08\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e454c414a069241ee08444d187f2dd3a702596b5">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-maps-9.4.0_89a4c1903b5c250c3c05e5d530dbefb29b6d77f6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="461e4257888c25ec05abcd91e758fe7f4949230a">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-nearby-9.4.0_179f24901fa046582fc6f7338fcaaec338a86281\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\google-http-client-gson-1.19.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b3cdefb990d5212bb2a130525b20e2c44aeffc4c">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\google-http-client-gson-1.19.0_de250b7a59e4d35c8b13e3ece7f229b6261109c8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\nande\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.0\support-annotations-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.0_a171cb09830c87ceb9818474b576239226d945d2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ece40b09e9d4d488bc270cf6af5a9af73bc1cfa3">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gcm-9.4.0_ff299f9f4dea368c208d30c6634e21835500b14f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8197651ce1af4d89b47f4545cc720bc4f8611e7d">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-fitness-9.4.0_9e9167701ee6e30bd14f86b882b632f8524e0ab4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\java-api-core-2.10.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ea3a649e1ff6a01eed97097bd54eaa081dc9ae95">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\java-api-core-2.10.5_8e989a49d288716ee98641573caf4e2a90e4fe04\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\libs\guava-18.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\2\guava-18.0_7c77dce8b6bacb2b2e68ebda303f91b7f8ac68e5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-contextmanager\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="72eacac37fc64e95d53abd2a041bf81a952d8615">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-contextmanager-9.4.0_5bdb992b0cbd5a247710e24abf496fae6aa8c71d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.0_8f3970bc4507be49ce95afaae3d78b508a10cb6d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.0_85347065c74f6fa671820b8028d825a999acd3eb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a432629397351d3ec7f27a23d258b229b81af08f">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-cast-9.4.0_19806dbe6077f4f4aa8aac512b0ea52298838c75\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\ShareRide\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="D:\ShareRide\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-9.4.0_2002295179c465115dcef6dfc99754d2de9a2c21\classes.dex" />
+    </item>
+
+</items>
