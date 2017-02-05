@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShareRide.iml" filepath="$PROJECT_DIR$/ShareRide.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/shareride.iml" filepath="$PROJECT_DIR$/shareride.iml" />
+>>>>>>> 51324c9e955ab452e02730eb58ad7efcf96e5de8
     </modules>
   </component>
 </project>
