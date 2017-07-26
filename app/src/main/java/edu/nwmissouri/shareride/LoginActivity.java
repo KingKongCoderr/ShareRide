@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
         mLogin_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(kinveyClient.user().isUserLoggedIn()){
-                      kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
+                if (kinveyClient.user().isUserLoggedIn()) {
+                    kinveyClient.user().logout().execute(); // user credentials are cached (which is normally a good thing), but we always want to have to log in, so we log out to start
                 }
 
                 kinveyClient.user().login(mUsername_et.getText().toString(), mPassword_et.getText().toString(), new KinveyUserCallback() {
@@ -93,10 +93,10 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                             }
                         });
 
-                        if(null != RideRequestCollection.recentRide ) {
-                            Log.d("RECENT RIDE LOGIN CLICK",RideRequestCollection.recentRide.toString());
-                        }else{
-                            Log.d("RECENT RIDE LOGIN CLICK","Nothing in recent ride");
+                        if (null != RideRequestCollection.recentRide) {
+                            Log.d("RECENT RIDE LOGIN CLICK", RideRequestCollection.recentRide.toString());
+                        } else {
+                            Log.d("RECENT RIDE LOGIN CLICK", "Nothing in recent ride");
                         }
 
                         kinveyClient.appData("RideCollection", Ride.class).get(new KinveyListCallback<Ride>() {
@@ -107,19 +107,19 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
                                 RideRequestCollection.items.clear();
                                 for (Ride ride : result) {
                                     if (ride.getRideType().equals("offer") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
-                                         rideCollection.addRideCollection(ride);
-                                    }else if(ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())){
+                                        rideCollection.addRideCollection(ride);
+                                    } else if (ride.getRideType().equals("request") && ride.getRideUserId().equals(kinveyClient.user().getUsername())) {
                                         rideRequestCollection.addRideCollection(ride);
                                     }
                                 }
-                                if(RideCollection.items.size()>0){
-                                    Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size()-1).getOfferID());
-                                }else{
+                                if (RideCollection.items.size() > 0) {
+                                    Ride.rideOfferCount = Integer.parseInt(RideCollection.items.get(RideCollection.items.size() - 1).getOfferID());
+                                } else {
                                     Ride.rideOfferCount = 0;
                                 }
-                                if(RideRequestCollection.items.size()>0){
-                                    Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size()-1).getOfferID());
-                                }else{
+                                if (RideRequestCollection.items.size() > 0) {
+                                    Ride.rideRequestCount = Integer.parseInt(RideRequestCollection.items.get(RideRequestCollection.items.size() - 1).getOfferID());
+                                } else {
                                     Ride.rideRequestCount = 0;
                                 }
                                 RideCollection.searchItems.clear();
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements SurfaceHolder.Ca
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-       if (!shouldPlay) {
+        if (!shouldPlay) {
             try {
                 shouldPlay = true;
                 mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());

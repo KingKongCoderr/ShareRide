@@ -97,10 +97,7 @@ public class FragmentRideRecent extends LazyFragment {
         kinveyClient = new Client.Builder(appKey, appSecret
                 , this.getContext()).build();
         recentRide = rideRequest.getRecentRide();
-<<<<<<< HEAD
-=======
         rideRecentLV = (ListView) getView().findViewById(R.id.riderecentlv);
->>>>>>> d52e45c3e5920137fe65d039e1357ddaa965f69d
         if (recentRide != null) {
 
             items = RideCollection.searchItems;
@@ -124,8 +121,6 @@ public class FragmentRideRecent extends LazyFragment {
                 }
 
             }
-<<<<<<< HEAD
-=======
             getView().findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             getView().findViewById(R.id.riderecentlv).setVisibility(View.VISIBLE);
             rideSearchResultsAdapter =
@@ -134,7 +129,6 @@ public class FragmentRideRecent extends LazyFragment {
             if (filteredItems.size() > 0) {
                 rideRecentLV.setAdapter(rideSearchResultsAdapter);
             }
->>>>>>> d52e45c3e5920137fe65d039e1357ddaa965f69d
         }
     }
 

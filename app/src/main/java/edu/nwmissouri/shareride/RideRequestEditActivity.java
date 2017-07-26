@@ -74,9 +74,9 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
             offerId.setText(resultOfferId);
         }
 
-        fromAddressET.setAdapter(new GooglePlacesAutocompleteRequestAdapter(this, R.layout.places_result));
+        fromAddressET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         fromAddressET.setOnItemClickListener(this);
-        toAddressET.setAdapter(new GooglePlacesAutocompleteRequestAdapter(this, R.layout.places_result));
+        toAddressET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         toAddressET.setOnItemClickListener(this);
         Button btnSubmit = (Button) findViewById(R.id.searchBTN);
         frequencyET.setOnClickListener(this);
@@ -223,7 +223,7 @@ public class RideRequestEditActivity extends AppCompatActivity implements Adapte
 
 }
 
-class GooglePlacesAutocompleteRequestAdapter extends ArrayAdapter implements Filterable
+/*class GooglePlacesAutocompleteRequestAdapter extends ArrayAdapter implements Filterable
 {
     private ArrayList resultList;
     public GooglePlacesAutocompleteRequestAdapter(Context context, int textViewResourceId)
@@ -275,4 +275,4 @@ class GooglePlacesAutocompleteRequestAdapter extends ArrayAdapter implements Fil
         };
         return filter;
     }
-}
+}*/

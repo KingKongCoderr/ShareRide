@@ -108,9 +108,9 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
             }
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         OfferIdTV.setText(String.valueOf(Ride.rideRequestCount+1));
-        fromET.setAdapter(new GooglePlacesAutocompleteAdapter3(this, R.layout.places_result));
+        fromET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
-        toET.setAdapter(new GooglePlacesAutocompleteAdapter3(this, R.layout.places_result));
+        toET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         toET.setOnItemClickListener(this);
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,56 +304,12 @@ public class NewRideRequestActivity extends AppCompatActivity implements Adapter
         return resultList;
     }
 }
+/*
+class GPACA3 extends GooglePlacesAutoCompleteAdapter{
 
-class GooglePlacesAutocompleteAdapter3 extends ArrayAdapter implements Filterable
-{
-    private ArrayList resultList;
-    public GooglePlacesAutocompleteAdapter3(Context context, int textViewResourceId)
-    {
+    public GPACA3(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
-
-    @Override
-    public int getCount() {
-        return resultList.size();
-    }
-
-    @Override
-    public String getItem(int index) {
-        return resultList.get(index).toString();
-    }
-
-    @Override
-
-    public Filter getFilter() {
-
-        Filter filter = new Filter() {
-
-            @Override
-
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-
-                if (constraint != null) {
-                    resultList = autocomplete(constraint.toString());
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
-
-                if (results != null && results.count > 0) {
-
-                    notifyDataSetChanged();
-
-                } else {
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
-        return filter;
-    }
 }
+*/
+

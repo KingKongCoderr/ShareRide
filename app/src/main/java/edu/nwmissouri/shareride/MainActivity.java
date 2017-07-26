@@ -94,10 +94,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         Button searchBTN = (Button) findViewById(R.id.searchBTN);
 
-        fromET.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.places_result));
+        fromET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
+
+        fromET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
 
-        toET.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.places_result));
+        toET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         toET.setOnItemClickListener(this);
 
         searchBTN.setOnClickListener(new View.OnClickListener() {
@@ -291,59 +293,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 }
 
-class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable
-{
-    private ArrayList resultList;
-    public GooglePlacesAutocompleteAdapter(Context context, int textViewResourceId)
-    {
+/*class GPACA extends GooglePlacesAutoCompleteAdapter{
+
+    public GPACA(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
+}*/
 
-    @Override
-    public int getCount() {
-        return resultList.size();
-    }
 
-    @Override
-    public String getItem(int index) {
-        return resultList.get(index).toString();
-    }
-
-    @Override
-
-    public Filter getFilter() {
-
-        Filter filter = new Filter() {
-
-            @Override
-
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-
-                if (constraint != null) {
-                    // Retrieve the autocomplete results.
-
-                    resultList = autocomplete(constraint.toString());
-                    // Assign the data to the FilterResults
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
-
-                if (results != null && results.count > 0) {
-
-                    notifyDataSetChanged();
-
-                } else {
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
-        return filter;
-    }
-}
 

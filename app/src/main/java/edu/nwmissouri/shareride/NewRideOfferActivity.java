@@ -109,10 +109,10 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
 
         OfferIdTV.setText(String.valueOf(Ride.rideOfferCount +1));
 
-        fromET.setAdapter(new GooglePlacesAutocompleteAdapter2(this, R.layout.places_result));
+        fromET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         fromET.setOnItemClickListener(this);
 
-        toET.setAdapter(new GooglePlacesAutocompleteAdapter2(this, R.layout.places_result));
+        toET.setAdapter(new GooglePlacesAutoCompleteAdapter(this, R.layout.places_result));
         toET.setOnItemClickListener(this);
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,56 +301,9 @@ public class NewRideOfferActivity extends AppCompatActivity  implements AdapterV
         return resultList;
     }
 }
+/*class GPACA2 extends GooglePlacesAutoCompleteAdapter{
 
-class GooglePlacesAutocompleteAdapter2 extends ArrayAdapter implements Filterable
-{
-    private ArrayList resultList;
-    public GooglePlacesAutocompleteAdapter2(Context context, int textViewResourceId)
-    {
+    public GPACA2(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
-
-    @Override
-    public int getCount() {
-        return resultList.size();
-    }
-
-    @Override
-    public String getItem(int index) {
-        return resultList.get(index).toString();
-    }
-
-    @Override
-
-    public Filter getFilter() {
-
-        Filter filter = new Filter() {
-
-            @Override
-
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-
-                if (constraint != null) {
-                    resultList = autocomplete(constraint.toString());
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
-
-                if (results != null && results.count > 0) {
-
-                    notifyDataSetChanged();
-
-                } else {
-                    notifyDataSetInvalidated();
-                }
-            }
-        };
-        return filter;
-    }
-}
+}*/
