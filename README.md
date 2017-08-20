@@ -1,8 +1,8 @@
 # Share Ride: 
 Android application which makes carpooling effortless.
 
-# Never use this kind of User Interface(Bad UI):
-This application is rapidly developed prototype which demonstrates the following concepts, so compromises on ui quality while emphasizing more on the performance and business logic of the application.
+# (Reason for somewhat ugly UI):
+This application is rapidly developed prototype which demonstrates the following concepts, so compromises on ui appearance while emphasizing more on the performance and business logic of the application.
 
 
 #### 1. Kinvey backend.
