@@ -2,7 +2,7 @@
 Android application which makes carpooling effortless.
 
 # (Reason for somewhat ugly UI):
-This application is rapidly developed prototype which demonstrates the following concepts, so compromises on ui appearance while emphasizing more on the performance and business logic of the application.
+In the initial stages of my android development learning phase this application was rapidly developed prototype which demonstrates the following concepts, so compromises on ui appearance while emphasizing more on the performance and business logic of the application.
 
 
 #### 1. Kinvey backend.
